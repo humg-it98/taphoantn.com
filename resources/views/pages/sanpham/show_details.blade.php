@@ -22,8 +22,8 @@
                 <div class="product-details-left">
                     <div class="product-details-images slider-navigation-1">
                         <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="{{URL::to('public/uploads/product/'.$product->product_image)}}" data-gall="myGallery">
-                                <img src="{{URL::to('public/uploads/product/'.$product->product_image)}}" alt="product image      ">
+                            <a class="popup-img venobox vbox-item" href="" data-gall="myGallery">
+                                <img src="{{URL::to('public/uploads/product/'.$product->product_image)}}" alt="product image">
                             </a>
                         </div>
 
@@ -72,15 +72,54 @@
                         <span class="product-details-ref">Danh mục sản phẩm: {{$product->category_id}}</span><br>
                         <span class="product-details-ref">Thương hiệu sản phẩm: {{$product->brand_id}}</span><br>
                         <span class="product-details-ref">ID sản phẩm: {{$product->product_id}}</span>
+                        <style type="text/css">
+                            a.tags_style {
+                                margin: 3px 2px;
+                                border: 1px solid;
+
+                                height: auto;
+                                background: #7a7a7a;
+                                color: #ffff;
+                                padding: 0px;
+
+                            }
+                            a.tags_style:hover {
+                                background: black;
+                            }
+                        </style>
+                        <fieldset>
+                            <span class="product-details-ref"><br>Tag sản phẩm: </span>
+                            <p><i class="fa fa-tag"></i>
+                                @php
+                                    $tags = $product->product_tags;
+                                    $tags = explode(",",$tags);
+
+                                @endphp
+                                    @foreach($tags as $tag)
+                                    <a href="{{url('/tag/'.Str::slug($tag))}}" class="tags_style">{{$tag}}</a>
+                                    @endforeach
+                            </p>
+                        </fieldset>
                         <div class="rating-box pt-20">
                             <ul class="rating rating-with-review-item">
-                                <li><i class="fa fa-star-o"></i></li>
+                                <span style="font-size:25px"> {{$rating}}. </span>
+                                {{-- <li><i class="fa fa-star-o"></i></li>
                                 <li><i class="fa fa-star-o"></i></li>
                                 <li><i class="fa fa-star-o"></i></li>
                                 <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                <li class="review-item"><a href="#">Read Review</a></li>
-                                <li class="review-item"><a href="#">Write Review</a></li>
+                                <li class="no-star"><i class="fa fa-star-o"></i></li> --}}
+                                @for($count=1; $count<=5; $count++)
+                                                		@php
+	                                                		if($count<=$rating){
+	                                                			$color = 'color:#ffcc00;';
+	                                                		}
+	                                                		else {
+	                                                			$color = 'color:#ccc;';
+	                                                		}
+
+                                                		@endphp
+                                <li title="star_rating" id="{{$product->product_id}}-{{$count}}" data-index="{{$count}}"  data-product_id="{{$product->product_id}}" data-rating="{{$rating}}" class="rating" style="cursor:pointer; {{$color}} font-size:30px;">&#9733;</li>
+                                @endfor
                             </ul>
                         </div>
                         <div class="price-box pt-20">
@@ -126,7 +165,6 @@
                             <div class="product-social-sharing pt-25">
                                 <ul>
                                     <li class="facebook"><a href="#"><i class="fa fa-facebook"></i>Facebook</a></li>
-                                    <li class="twitter"><a href="#"><i class="fa fa-twitter"></i>Twitter</a></li>
                                     <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i>Google +</a></li>
                                     <li class="instagram"><a href="#"><i class="fa fa-instagram"></i>Instagram</a></li>
                                 </ul>
@@ -202,40 +240,51 @@
                 <div class="product-reviews">
                     <div class="product-details-comment-block">
                         <div class="comment-review">
-                            <span>Grade</span>
+                            <span>Đánh giá được {{$rating}}/5☆  </span>
                             <ul class="rating">
-                                <li><i class="fa fa-star-o"></i></li>
-                                <li><i class="fa fa-star-o"></i></li>
-                                <li><i class="fa fa-star-o"></i></li>
-                                <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                @for($count=1; $count<=5; $count++)
+                                                		@php
+	                                                		if($count<=$rating){
+	                                                			$color = 'color:#ffcc00;';
+	                                                		}
+	                                                		else {
+	                                                			$color = 'color:#ccc;';
+	                                                		}
+
+                                                		@endphp
+                                <li title="star_rating" id="{{$product->product_id}}-{{$count}}" data-index="{{$count}}"  data-product_id="{{$product->product_id}}" data-rating="{{$rating}}" class="rating" style="cursor:pointer; {{$color}} font-size:30px;">&#9733;</li>
+                                @endfor
                             </ul>
                         </div>
-                        <div class="comment-author-infos pt-25">
-                            <span>HTML 5</span>
-                            <em>01-12-18</em>
-                        </div>
-                        <div class="comment-details">
-                            <h4 class="title-block">Demo</h4>
-                            <p>Plaza</p>
-                        </div>
+                        <form>
+                            @csrf
+                            <input type="hidden" name="comment_product_id" class="comment_product_id" value="{{$product->product_id}}">
+                            <div class="li-comment-section">
+                                <br>
+                                <h3>Bình luận: </h3>
+                                <ul>
+                                    <div id="comment_show"></div>
+
+                                </ul>
+                            </div>
+                        </form>
                         <div class="review-btn">
-                            <a class="review-links" href="#" data-toggle="modal" data-target="#mymodal">Write Your Review!</a>
+                            <a class="review-links" href="#" data-toggle="modal" data-target="#mymodal">Viết đánh giá của bạn</a>
                         </div>
                         <!-- Begin Quick View | Modal Area -->
                         <div class="modal fade modal-wrapper" id="mymodal" >
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-body">
-                                        <h3 class="review-page-title">Write Your Review</h3>
+                                        <h3 class="review-page-title">Viết đánh giá của ban</h3>
                                         <div class="modal-inner-area row">
                                             <div class="col-lg-6">
                                                <div class="li-review-product">
-                                                   <img src="images/product/large-size/3.jpg" alt="Li's Product">
+                                                   <img width="300px" src="{{URL::to('public/uploads/product/'.$product->product_image)}}" alt="product image">
                                                    <div class="li-review-product-desc">
-                                                       <p class="li-product-name">Today is a good day Framed poster</p>
+                                                       <p class="li-product-name">{{$product->product_name}}</p>
                                                        <p>
-                                                           <span>Beach Camera Exclusive Bundle - Includes Two Samsung Radiant 360 R3 Wi-Fi Bluetooth Speakers. Fill The Entire Room With Exquisite Sound via Ring Radiator Technology. Stream And Control R3 Speakers Wirelessly With Your Smartphone. Sophisticated, Modern Design </span>
+                                                           <span>{!!$product->product_desc!!}</span>
                                                        </p>
                                                    </div>
                                                </div>
@@ -245,40 +294,32 @@
                                                     <!-- Begin Feedback Area -->
                                                     <div class="feedback-area">
                                                         <div class="feedback">
-                                                            <h3 class="feedback-title">Our Feedback</h3>
-                                                            <form action="#">
+                                                            <h3 class="feedback-title">Đánh giá sản phẩm</h3>
+                                                            <form action="" method="POST">
+                                                                @csrf
+                                                                <input type="hidden" name="comment_product_id" class="comment_product_id" value="{{$product->product_id}}">
                                                                 <p class="your-opinion">
-                                                                    <label>Your Rating</label>
+                                                                    <label>Đánh giá sao</label>
                                                                     <span>
-                                                                        <select class="star-rating">
-                                                                          <option value="1">1</option>
-                                                                          <option value="2">2</option>
-                                                                          <option value="3">3</option>
-                                                                          <option value="4">4</option>
-                                                                          <option value="5">5</option>
-                                                                        </select>
+                                                                        <li title="star_rating" id="{{$product->product_id}}-{{$count}}" data-index="{{$count}}"  data-product_id="{{$product->product_id}}" data-rating="{{$rating}}" class="rating" style="cursor:pointer; {{$color}} font-size:30px;">&#9733;</li>
                                                                     </span>
                                                                 </p>
                                                                 <p class="feedback-form">
-                                                                    <label for="feedback">Your Review</label>
-                                                                    <textarea id="feedback" name="comment" cols="45" rows="8" aria-required="true"></textarea>
+                                                                    <label for="feedback">Đánh giá của bạn</label>
+                                                                    <textarea id="feedback" class="comment_content" name="comment_content" cols="45" rows="8" aria-required="true"></textarea>
                                                                 </p>
                                                                 <div class="feedback-input">
                                                                     <p class="feedback-form-author">
-                                                                        <label for="author">Name<span class="required">*</span>
+                                                                        <label for="author">Họ tên bạn<span class="required">*</span>
                                                                         </label>
-                                                                        <input id="author" name="author" value="" size="30" aria-required="true" type="text">
-                                                                    </p>
-                                                                    <p class="feedback-form-author feedback-form-email">
-                                                                        <label for="email">Email<span class="required">*</span>
-                                                                        </label>
-                                                                        <input id="email" name="email" value="" size="30" aria-required="true" type="text">
-                                                                        <span class="required"><sub>*</sub> Required fields</span>
+                                                                        <input id="author" class="comment_name" name="comment_name" value="" size="30" aria-required="true" type="text">
                                                                     </p>
                                                                     <div class="feedback-btn pb-15">
-                                                                        <a href="#" class="close" data-dismiss="modal" aria-label="Close">Close</a>
-                                                                        <a href="#">Submit</a>
+                                                                        <a href="#" class="close" data-dismiss="modal" aria-label="Close">Đóng</a>
+
+                                                                        <button style="background-color: black; color:#ffffff;" class="send-comment" name="send-comment"  type="button">Gửi đánh giá</button>
                                                                     </div>
+                                                                    <div id="notify_comment"></div>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -313,6 +354,7 @@
                     </h2>
                 </div>
                 <div class="row">
+
                     <div class="product-active owl-carousel">
                         @foreach($relate as $key => $lienquan)
                         <div class="col-lg-12">
@@ -356,8 +398,9 @@
                             </div>
                             <!-- single-product-wrap end -->
                         </div>
-                        @endforeach
+                        @endforeach 
                     </div>
+
                 </div>
             </div>
             <!-- Li's Section Area End Here -->

@@ -69,7 +69,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-image">
                                                 <a href="{{URL::to('/chi-tiet-san-pham/'.$product->product_slug)}}">
-                                                    <img src={{URL::to("public/uploads/product/".$product->product_image)}} alt="{{($product->product_name)}}">
+                                                    <img src="{{URL::to('public/uploads/product/'.$product->product_image)}}" alt="{{($product->product_name)}}">
                                                 </a>
                                                 <span class="sticker">New</span>
                                             </div>

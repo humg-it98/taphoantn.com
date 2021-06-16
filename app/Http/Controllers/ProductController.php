@@ -9,6 +9,8 @@ use Session;
 use App\Models\CatePost;
 use App\Models\Partner;
 use App\Models\Product;
+use App\Models\Gallery;
+use App\Models\Rating;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 session_start();
@@ -166,16 +168,35 @@ class ProductController extends Controller
             //seo
             foreach($details_product  as $key =>$value){
             $category_id = $value-> category_id;
+            $product_id = $value-> product_id;
+            $category_id = $value->category_id;
+            $product_id = $value->product_id;
+            $product_cate = $value->category_name;
+            $cate_slug = $value->slug_category_product;
             }
 
 
             $related_product = DB::table('tbl_product')
             ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
             ->join('tbl_brand_product','tbl_brand_product.brand_id','=','tbl_product.brand_id')
-            ->where('tbl_category_product.category_id',$category_id)->whereNotIn('tbl_product.product_slug',[$product_slug])->get();
+            ->where('tbl_category_product.category_id',$category_id)->whereNotIn('tbl_product.product_slug',[$product_slug])->orderby(DB::raw('RAND()'))->paginate(3);
+
+            $rating = Rating::where('product_id',$product_id)->avg('rating');
+            $rating = round($rating);
 
 
-            return view('pages.sanpham.show_details')->with('category',$cate_product)->with('brand',$brand_product)->with('product_images',$product_images)->with('product_details',$details_product)->with('relate',$related_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('category_post',$category_post)->with('partner',$partner);
+            return view('pages.sanpham.show_details')->with('category',$cate_product)
+            ->with('brand',$brand_product)
+            ->with('product_images',$product_images)
+            ->with('product_details',$details_product)
+            ->with('relate',$related_product)
+            ->with('meta_desc',$meta_desc)
+            ->with('meta_keywords',$meta_keywords)
+            ->with('meta_title',$meta_title)
+            ->with('url_canonical',$url_canonical)
+            ->with('category_post',$category_post)
+            ->with('partner',$partner)
+            ->with('rating',$rating);
         }
 
         public function add_images_product (){
@@ -300,11 +321,11 @@ class ProductController extends Controller
         $product = Product::find($product_id);
         $gallery = Gallery::where('product_id',$product_id)->get();
 
-        // $output['product_gallery'] = '';
+        $output['product_gallery'] = '';
 
-        // foreach($gallery as $key => $gal){
-        //     $output['product_gallery'].= '<p><img width="100%" src="public/uploads/gallery/'.$gal->gallery_image.'"></p>';
-        // }
+        foreach($gallery as $key => $gal){
+            $output['product_gallery'].= '<p><img width="100%" src="public/uploads/gallery/'.$gal->gallery_image.'"></p>';
+        }
 
         $output['product_name'] = $product->product_name;
         $output['product_id'] = $product->product_id;
@@ -313,19 +334,15 @@ class ProductController extends Controller
         $output['product_price'] = number_format($product->product_price,0,',','.').'VNĐ';
         $output['product_image'] = '<img width="100%" src="public/uploads/product/'.$product->product_image.'">';
 
-        $output['product_button'] = '<input type="button" value="Mua ngay" class="btn btn-primary btn-sm add-to-cart-quickview" id="buy_quickview" data-id_product="'.$product->product_id.'"  name="add-to-cart">';
+        $output['product_button'] = '<button class="add-to-cart add-to-cart" name="add-to-cart" data-id_product="{{$product->product_id}}" type="submit">Thêm vào giỏ hàng</button>';
 
         $output['product_quickview_value'] = '
 
-        <input type="hidden" value="'.$product->product_id.'" class="cart_product_id_'.$product->product_id.'">
-
-        <input type="hidden" value="'.$product->product_name.'" class="cart_product_name_'.$product->product_id.'">
-
-        <input type="hidden" value="'.$product->product_quantity.'" class="cart_product_quantity_'.$product->product_id.'">
-
-        <input type="hidden" value="'.$product->product_image.'" class="cart_product_image_'.$product->product_id.'">
-
-        <input type="hidden" value="'.$product->product_price.'" class="cart_product_price_'.$product->product_id.'">
+        <input class="cart_product_id_{{$product->product_id}}" type="hidden" value="{{$product->product_id}}">
+        <input class="cart_product_name_{{$product->product_id}}" type="hidden" value="{{$product->product_name}}">
+        <input class="cart_product_image_{{$product->product_id}}" type="hidden" value="{{$product->product_image}}">
+        <input class="cart_product_price_{{$product->product_id}}" type="hidden" value="{{$product->product_price}}">
+        <input class="cart_product_quantity_{{$product->product_id}}" type="hidden" value="{{$product->product_quantity}}">
 
         <input type="hidden" value="1" class="cart_product_qty_'.$product->product_id.'">';
 

@@ -61,7 +61,7 @@
               </ul>
               @if($comm->comment_status==0)
               <br/><textarea class="form-control reply_comment_{{$comm->comment_id}}" rows="5"></textarea>
-              <br/><button class="btn btn-default btn-xs btn-reply-comment" data-product_id="{{$comm->comment_product_id}}"  data-comment_id="{{$comm->comment_id}}">Trả lời bình luận</button>
+              <br/><button class="btn btn-default btn-xs btn-reply-comment" data-product_id="{{$comm->product_id}}"  data-comment_id="{{$comm->comment_id}}">Trả lời bình luận</button>
 
               @endif
 

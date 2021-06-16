@@ -235,7 +235,7 @@
                                                        <p>Chưa có sản phẩm trong giỏ hàng</p>
                                                     </li>
                                                 </ul>
-                                                <p class="minicart-total">SUBTOTAL: <span>0 đ</span></p>
+                                                <p class="minicart-total">Tổng tiền: <span>0 đ</span></p>
                                                 <div class="minicart-button">
                                                     <a href="shopping-cart.html" class="li-button li-button-fullwidth li-button-dark">
                                                         <span>Xem giỏ hàng</span>
@@ -256,7 +256,7 @@
                 </div>
                 <!-- Header Middle Area End Here -->
                 <!-- Begin Header Bottom Area -->
-                <div class="header-bottom header-sticky d-none d-lg-block d-xl-block">
+                <div class="header-bottom mb-0 header-sticky stick d-none d-lg-block d-xl-block">
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12">
@@ -264,71 +264,93 @@
                                 <div class="hb-menu">
                                     <nav>
                                         <ul>
-                                            <li><a href="{{URL::to('/')}}">Home</a>
+                                            <li class="dropdown-holder"><a href="{{URL::to('/')}}">Home</a>
                                             </li>
-                                            <li class="dropdown-holder"><a href="">Danh mục</a>
+                                            {{-- <li class="catmenu-dropdown megamenu-holder"><a>Category</a>
                                                 @foreach($category as $key => $danhmuc)
-                                                <ul class="hb-dropdown">
+                                                <ul class="megamenu hb-megamenu">
                                                     @if($danhmuc->category_parent==0)
-                                                    <li class="sub-dropdown-holder"><a href="{{URL::to('/danh-muc-san-pham/'.$danhmuc->slug_category_product)}}">{{$danhmuc->category_name}}</a>
+                                                    <li><a href="{{URL::to('/danh-muc-san-pham/'.$danhmuc->slug_category_product)}}">{{$danhmuc->category_name}}</a>
                                                         @foreach($category as $key => $danhmuc1)
-                                                        @if($danhmuc1->category_parent==$danhmuc->category_id)
-                                                        <ul class="hb-dropdown hb-sub-dropdown">
-                                                            <li><a href="{{URL::to('/danh-muc-san-pham/'.$danhmuc1->slug_category_product)}}">{{$danhmuc1->category_name}}</a></li>
-                                                        </ul>
-                                                        @endif
+                                                            @if($danhmuc1->category_parent==$danhmuc->category_id)
+                                                            <ul class="hb-dropdown hb-sub-dropdown">
+                                                                <li><a href="{{URL::to('/danh-muc-san-pham/'.$danhmuc1->slug_category_product)}}">{{$danhmuc1->category_name}}</a></li>
+                                                            </ul>
+                                                            @endif
                                                         @endforeach
                                                     </li>
                                                     @endif
                                                 </ul>
                                                 @endforeach
+                                            </li> --}}
+                                            <li class="dropdown-holder"><a href="{{URL::to('/')}}">Category Product</a>
+                                                <ul class="hb-dropdown">
+                                                    <li class="sub-dropdown-holder">
+                                                        @foreach($category as $key => $cate)
+                                                        <ul class="nav nav-pills nav-stacked">
+                                                            <li><a href="{{URL::to('/danh-muc-san-pham/'.$cate->slug_category_product)}}">{{$cate->category_name}}</a></li>
+                                                        </ul>
+                                                        @endforeach
+                                                    </li>
+                                                </ul>
                                             </li>
-                                            <li class="megamenu-static-holder"><a href="index.html">Pages</a>
-                                                <ul class="megamenu hb-megamenu">
-                                                    <li><a href="blog-left-sidebar.html">Blog Layouts</a>
-                                                        <ul>
-                                                            <li><a href="blog-2-column.html">Blog 2 Column</a></li>
+                                            <li class="dropdown-holder"><a href="{{URL::to('/')}}">Brand Product</a>
+                                                <ul class="hb-dropdown">
+                                                    <li class="sub-dropdown-holder">
+                                                        @foreach($brand as $key => $bran)
+                                                        <ul class="nav nav-pills nav-stacked">
+                                                            <li><a href="{{URL::to('/thuong-hieu-san-pham/'.$bran->brand_slug)}}">{{$bran->brand_name}}</a></li>
+                                                        </ul>
+                                                        @endforeach
+                                                    </li>
+                                                </ul>
+                                            </li>
 
+                                            <li class="catmenu-dropdown megamenu-static-holder"><a  href="{{URL::to('/')}}">&emsp;&ensp;Pages</a>
+                                                <ul class="megamenu hb-megamenu">
+                                                    <li><a href="{{URL::to('/')}}">Blog Layouts</a>
+                                                        <ul>
+                                                            {{-- <li><a href="blog-2-column.html">Blog 2 Column</a></li>
+                                                            <li><a href="blog-3-column.html">Blog 3 Column</a></li>
+                                                            <li><a href="blog-left-sidebar.html">Grid Left Sidebar</a></li>
+                                                            <li><a href="blog-right-sidebar.html">Grid Right Sidebar</a></li>
+                                                            <li><a href="blog-list.html">Blog List</a></li>
+                                                            <li><a href="blog-list-left-sidebar.html">List Left Sidebar</a></li>
+                                                            <li><a href="blog-list-right-sidebar.html">List Right Sidebar</a></li> --}}
                                                         </ul>
                                                     </li>
-                                                    <li><a href="blog-details-left-sidebar.html">Blog Details Pages</a>
-                                                        <ul>
+                                                    <li><a href="{{URL::to('/')}}">Blog Details Pages</a>
+                                                        {{-- <ul>
                                                             <li><a href="blog-details-left-sidebar.html">Left Sidebar</a></li>
                                                             <li><a href="blog-details-right-sidebar.html">Right Sidebar</a></li>
-
-                                                        </ul>
+                                                            <li><a href="blog-audio-format.html">Blog Audio Format</a></li>
+                                                            <li><a href="blog-video-format.html">Blog Video Format</a></li>
+                                                            <li><a href="blog-gallery-format.html">Blog Gallery Format</a></li>
+                                                        </ul> --}}
                                                     </li>
-                                                    <li><a href="index.html">Tin tức</a>
-                                                        <ul>
+                                                    <li><a href="{{URL::to('/')}}">Other Pages</a>
+                                                        {{-- <ul>
                                                             <li><a href="login-register.html">My Account</a></li>
                                                             <li><a href="checkout.html">Checkout</a></li>
-
-                                                        </ul>
+                                                            <li><a href="compare.html">Compare</a></li>
+                                                            <li><a href="wishlist.html">Wishlist</a></li>
+                                                            <li><a href="shopping-cart.html">Shopping Cart</a></li>
+                                                        </ul> --}}
                                                     </li>
-                                                    <li><a href="index.html">Other Pages 2</a>
-                                                        <ul>
+                                                    <li><a href="{{URL::to('/')}}">Other Pages 2</a>
+                                                        {{-- <ul>
                                                             <li><a href="contact.html">Contact</a></li>
-                                                            <li><a href="about-us.html">About Us</a></li>
+                                                            <li><a  href="{{URL::to('/san-pham-yeu-thich')}}">Wishlist Product</a></li>
                                                             <li><a href="faq.html">FAQ</a></li>
                                                             <li><a href="404.html">404 Error</a></li>
-                                                        </ul>
+                                                        </ul> --}}
                                                     </li>
                                                 </ul>
                                             </li>
-                                            <li class="dropdown-holder"><a href="">NEWS</a>
-                                                <ul class="hb-dropdown">
-                                                    @foreach($category_post as $key => $danhmucbaiviet)
 
-                                                    <li class="sub-dropdown-holder"><a href="{{URL::to('/danh-muc-bai-viet/'.$danhmucbaiviet->cate_post_slug)}}">{{$danhmucbaiviet->cate_post_name}}</a>
-                                                    </li>
-
-                                                    @endforeach
-                                                </ul>
-                                            </li>
-                                            <li><a href="about-us.html">Video</a></li>
-                                            <li><a href="contact.html">Contact</a></li>
-                                            <li><a href="shop-left-sidebar.html">Smartwatch</a></li>
-                                            <li><a href="shop-left-sidebar.html">Accessories</a></li>
+                                            <li><a href="{{URL::to('/lien-he')}}">Contact</a></li>
+                                            <li><a href="{{URL::to('/video-shop')}}">Video</a></li>
+                                            <li><a href="{{URL::to('/san-pham-yeu-thich')}}">Wishlist Product</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -575,7 +597,7 @@
                                 <!-- Footer Payment Area End Here -->
                                 <!-- Begin Copyright Area -->
                                 <div class="copyright text-center pt-25">
-                                    <span><a href=" target="_blank">@2021 Website phát triển 💙 bởi Nguyễn Tuấn Ngọc</a></span>
+                                    <span><a target="_blank"> <?php echo date('@'."Y"); ?> Website phát triển 💙 bởi Nguyễn Tuấn Ngọc.</a></span>
                                 </div>
                                 <!-- Copyright Area End Here -->
                             </div>
@@ -655,7 +677,7 @@
                                             </div>
                                             <div class="product-variants">
                                                 <div class="produt-variants-size">
-                                                    <label>Dimension</label>
+                                                    <label>Tùy chọn sp</label>
                                                     <select class="nice-select">
                                                         <option value="1" title="S" selected="selected">40x60cm</option>
                                                         <option value="2" title="M">60x90cm</option>
@@ -664,31 +686,28 @@
                                                 </div>
                                             </div>
                                             <div class="single-add-to-cart">
-                                                <form action="#" class="cart-quantity">
+                                                <form class="cart-quantity">
+                                                    @csrf
                                                     <div class="quantity">
-                                                        <label>Quantity</label>
+                                                        <label>Số lượng</label>
                                                         <div class="cart-plus-minus">
-                                                            <input class="cart_product_qty_{{$product->product_id}}" name="qty" min="1" value="1" type="number">
-                                                            <input class="cart_product_id_{{$product->product_id}}" type="hidden" value="{{$product->product_id}}">
-                                                            <input class="cart_product_name_{{$product->product_id}}" type="hidden" value="{{$product->product_name}}">
-                                                            <input class="cart_product_image_{{$product->product_id}}" type="hidden" value="{{$product->product_image}}">
-                                                            <input class="cart_product_price_{{$product->product_id}}" type="hidden" value="{{$product->product_price}}">
-                                                            <input class="cart_product_quantity_{{$product->product_id}}" type="hidden" value="{{$product->product_quantity}}">
+                                                            <input name="qty" type="number" min="1" class="cart_product_qty_"  value="1">
                                                             <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                                                             <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                                         </div>
                                                     </div>
-                                                    <button class="add-to-cart add-to-cart" name="add-to-cart" data-id_product="{{$product->product_id}}" type="button">Thêm vào giỏ hàng</button>
+                                                    <div id="product_quickview_value"></div>
+                                                    <div id="product_quickview_button"></div>
                                                 </form>
                                             </div>
                                             <div class="product-additional-info pt-25">
-                                                <a class="wishlist-btn" href="wishlist.html"><i class="fa fa-heart-o"></i>Add to wishlist</a>
+                                                <a class="wishlist-btn" href=""><i class="fa fa-heart-o"></i>Add to wishlist</a>
                                                 <div class="product-social-sharing pt-25">
                                                     <ul>
-                                                        <li class="facebook"><a href="#"><i class="fa fa-facebook"></i>Facebook</a></li>
-                                                        <li class="twitter"><a href="#"><i class="fa fa-twitter"></i>Twitter</a></li>
-                                                        <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i>Google +</a></li>
-                                                        <li class="instagram"><a href="#"><i class="fa fa-instagram"></i>Instagram</a></li>
+                                                        <li class="facebook"><a href=""><i class="fa fa-facebook"></i>Facebook</a></li>
+                                                        <li class="twitter"><a href=""><i class="fa fa-twitter"></i>Twitter</a></li>
+                                                        <li class="google-plus"><a href=""><i class="fa fa-google-plus"></i>Google +</a></li>
+                                                        <li class="instagram"><a href=""><i class="fa fa-instagram"></i>Instagram</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -747,7 +766,6 @@
         <script src="{{asset('public/frontend/js/main.js')}}"></script>
         {{-- Tự tạo --}}
         <script src="{{asset('public/frontend/js/sweetalert.min.js')}}"></script>
-
 
 
         <script type="text/javascript">
@@ -1060,7 +1078,159 @@
             });
         });
         </script>
+          <script type="text/javascript">
 
+            $(document).on('click','.watch-video',function(){
+                var video_id = $(this).attr('id');
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url:'{{url('/watch-video')}}',
+                    method:"POST",
+                    dataType:"JSON",
+                    data:{video_id:video_id,_token:_token},
+                    success:function(data){
+                        $('#video_title').html(data.video_title);
+                        $('#video_link').html(data.video_link);
+                        $('#video_desc').html(data.video_desc);
+                        var playerYT = new vlitejs({
+                            selector: '#my_yt_video',
+                            options: {
+                              // auto play
+                              autoplay: false,
+
+                              // enable controls
+                              controls: true,
+
+                              // enables play/pause buttons
+                              playPause: true,
+
+                              // shows progress bar
+                              progressBar: true,
+
+                              // shows time
+                              time: true,
+
+                              // shows volume control
+                              volume: true,
+
+                              // shows fullscreen button
+                              fullscreen: true,
+
+                              // path to poster image
+                              poster: null,
+
+                              // shows play button
+                              bigPlay: true,
+
+                              // hide the control bar if the user is inactive
+                              autoHide: false,
+
+                              // keeps native controls for touch devices
+                              nativeControlsForTouch: false
+                            },
+                            onReady: (player) => {
+                              // callback function here
+                            }
+                        });
+
+                    }
+
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+
+            function view(){
+
+
+                if(localStorage.getItem('data')!=null){
+
+                    var data = JSON.parse(localStorage.getItem('data'));
+
+                    data.reverse();
+
+                    // document.getElementById('row_wishlist').style.overflow = 'scroll';
+                    // document.getElementById('row_wishlist').style.height = '500px';
+
+                    for(i=0;i<data.length;i++){
+
+                    var name = data[i].name;
+                    var price = data[i].price;
+                    var image = data[i].image;
+                    var url = data[i].url;
+
+                    $('#row_wishlist').append('<div class="row" style="margin:10px 0"><div class="col-md-4"><img width="100%" src="'+image+'"></div><div class="col-md-8 info_wishlist"><p>'+name+'</p><p style="color:#FE980F">'+price+'</p><a href="'+url+'">Đặt hàng</a></div>');
+                }
+
+            }
+
+        }
+
+        view();
+
+
+        function add_wistlist(clicked_id){
+
+            var id = clicked_id;
+            var name = document.getElementById('wishlist_productname'+id).value;
+            var price = document.getElementById('wishlist_productprice'+id).value;
+            var image = document.getElementById('wishlist_productimage'+id).src;
+            var url = document.getElementById('wishlist_producturl'+id).href;
+
+
+            var newItem = {
+                'url':url,
+                'id' :id,
+                'name': name,
+                'price': price,
+                'image': image
+            }
+
+            if(localStorage.getItem('data')==null){
+                localStorage.setItem('data', '[]');
+            }
+
+            var old_data = JSON.parse(localStorage.getItem('data'));
+
+            //    old_data.push(newItem);
+
+            var matches = $.grep(old_data, function(obj){
+                return obj.id == id;
+            })
+
+            if(matches.length){
+                alert('Sản phẩm bạn đã yêu thích,nên không thể thêm');
+
+            }else{
+
+                old_data.push(newItem);
+
+                $('#row_wishlist').append('<div class="row" style="margin:10px 0"><div class="col-md-4"><img width="100%" src="'+newItem.image+'"></div><div class="col-md-8 info_wishlist"><p>'+newItem.name+'</p><p style="color:#FE980F">'+newItem.price+'</p><a href="'+newItem.url+'">Đặt hàng</a></div>');
+
+            }
+
+            localStorage.setItem('data', JSON.stringify(old_data));
+
+
+        }
+        </script>
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+
+                $('#sort').on('change',function(){
+
+                    var url = $(this).val();
+                    // alert(url);
+                    if (url) {
+                        window.location = url;
+                    }
+                    return false;
+                });
+
+            });
+        </script>
 
 
 

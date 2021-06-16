@@ -34,11 +34,13 @@ class HomeController extends Controller
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tbl_brand_product')->where('brand_status','0')->orderby('brand_id','desc')->get();
         $all_product = DB::table('tbl_product')->where('product_status','0')->orderby('product_id','desc')->limit(10)->get();
+        $all_product_laptop = DB::table('tbl_product')->where('category_id','12')->where('product_status','0')->orderby('product_id','desc')->limit(10)->get();
 
         // $all_post = Post::orderBy('post_id','DESC')->where('post_status','0')->take(10)->get();
 
         return view('pages.home')->with('category',$cate_product)->with('brand',$brand_product)
         ->with('all_product',$all_product)
+        ->with('all_product_laptop',$all_product_laptop)
         ->with('category_post',$category_post)
         ->with('meta_desc',$meta_desc)
         ->with('meta_keywords',$meta_keywords)
@@ -80,28 +82,77 @@ class HomeController extends Controller
                return redirect('/')->with('message','');
                //--send mail
    }
-   public function autocomplete_ajax(Request $request){
-    $data = $request->all();
+    public function autocomplete_ajax(Request $request){
+        $data = $request->all();
 
-    if($data['query']){
+        if($data['query']){
 
-        $product = Product::where('product_status',0)->where('product_name','LIKE','%'.$data['query'].'%')->get();
+            $product = Product::where('product_status',0)->where('product_name','LIKE','%'.$data['query'].'%')->get();
 
-        $output = '
-        <ul class="dropdown-menu" style="display:block; position:relative">'
-        ;
+            $output = '
+            <ul class="dropdown-menu" style="display:block; position:relative">'
+            ;
 
-        foreach($product as $key => $val){
-           $output .= '
-           <li class="li_search_ajax"><a href="#">'.$val->product_name.'</a></li>
-           ';
+            foreach($product as $key => $val){
+            $output .= '
+            <li class="li_search_ajax"><a href="#">'.$val->product_name.'</a></li>
+            ';
+            }
+
+            $output .= '</ul>';
+            echo $output;
         }
 
-        $output .= '</ul>';
-        echo $output;
+
     }
+    public function lienhe(Request $request){
+            $meta_desc = "Shop Đồng Hồ⌚️ Nam Nữ Hơn 15 Cửa Hàng & 15 Năm Bán Đồng Hồ ️ Casio, Orient, Citizen, DW, Tissot Chính Hãng Bảo Hành 5 Năm⚡ Khuyến Mãi 20%-50 ";
+            $meta_keywords = "Đồng Hồ ️ Casio, Orient, Citizen, DW, Tissot Chính Hãng";
+            $meta_title = "Shop Đồng Hồ⌚️ Nam Nữ chính hãng.";
+            $url_canonical = $request->url();
+            //
+            $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','0')->take(4)->get();
+            $category_post = CatePost::orderBy('cate_post_id','DESC')->where('cate_post_status','0')->get();
+            // $partner = Partner::orderBy('partner_id','DESC')->where('partner_status','0')->take(10)->get();
+            // $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->take(3)->get();
+            $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
+            $brand_product = DB::table('tbl_brand_product')->where('brand_status','0')->orderby('brand_id','desc')->get();
+            $all_product = DB::table('tbl_product')->where('product_status','0')->orderby('product_id','desc')->limit(10)->get();
 
+            // $all_post = Post::orderBy('post_id','DESC')->where('post_status','0')->take(10)->get();
 
+            return view('pages.lienhe.lienhe')->with('category',$cate_product)->with('brand',$brand_product)
+            ->with('all_product',$all_product)
+            ->with('category_post',$category_post)
+            ->with('meta_desc',$meta_desc)
+            ->with('meta_keywords',$meta_keywords)
+            ->with('meta_title',$meta_title)
+            ->with('url_canonical',$url_canonical);
+    }
+    public function wishlist(Request $request){
+        $meta_desc = "Shop Đồng Hồ⌚️ Nam Nữ Hơn 15 Cửa Hàng & 15 Năm Bán Đồng Hồ ️ Casio, Orient, Citizen, DW, Tissot Chính Hãng Bảo Hành 5 Năm⚡ Khuyến Mãi 20%-50 ";
+        $meta_keywords = "Đồng Hồ ️ Casio, Orient, Citizen, DW, Tissot Chính Hãng";
+        $meta_title = "Shop Đồng Hồ⌚️ Nam Nữ chính hãng.";
+        $url_canonical = $request->url();
+        //
+        $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','0')->take(4)->get();
+        $category_post = CatePost::orderBy('cate_post_id','DESC')->where('cate_post_status','0')->get();
+        // $partner = Partner::orderBy('partner_id','DESC')->where('partner_status','0')->take(10)->get();
+        // $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->take(3)->get();
+        $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
+        $brand_product = DB::table('tbl_brand_product')->where('brand_status','0')->orderby('brand_id','desc')->get();
+        $all_product = DB::table('tbl_product')->where('product_status','0')->orderby('product_id','desc')->limit(10)->get();
+
+        // $all_post = Post::orderBy('post_id','DESC')->where('post_status','0')->take(10)->get();
+
+        return view('pages.sanpham.wishlist')->with('category',$cate_product)->with('brand',$brand_product)
+        ->with('all_product',$all_product)
+        ->with('category_post',$category_post)
+        ->with('meta_desc',$meta_desc)
+        ->with('meta_keywords',$meta_keywords)
+        ->with('meta_title',$meta_title)
+        ->with('url_canonical',$url_canonical);
 }
+
 
 }

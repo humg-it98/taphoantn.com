@@ -5,31 +5,26 @@ use Auth;
 use App\Models\Comment;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class CommentProduct extends Controller
 {
     public function AuthLogin(){
-
-        if(Session::get('login_normal')){
-
-            $admin_id = Session::get('admin_id');
+        $admin_id = Auth::id();
+        if($admin_id){
+            return Redirect::to('dashboard');
         }else{
-            $admin_id = Auth::id();
+            return Redirect::to('admin')->send();
         }
-            if($admin_id){
-                return Redirect::to('dashboard');
-            }else{
-                return Redirect::to('admin')->send();
-            }
     }
     public function reply_comment(Request $request){
         $data = $request->all();
         $comment = new Comment();
         $comment->comment = $data['comment'];
-        $comment->product_id = $data['comment_product_id'];
+        $comment->product_id = $data['product_id'];
         $comment->comment_parent_comment = $data['comment_id'];
         $comment->comment_status = 0;
-        $comment->comment_name = 'HiếuStore';
+        $comment->comment_name = 'NgocNTN';
         $comment->save();
 
     }
@@ -40,6 +35,7 @@ class CommentProduct extends Controller
         $comment->save();
     }
     public function list_comment(){
+        $this->AuthLogin();
         $comment = Comment::with('product')->where('comment_parent_comment','=',0)->orderBy('comment_id','DESC')->get();
         $comment_rep = Comment::with('product')->where('comment_parent_comment','>',0)->get();
         return view('admin.comment.list_comment')->with(compact('comment','comment_rep'));
@@ -63,31 +59,36 @@ class CommentProduct extends Controller
         $output = '';
         foreach($comment as $key => $comm){
             $output.= '
-
-                                        <div class="col-md-2">
-                                            <img width="100%" src="('/public/frontend/images/avata.png')" class="img img-responsive img-thumbnail">
-                                        </div>
-                                        <div class="col-md-10">
-                                            <p style="color:green;">@'.$comm->comment_name.'</p>
-                                            <p style="color:#000;">'.$comm->comment_date.'</p>
-                                            <p>'.$comm->comment.'</p>
-                                        </div>
-                                    </div><p></p>
+                            <li>
+                                <div class="author-avatar pt-15">
+                                    <img src="'.url('/public/frontend/images/product-details/user.png').'" alt="Admin">
+                                </div>
+                                <div class="comment-body pl-15">
+                                        <span class="reply-btn pt-15 pt-xs-5"><a href="#">reply</a></span>
+                                    <h5 class="comment-author pt-15">@'.$comm->comment_name.'</h5>
+                                    <div class="comment-post-date">'.$comm->comment_date.'</div>
+                                    <p>'.$comm->comment.'</p>
+                                </div>
+                            </li>
                                     ';
 
                                     foreach($comment_rep as $key => $rep_comment)  {
                                         if($rep_comment->comment_parent_comment==$comm->comment_id)  {
-                                     $output.= ' <div class="row style_comment" style="margin:5px 40px;background: aquamarine;">
-
-                                        <div class="col-md-2">
-                                            <img width="80%" src="('/public/frontend/images/admin.png')" class="img img-responsive img-thumbnail">
-                                        </div>
-                                        <div class="col-md-10">
-                                            <p style="color:blue;">@Admin</p>
-                                            <p style="color:#000;">'.$rep_comment->comment.'</p>
-                                            <p></p>
-                                        </div>
-                                    ;
+                                     $output.= '
+                                                <li class="comment-children">
+                                                    <div class="author-avatar pt-15tar">
+                                                        <img src="'.url('/public/frontend/images/product-details/admin.png').'" alt="Admin">
+                                                    </div>
+                                                    <div class="comment-body pl-15">
+                                                            <span class="reply-btn pt-15 pt-xs-5"><a href="#">reply</a></span>
+                                                        <h5 class="comment-author pt-15">admin</h5>
+                                                        <div class="comment-post-date">
+                                                        '.$rep_comment->comment_date.'
+                                                        </div>
+                                                        <p>'.$rep_comment->comment.'</p>
+                                                    </div>
+                                                </li>
+                                    ';
                                         }
                                     }
         }

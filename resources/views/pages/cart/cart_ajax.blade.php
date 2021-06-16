@@ -100,38 +100,43 @@
                             <div class="cart-page-total">
                                 <h2>Cart totals</h2>
                                 <ul>
-                                    <li>Tạm tính: <span>{{number_format($total).' VNĐ'}}</span></li>
-                                    @if(Session::get('coupon'))
-                                      @foreach(Session::get('coupon') as $key => $cou)
-                                          @if($cou['coupon_condition']==1)
-                                          <li>Mã giảm: <span>{{$cou['coupon_number']}} % </span></li>
-                                                  @php
-                                                  $total_coupon = ($total*$cou['coupon_number'])/100;
-                                                  $total_after_coupon = $total-$total_coupon;
-                                                  @endphp
-                                          @elseif($cou['coupon_condition']==2)
-                                          <li>Mã giảm: <span>{{number_format($cou['coupon_number'],0,',','.')}} VNĐ </span></li>
-                                                  @php
-                                                  $total_coupon = $total - $cou['coupon_number'];
-                                                  $total_after_coupon = $total_coupon;
-                                                  @endphp
-                                          @else
-                                          <li>Mã giảm: <span>0 vnđ</span></li>
-                                                  @php
-                                                  $total_coupon = $total;
-                                                  $total_after_coupon = $total_coupon;
-                                                  @endphp
-                                          @endif
-                                      @endforeach
-                                    @endif
-                                    @if(Session::get('coupon'))
-                                    <li>Tổng tiền: <span>{{number_format($total_after_coupon).' VNĐ'}}</span></li>
+                                    @if(Session::get('cart'))
+                                        <li>Tạm tính: <span>{{number_format($total).' VNĐ'}}</span></li>
+                                        @if(Session::get('coupon'))
+                                            @foreach(Session::get('coupon') as $key => $cou)
+                                                @if($cou['coupon_condition']==1)
+                                                <li>Mã giảm: <span>{{$cou['coupon_number']}} % </span></li>
+                                                        @php
+                                                        $total_coupon = ($total*$cou['coupon_number'])/100;
+                                                        $total_after_coupon = $total-$total_coupon;
+                                                        @endphp
+                                                @elseif($cou['coupon_condition']==2)
+                                                <li>Mã giảm: <span>{{number_format($cou['coupon_number'],0,',','.')}} VNĐ </span></li>
+                                                        @php
+                                                        $total_coupon = $total - $cou['coupon_number'];
+                                                        $total_after_coupon = $total_coupon;
+                                                        @endphp
+                                                @else
+                                                <li>Mã giảm: <span>0 vnđ</span></li>
+                                                        @php
+                                                        $total_coupon = $total;
+                                                        $total_after_coupon = $total_coupon;
+                                                        @endphp
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                            @if(Session::get('coupon'))
+                                            <li>Tổng tiền: <span>{{number_format($total_after_coupon).' VNĐ'}}</span></li>
+                                            @else
+                                            @php
+                                                $total_after_coupon = ($total);
+                                            @endphp
+                                            <li>Tổng tiền: <span>{{number_format($total).'VNĐ'}}</span></li>
+                                            @endif
                                     @else
-                                    @php
-                                        $total_after_coupon = ($total);
-                                    @endphp
-                                    <li>Tổng tiền: <span>{{number_format($total).'VNĐ'}}</span></li>
+                                    <li>Tổng tiền: <span> 0 VNĐ</span></li>
                                     @endif
+
 
                                 </ul>
                                 @if(Session::get('customer_id'))

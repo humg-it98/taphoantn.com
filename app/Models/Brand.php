@@ -11,6 +11,10 @@ class Brand extends Model
     	'brand_name', 'brand_slug', 'brand_desc','brand_status'
     ];
     protected $primaryKey = 'brand_id';
- 	protected $table = 'tbl_brand';
+ 	protected $table = 'tbl_brand_product';
+
+     public function product(){
+        return $this->hasMany('App\Models\Product');
+    }
 
 }

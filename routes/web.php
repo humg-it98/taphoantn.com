@@ -21,12 +21,15 @@ Route::get('/trang-chu','HomeController@index');
 Route::post('/tim-kiem','HomeController@search');
 Route::get('/404','HomeController@error_page');
 Route::post('/autocomplete-ajax','HomeController@autocomplete_ajax');
+Route::get('/lien-he','HomeController@lienhe');
 
 /*Back-end*/
 Route::get('/admin','AdminController@index');
 Route::get('/dashboard','AdminController@show_dashboard');
 Route::post('/admin-dashboard','AdminController@dashboard');
 Route::get('/logout','AdminController@logout');
+Route::get('/san-pham-yeu-thich','HomeController@wishlist');
+
 
 //Dang nhap fb-gmail
 Route::get('/login-facebook','AdminController@login_facebook');
@@ -69,8 +72,11 @@ Route::post('/save-product','ProductController@save_product');
 Route::get('/add-images-product','ProductController@add_images_product');
 Route::post('/save-images-product','ProductController@save_images_product');
 
+
 Route::get('/tag/{product_tag}','ProductController@tag');
 Route::post('/quickview','ProductController@quickview');
+
+Route::get('/all-product-home','ProductController@all_product_home');
 
 //Danh  mục bài viết
 Route::get('/add-category-post','CategoryPost@add_category_post');
@@ -95,7 +101,7 @@ Route::get('/bai-viet/{post_slug}','PostController@bai_viet');
 
 //Danh mục sp
 Route::get('/danh-muc-san-pham/{slug_category_product}','CategoryProduct@show_category_home');
-Route::get('/thuong-hieu-san-pham/{slug_category_product}','BrandProduct@show_brand_home');
+Route::get('/thuong-hieu-san-pham/{brand_slug}','BrandProduct@show_brand_home');
 Route::get('/chi-tiet-san-pham/{product_slug}','ProductController@details_product');
 
 //Cart
