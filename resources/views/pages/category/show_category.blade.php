@@ -42,7 +42,6 @@
                     <!-- product-select-box start -->
                     <div class="product-select-box">
                         <form>
-                
                             <div class="product-short">
                                 <p>Sắp xếp theo:</p>
                                 <select class="nice-select" name="sort" id="sort">

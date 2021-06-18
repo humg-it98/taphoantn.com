@@ -19,6 +19,7 @@
         <div class="row single-product-area">
             <div class="col-lg-5 col-md-6">
                <!-- Product Details Left -->
+               @foreach($product_images as $key => $images)
                 <div class="product-details-left">
                     <div class="product-details-images slider-navigation-1">
                         <div class="lg-image">
@@ -26,42 +27,42 @@
                                 <img src="{{URL::to('public/uploads/product/'.$product->product_image)}}" alt="product image">
                             </a>
                         </div>
-
                         <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="{{asset('public/frontend/images/product/large-size/2.jpg')}}" data-gall="myGallery">
-                                <img src="{{asset('public/frontend/images/product/large-size/2.jpg')}}" alt="product image">
+                            <a class="popup-img venobox vbox-item" href="" data-gall="myGallery">
+                                <img src="{{URL::to('public/uploads/product_img/'.$images->product_image_1)}}" alt="product image">
                             </a>
                         </div>
                         <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="{{asset('public/frontend/images/product/large-size/3.jpg')}}" data-gall="myGallery">
-                                <img src="{{asset('public/frontend/images/product/large-size/3.jpg')}}" alt="product image">
+                            <a class="popup-img venobox vbox-item" href="" data-gall="myGallery">
+                                <img src="{{URL::to('public/uploads/product_img/'.$images->product_image_2)}}" alt="product image">
+                        </div>
+                        <div class="lg-image">
+                            <a class="popup-img venobox vbox-item" href="" data-gall="myGallery">
+                                <img src="{{URL::to('public/uploads/product_img/'.$images->product_image_3)}}" alt="product image">
                             </a>
                         </div>
                         <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="{{asset('public/frontend/images/product/large-size/4.jpg')}}" data-gall="myGallery">
-                                <img src="{{asset('public/frontend/images/product/large-size/4.jpg')}}" alt="product image">
+                            <a class="popup-img venobox vbox-item" href="" data-gall="myGallery">
+                                <img src="{{URL::to('public/uploads/product_img/'.$images->product_image_4)}}" alt="product image">
                             </a>
                         </div>
                         <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="{{asset('public/frontend/images/product/large-size/5.jpg')}}" data-gall="myGallery">
-                                <img src="{{asset('public/frontend/images/product/large-size/5.jp')}}g" alt="product image">
-                            </a>
-                        </div>
-                        <div class="lg-image">
-                            <a class="popup-img venobox vbox-item" href="{{asset('public/frontend/images/product/large-size/6.jpg')}}" data-gall="myGallery">
-                                <img src="{{asset('public/frontend/images/product/large-size/6.jpg')}}" alt="product image">
+                            <a class="popup-img venobox vbox-item" href="" data-gall="myGallery">
+                                <img src="{{URL::to('public/uploads/product_img/'.$images->product_image_5)}}" alt="product image">
                             </a>
                         </div>
                     </div>
                     <div class="product-details-thumbs slider-thumbs-1">
-                        <div class="sm-image"><img src="{{asset('public/frontend/images/product/small-size/1.jpg')}}" alt="product image thumb"></div>
-                        <div class="sm-image"><img src="{{asset('public/frontend/images/product/small-size/2.jpg')}}" alt="product image thumb"></div>
-                        <div class="sm-image"><img src="{{asset('public/frontend/images/product/small-size/3.jpg')}}" alt="product image thumb"></div>
-                        <div class="sm-image"><img src="{{asset('public/frontend/images/product/small-size/4.jpg')}}" alt="product image thumb"></div>
-                        <div class="sm-image"><img src="{{asset('public/frontend/images/product/small-size/5.jpg')}}" alt="product image thumb"></div>
-                        <div class="sm-image"><img src="{{asset('public/frontend/images/product/small-size/6.jpg')}}" alt="product image thumb"></div>
+                        <div class="sm-image"><img src="{{URL::to('public/uploads/product/'.$product->product_image)}}" alt="product image thumb"></div>
+                        <div class="sm-image"><img src="{{URL::to('public/uploads/product_img/'.$images->product_image_1)}}" alt="product image thumb"></div>
+                        <div class="sm-image"><img src="{{URL::to('public/uploads/product_img/'.$images->product_image_2)}}" alt="product image thumb"></div>
+                        <div class="sm-image"><img src="{{URL::to('public/uploads/product_img/'.$images->product_image_3)}}" alt="product image thumb"></div>
+                        <div class="sm-image"><img src="{{URL::to('public/uploads/product_img/'.$images->product_image_4)}}" alt="product image thumb"></div>
+                        <div class="sm-image"><img src="{{URL::to('public/uploads/product_img/'.$images->product_image_5)}}" alt="product image thumb"></div>
+
                     </div>
                 </div>
+                @endforeach
                 <!--// Product Details Left -->
             </div>
 
@@ -382,7 +383,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <h4><a class="product_name" href="single-product.html">{{$lienquan->product_name}}</a></h4>
+                                        <h4><a class="product_name" href="{{URL::to('/chi-tiet-san-pham',$lienquan->product_slug)}}">{{$lienquan->product_name}}</a></h4>
                                         <div class="price-box">
                                             <span class="new-price">{{number_format((int)$lienquan->product_price).' VNĐ'}}</span>
                                         </div>
@@ -391,14 +392,14 @@
                                         <ul class="add-actions-link">
                                             <li class="add-cart active"><a href="#">Add to cart</a></li>
                                             <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
-                                            <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
+                                            <li><a class="links-details" href=""><i class="fa fa-heart-o"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                             <!-- single-product-wrap end -->
                         </div>
-                        @endforeach 
+                        @endforeach
                     </div>
 
                 </div>

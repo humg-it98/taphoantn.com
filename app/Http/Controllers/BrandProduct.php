@@ -42,7 +42,6 @@ class BrandProduct extends Controller
             $data['brand_desc'] = $request->brand_product_desc;
             $data['brand_status'] = $request->brand_product_status;
             $data['brand_slug'] = $request->brand_slug;
-            $data['meta_keywords'] = $request->meta_keywords;
             DB::table('tbl_brand_product')->insert($data);
             Session::put('message','Them thương hiệu thành cong');
             return Redirect::to('add-brand-product');

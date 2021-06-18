@@ -605,7 +605,7 @@
             <div class="col-lg-4 col-md-4 text-center">
                 <div class="single-banner">
                     <a href="#">
-                        <img src="{{asset('public/frontend/images/banner/banner_lap1.jpg')}}" alt="Li's Static Banner">
+                        <img src="{{asset('public/frontend/images/banner/banner_lap2.png')}}" alt="Li's Static Banner">
                     </a>
                 </div>
             </div>
@@ -614,7 +614,7 @@
             <div class="col-lg-4 col-md-4 text-center pt-xs-30">
                 <div class="single-banner">
                     <a href="#">
-                        <img src="{{asset('public/frontend/images/banner/banner_lap2.png')}}" alt="Li's Static Banner">
+                        <img src="{{asset('public/frontend/images/banner/banner_lap1.jpg')}}" alt="Li's Static Banner">
                     </a>
                 </div>
             </div>
@@ -632,6 +632,80 @@
     </div>
 </div>
 <!-- Li's Static Banner Area End Here -->
+<section class="product-area li-laptop-product pt-60 pb-45">
+    <div class="container">
+        <div class="row">
+            <!-- Begin Li's Section Area -->
+            <div class="col-lg-12">
+                <div class="li-section-title">
+                    <h2>
+                        <span>ĐIÊN THOAI
+                        </span>
+                    </h2>
+                </div>
+                <div class="row">
+                    <div class="product-active owl-carousel">
+                        @foreach($all_product_phone as $key => $product_phone)
+
+                        <div class="col-lg-12">
+                            <form>
+                                @csrf
+                                <input type="hidden" value="{{$product_phone->product_id}}" class="cart_product_id_{{$product_phone->product_id}}" >
+                                <input type="hidden" id="wishlist_productname{{$product_phone->product_id}}" value="{{$product_phone->product_name}}" class="cart_product_name_{{$product_phone->product_id}}">
+                                <input type="hidden" value="{{$product_phone->product_image}}" class="cart_product_image_{{$product_phone->product_id}}">
+                                <input type="hidden" id="wishlist_productprice{{$product_phone->product_id}}" value="{{$product_phone->product_price}}" class="cart_product_price_{{$product_phone->product_id}}">
+                                <input type="hidden" value="1" class="cart_product_qty_{{$product_phone->product_id}}">
+                            <!-- single-product-wrap start -->
+                            <div class="single-product-wrap">
+                                <div class="product-image">
+                                    <a href="{{URL::to('/chi-tiet-san-pham',$product_phone->product_slug)}}">
+                                        <img id="wishlist_productimage{{$product_phone->product_id}}" src="{{URL::to('public/uploads/product/'.$product_phone->product_image)}}" alt="Li's Product Image">
+                                    </a>
+                                    <span class="sticker">New</span>
+                                </div>
+                                <div class="product_desc">
+                                    <div class="product_desc_info">
+                                        <div class="product-review">
+                                            <h5 class="manufacturer">
+                                                <a>ID sản phẩm: {{$product_phone->product_id}}</a>
+                                            </h5>
+                                            <div class="rating-box">
+                                                <ul class="rating">
+                                                    <li><i class="fa fa-star-o"></i></li>
+                                                    <li><i class="fa fa-star-o"></i></li>
+                                                    <li><i class="fa fa-star-o"></i></li>
+                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <h4><a class="product_name" id="wishlist_producturl{{$product_phone->product_id}}" href="{{URL::to('/chi-tiet-san-pham',$product_phone->product_slug)}}">{{$product_phone->product_name}}</a></h4>
+                                        <div class="price-box">
+                                            <span class="new-price">{{number_format($product_phone->product_price,0,',','.')}}VNĐ</span>
+                                        </div>
+                                    </div>
+                                    <div class="add-actions">
+                                        <ul class="add-actions-link">
+                                            <li class="add-cart active add-to-cart" name="add-to-cart" data-id_product="{{$product_phone->product_id}}" ><a>Thêm giỏ hàng</a></li>
+                                            <li><a class="links-details wishlist" id="{{$product_phone->product_id}}" onclick="add_wistlist(this.id);"><i class="fa fa-heart-o"></i></a></li>
+                                            <li><a title="Xem nhanh" name="add-to-cart" class="quick-view-btn xemnhanh" data-id_product="{{$product_phone->product_id}}" data-toggle="modal" data-target="#xemnhanh"><i class="fa fa-eye"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- single-product-wrap end -->
+                            </form>
+                        </div>
+
+                        @endforeach
+
+                    </div>
+                </div>
+            </div>
+            <!-- Li's Section Area End Here -->
+        </div>
+    </div>
+</section>
 <!-- Begin Li's Laptop Product Area -->
 <section class="product-area li-laptop-product pt-60 pb-45">
     <div class="container">
@@ -723,20 +797,29 @@
                     <h2>
                         <span>TABLET</span>
                     </h2>
-                    <ul class="li-sub-category-list">
+                    {{-- <ul class="li-sub-category-list">
                         <li class="active"><a href="shop-left-sidebar.html">Chamcham</a></li>
                         <li><a href="shop-left-sidebar.html">Sanai</a></li>
                         <li><a href="shop-left-sidebar.html">Meito</a></li>
-                    </ul>
+                    </ul> --}}
                 </div>
                 <div class="row">
                     <div class="product-active owl-carousel">
+                        @foreach($all_product_table as $key => $product_tab)
+
                         <div class="col-lg-12">
+                            <form>
+                                @csrf
+                                <input type="hidden" value="{{$product_tab->product_id}}" class="cart_product_id_{{$product_tab->product_id}}" >
+                                <input type="hidden" id="wishlist_productname{{$product_tab->product_id}}" value="{{$product_tab->product_name}}" class="cart_product_name_{{$product_tab->product_id}}">
+                                <input type="hidden" value="{{$product_tab->product_image}}" class="cart_product_image_{{$product_tab->product_id}}">
+                                <input type="hidden" id="wishlist_productprice{{$product_tab->product_id}}" value="{{$product_tab->product_price}}" class="cart_product_price_{{$product_tab->product_id}}">
+                                <input type="hidden" value="1" class="cart_product_qty_{{$product_tab->product_id}}">
                             <!-- single-product-wrap start -->
                             <div class="single-product-wrap">
                                 <div class="product-image">
-                                    <a href="single-product.html">
-                                        <img src="{{asset('public/frontend/images/product/large-size/3.jpg')}}" alt="Li's Product Image">
+                                    <a href="{{URL::to('/chi-tiet-san-pham',$product_tab->product_slug)}}">
+                                        <img id="wishlist_productimage{{$product_tab->product_id}}" src="{{URL::to('public/uploads/product/'.$product_tab->product_image)}}" alt="Li's Product Image">
                                     </a>
                                     <span class="sticker">New</span>
                                 </div>
@@ -744,7 +827,7 @@
                                     <div class="product_desc_info">
                                         <div class="product-review">
                                             <h5 class="manufacturer">
-                                                <a href="shop-left-sidebar.html">Graphic Corner</a>
+                                                <a>ID sản phẩm: {{$product_tab->product_id}}</a>
                                             </h5>
                                             <div class="rating-box">
                                                 <ul class="rating">
@@ -756,233 +839,26 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <h4><a class="product_name" href="single-product.html">Accusantium dolorem1</a></h4>
+                                        <h4><a class="product_name" id="wishlist_producturl{{$product_tab->product_id}}" href="{{URL::to('/chi-tiet-san-pham',$product_tab->product_slug)}}">{{$product_tab->product_name}}</a></h4>
                                         <div class="price-box">
-                                            <span class="new-price">$46.80</span>
+                                            <span class="new-price">{{number_format($product_tab->product_price,0,',','.')}}VNĐ</span>
                                         </div>
                                     </div>
                                     <div class="add-actions">
                                         <ul class="add-actions-link">
-                                            <li class="add-cart active"><a href="#">Add to cart</a></li>
-                                            <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
-                                            <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
+                                            <li class="add-cart active add-to-cart" name="add-to-cart" data-id_product="{{$product_tab->product_id}}" ><a>Thêm giỏ hàng</a></li>
+                                            <li><a class="links-details wishlist" id="{{$product_tab->product_id}}" onclick="add_wistlist(this.id);"><i class="fa fa-heart-o"></i></a></li>
+                                            <li><a title="Xem nhanh" name="add-to-cart" class="quick-view-btn xemnhanh" data-id_product="{{$product_tab->product_id}}" data-toggle="modal" data-target="#xemnhanh"><i class="fa fa-eye"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                             <!-- single-product-wrap end -->
+                            </form>
                         </div>
-                        <div class="col-lg-12">
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-image">
-                                    <a href="single-product.html">
-                                        <img src="{{asset('public/frontend/images/product/large-size/5.jpg')}}" alt="Li's Product Image">
-                                    </a>
-                                    <span class="sticker">New</span>
-                                </div>
-                                <div class="product_desc">
-                                    <div class="product_desc_info">
-                                        <div class="product-review">
-                                            <h5 class="manufacturer">
-                                                <a href="shop-left-sidebar.html">Studio Design</a>
-                                            </h5>
-                                            <div class="rating-box">
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <h4><a class="product_name" href="single-product.html">Mug Today is a good day</a></h4>
-                                        <div class="price-box">
-                                            <span class="new-price new-price-2">$71.80</span>
-                                            <span class="old-price">$77.22</span>
-                                            <span class="discount-percentage">-7%</span>
-                                        </div>
-                                    </div>
-                                    <div class="add-actions">
-                                        <ul class="add-actions-link">
-                                            <li class="add-cart active"><a href="#">Add to cart</a></li>
-                                            <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
-                                            <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                        </div>
-                        <div class="col-lg-12">
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-image">
-                                    <a href="single-product.html">
-                                        <img src="{{asset('public/frontend/images/product/large-size/7.jpg')}}" alt="Li's Product Image">
-                                    </a>
-                                    <span class="sticker">New</span>
-                                </div>
-                                <div class="product_desc">
-                                    <div class="product_desc_info">
-                                        <div class="product-review">
-                                            <h5 class="manufacturer">
-                                                <a href="shop-left-sidebar.html">Graphic Corner</a>
-                                            </h5>
-                                            <div class="rating-box">
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <h4><a class="product_name" href="single-product.html">Accusantium dolorem1</a></h4>
-                                        <div class="price-box">
-                                            <span class="new-price">$46.80</span>
-                                        </div>
-                                    </div>
-                                    <div class="add-actions">
-                                        <ul class="add-actions-link">
-                                            <li class="add-cart active"><a href="#">Add to cart</a></li>
-                                            <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
-                                            <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                        </div>
-                        <div class="col-lg-12">
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-image">
-                                    <a href="single-product.html">
-                                        <img src="{{asset('public/frontend/images/product/large-size/9.jpg')}}" alt="Li's Product Image">
-                                    </a>
-                                    <span class="sticker">New</span>
-                                </div>
-                                <div class="product_desc">
-                                    <div class="product_desc_info">
-                                        <div class="product-review">
-                                            <h5 class="manufacturer">
-                                                <a href="shop-left-sidebar.html">Studio Design</a>
-                                            </h5>
-                                            <div class="rating-box">
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <h4><a class="product_name" href="single-product.html">Mug Today is a good day</a></h4>
-                                        <div class="price-box">
-                                            <span class="new-price new-price-2">$71.80</span>
-                                            <span class="old-price">$77.22</span>
-                                            <span class="discount-percentage">-7%</span>
-                                        </div>
-                                    </div>
-                                    <div class="add-actions">
-                                        <ul class="add-actions-link">
-                                            <li class="add-cart active"><a href="#">Add to cart</a></li>
-                                            <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
-                                            <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                        </div>
-                        <div class="col-lg-12">
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-image">
-                                    <a href="single-product.html">
-                                        <img src="{{asset('public/frontend/images/product/large-size/11.jpg')}}" alt="Li's Product Image">
-                                    </a>
-                                    <span class="sticker">New</span>
-                                </div>
-                                <div class="product_desc">
-                                    <div class="product_desc_info">
-                                        <div class="product-review">
-                                            <h5 class="manufacturer">
-                                                <a href="shop-left-sidebar.html">Graphic Corner</a>
-                                            </h5>
-                                            <div class="rating-box">
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <h4><a class="product_name" href="single-product.html">Accusantium dolorem1</a></h4>
-                                        <div class="price-box">
-                                            <span class="new-price">$46.80</span>
-                                        </div>
-                                    </div>
-                                    <div class="add-actions">
-                                        <ul class="add-actions-link">
-                                            <li class="add-cart active"><a href="#">Add to cart</a></li>
-                                            <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
-                                            <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                        </div>
-                        <div class="col-lg-12">
-                            <!-- single-product-wrap start -->
-                            <div class="single-product-wrap">
-                                <div class="product-image">
-                                    <a href="single-product.html">
-                                        <img src="{{asset('public/frontend/images/product/large-size/11.jpg')}}" alt="Li's Product Image">
-                                    </a>
-                                    <span class="sticker">New</span>
-                                </div>
-                                <div class="product_desc">
-                                    <div class="product_desc_info">
-                                        <div class="product-review">
-                                            <h5 class="manufacturer">
-                                                <a href="shop-left-sidebar.html">Studio Design</a>
-                                            </h5>
-                                            <div class="rating-box">
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <h4><a class="product_name" href="single-product.html">Mug Today is a good day</a></h4>
-                                        <div class="price-box">
-                                            <span class="new-price new-price-2">$71.80</span>
-                                            <span class="old-price">$77.22</span>
-                                            <span class="discount-percentage">-7%</span>
-                                        </div>
-                                    </div>
-                                    <div class="add-actions">
-                                        <ul class="add-actions-link">
-                                            <li class="add-cart active"><a href="#">Add to cart</a></li>
-                                            <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
-                                            <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-wrap end -->
-                        </div>
+
+                        @endforeach
+
                     </div>
                 </div>
             </div>
@@ -1006,7 +882,7 @@
                     <h2>Meito Accessories 2018</h2>
                     <p class="schedule">
                         Starting at
-                        <span> $1209.00</span>
+                        <span> 500K</span>
                     </p>
                     <div class="default-btn">
                         <a href="" class="links">Shopping Now</a>

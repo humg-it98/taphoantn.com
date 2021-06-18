@@ -44,9 +44,10 @@
         <link rel="stylesheet" href="{{asset('public/frontend/css/sweetalert.css')}}">
         <!-- Modernizr js -->
         <script src="{{asset('public/frontend/js/vendor/modernizr-2.8.3.min.js')}}"></script>
+        <link rel="stylesheet" href="/resources/demos/style.css">
     </head>
     <body>
-    <!--[if lt IE 8]>
+ <!--[if lt IE 8]>
 		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	<![endif]-->
         <!-- Begin Body Wrapper -->
@@ -71,7 +72,7 @@
                                 <div class="header-top-right">
                                     <ul class="ht-menu">
                                         <!-- Begin Setting Area -->
-                                        <li><a href="{{URL::to('/yeu-thich')}}"><i class="fa fa-star"></i> Yêu thích</a></li>
+                                        <li><a href="{{URL::to('/san-pham-yeu-thich')}}"><i class="fa fa-star"></i> Yêu thích</a></li>
                                             <?php
                                                 $customer_id = Session::get('customer_id');
                                                 $shipping_id = Session::get('shipping_id');
@@ -237,7 +238,7 @@
                                                 </ul>
                                                 <p class="minicart-total">Tổng tiền: <span>0 đ</span></p>
                                                 <div class="minicart-button">
-                                                    <a href="shopping-cart.html" class="li-button li-button-fullwidth li-button-dark">
+                                                    <a href="{{URL::to('/gio-hang')}}" class="li-button li-button-fullwidth li-button-dark">
                                                         <span>Xem giỏ hàng</span>
                                                     </a>
                                                 </div>
@@ -264,7 +265,7 @@
                                 <div class="hb-menu">
                                     <nav>
                                         <ul>
-                                            <li class="dropdown-holder"><a href="{{URL::to('/')}}">Home</a>
+                                            <li class="dropdown-holder"><a href="{{URL::to('/')}}">TRANG CHU</a>
                                             </li>
                                             {{-- <li class="catmenu-dropdown megamenu-holder"><a>Category</a>
                                                 @foreach($category as $key => $danhmuc)
@@ -283,7 +284,7 @@
                                                 </ul>
                                                 @endforeach
                                             </li> --}}
-                                            <li class="dropdown-holder"><a href="{{URL::to('/')}}">Category Product</a>
+                                            {{-- <li class="dropdown-holder"><a href="{{URL::to('/')}}">N</a>
                                                 <ul class="hb-dropdown">
                                                     <li class="sub-dropdown-holder">
                                                         @foreach($category as $key => $cate)
@@ -293,8 +294,8 @@
                                                         @endforeach
                                                     </li>
                                                 </ul>
-                                            </li>
-                                            <li class="dropdown-holder"><a href="{{URL::to('/')}}">Brand Product</a>
+                                            </li> --}}
+                                            <li class="dropdown-holder"><a href="{{URL::to('/')}}">THUONG HIEU SAN PHAM</a>
                                                 <ul class="hb-dropdown">
                                                     <li class="sub-dropdown-holder">
                                                         @foreach($brand as $key => $bran)
@@ -306,50 +307,35 @@
                                                 </ul>
                                             </li>
 
-                                            <li class="catmenu-dropdown megamenu-static-holder"><a  href="{{URL::to('/')}}">&emsp;&ensp;Pages</a>
+                                            <li class="catmenu-dropdown megamenu-static-holder"><a  href="{{URL::to('/')}}">&ensp;DANH MUC SAN PHAM</a>
                                                 <ul class="megamenu hb-megamenu">
-                                                    <li><a href="{{URL::to('/')}}">Blog Layouts</a>
+                                                @foreach($category as $key => $cate)
+                                                    <li><a href="{{URL::to('/danh-muc-san-pham/'.$cate->slug_category_product)}}">{{$cate->category_name}}</a>
                                                         <ul>
-                                                            {{-- <li><a href="blog-2-column.html">Blog 2 Column</a></li>
-                                                            <li><a href="blog-3-column.html">Blog 3 Column</a></li>
-                                                            <li><a href="blog-left-sidebar.html">Grid Left Sidebar</a></li>
-                                                            <li><a href="blog-right-sidebar.html">Grid Right Sidebar</a></li>
-                                                            <li><a href="blog-list.html">Blog List</a></li>
-                                                            <li><a href="blog-list-left-sidebar.html">List Left Sidebar</a></li>
-                                                            <li><a href="blog-list-right-sidebar.html">List Right Sidebar</a></li> --}}
+                                                            @foreach($category as $key => $cate_sub)
+                                                            @if($cate_sub->category_parent==$cate->category_id)
+                                                                <li><a href="{{URL::to('/danh-muc-san-pham/'.$cate_sub->slug_category_product)}}">{{$cate_sub->category_name}}</a></li>
+                                                            @endif
+                                                            @endforeach
                                                         </ul>
                                                     </li>
-                                                    <li><a href="{{URL::to('/')}}">Blog Details Pages</a>
-                                                        {{-- <ul>
-                                                            <li><a href="blog-details-left-sidebar.html">Left Sidebar</a></li>
-                                                            <li><a href="blog-details-right-sidebar.html">Right Sidebar</a></li>
-                                                            <li><a href="blog-audio-format.html">Blog Audio Format</a></li>
-                                                            <li><a href="blog-video-format.html">Blog Video Format</a></li>
-                                                            <li><a href="blog-gallery-format.html">Blog Gallery Format</a></li>
-                                                        </ul> --}}
-                                                    </li>
-                                                    <li><a href="{{URL::to('/')}}">Other Pages</a>
-                                                        {{-- <ul>
-                                                            <li><a href="login-register.html">My Account</a></li>
-                                                            <li><a href="checkout.html">Checkout</a></li>
-                                                            <li><a href="compare.html">Compare</a></li>
-                                                            <li><a href="wishlist.html">Wishlist</a></li>
-                                                            <li><a href="shopping-cart.html">Shopping Cart</a></li>
-                                                        </ul> --}}
-                                                    </li>
-                                                    <li><a href="{{URL::to('/')}}">Other Pages 2</a>
-                                                        {{-- <ul>
-                                                            <li><a href="contact.html">Contact</a></li>
-                                                            <li><a  href="{{URL::to('/san-pham-yeu-thich')}}">Wishlist Product</a></li>
-                                                            <li><a href="faq.html">FAQ</a></li>
-                                                            <li><a href="404.html">404 Error</a></li>
-                                                        </ul> --}}
+                                                @endforeach
+                                                </ul>
+                                            </li>
+                                            <li class=""><a href="{{URL::to('/')}}">TIN TUC SAN PHAM</a>
+                                                <ul class="hb-dropdown">
+                                                    <li class="sub-dropdown-holder">
+                                                        @foreach($category_post as $key => $danhmucbaiviet)
+                                                        <ul class="nav nav-pills nav-stacked">
+                                                            <li><a href="{{URL::to('/danh-muc-bai-viet/'.$danhmucbaiviet->cate_post_slug)}}">{{$danhmucbaiviet->cate_post_name}}</a></li>
+                                                        </ul>
+                                                        @endforeach
                                                     </li>
                                                 </ul>
                                             </li>
 
-                                            <li><a href="{{URL::to('/lien-he')}}">Contact</a></li>
-                                            <li><a href="{{URL::to('/video-shop')}}">Video</a></li>
+                                            <li><a href="{{URL::to('/lien-he')}}">&emsp;&ensp;Contact</a></li>
+                                            <li><a href="{{URL::to('/video-shop')}}">&emsp;Video</a></li>
                                             <li><a href="{{URL::to('/san-pham-yeu-thich')}}">Wishlist Product</a></li>
                                         </ul>
                                     </nav>
@@ -766,6 +752,8 @@
         <script src="{{asset('public/frontend/js/main.js')}}"></script>
         {{-- Tự tạo --}}
         <script src="{{asset('public/frontend/js/sweetalert.min.js')}}"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
         <script type="text/javascript">
@@ -1228,6 +1216,36 @@
                     }
                     return false;
                 });
+
+            });
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+
+               $( "#slider-range" ).slider({
+                  orientation: "horizontal",
+                  range: true,
+
+                  min:{{$min_price_range}},
+                  max:{{$max_price_range}},
+
+                  steps:10000,
+                  values: [ {{$min_price}}, {{$max_price}} ],
+
+                  slide: function( event, ui ) {
+                    $( "#amount_start" ).val(ui.values[ 0 ]).simpleMoneyFormat();
+                    $( "#amount_end" ).val(ui.values[ 1 ]).simpleMoneyFormat();
+
+
+                    $( "#start_price" ).val(ui.values[ 0 ]);
+                    $( "#end_price" ).val(ui.values[ 1 ]);
+
+                  }
+
+                });
+
+                $( "#amount_start" ).val($( "#slider-range" ).slider("values",0)).simpleMoneyFormat();
+                $( "#amount_end" ).val($( "#slider-range" ).slider("values",1)).simpleMoneyFormat();
 
             });
         </script>

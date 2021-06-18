@@ -27,13 +27,13 @@ class ProductController extends Controller
             }
         }
         public function add_product (){
-            // $this->AuthLogin();
+            $this->AuthLogin();
             $cate_product = DB::table('tbl_category_product')->orderby('category_id','desc')->get();
             $brand_product = DB::table('tbl_brand_product')->orderby('brand_id','desc')->get();
             return view('admin.product.add_product')->with('cate_product', $cate_product)->with('brand_product',$brand_product);
         }
         public function all_product(){
-            // $this->AuthLogin();
+            $this->AuthLogin();
             $all_product = DB::table('tbl_product')
             ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
             ->join('tbl_brand_product','tbl_brand_product.brand_id','=','tbl_product.brand_id')
@@ -43,7 +43,7 @@ class ProductController extends Controller
 
         }
         public function save_product(Request $request){
-            // $this->AuthLogin();
+            $this->AuthLogin();
             $data = array();
 
             $data['product_name'] = $request->product_name;
@@ -109,7 +109,7 @@ class ProductController extends Controller
 
 
         public function update_product(Request $request, $product_id){
-            // $this->AuthLogin();
+            $this->AuthLogin();
             $data = array();
             $data['product_name'] = $request->product_name;
             $data['product_quantity'] = $request->product_qty;
@@ -274,7 +274,7 @@ class ProductController extends Controller
 
                 DB::table('tbl_images_product')->insert($data);
                 Session::put('message','Thêm hình ảnh sản phẩm thành công');
-                return Redirect::to('add-product');
+                return redirect()->back();
             }
             $data['product_id'] = $request->product_images_id;
             $data['product_image_1'] = '';

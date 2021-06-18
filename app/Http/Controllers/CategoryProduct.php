@@ -37,13 +37,13 @@ class CategoryProduct extends Controller
             $this->AuthLogin();
             $category_product = CategoryProductModels::where('category_parent',0)->orderBy('category_id','DESC')->get();
 
-            $all_category_product = DB::table('tbl_category_product')->orderBy('category_parent','DESC')->get();
+            $all_category_product = DB::table('tbl_category_product')->orderBy('category_parent','DESC')->orderBy('category_order','ASC')->get();
 
             $manager_category_product  = view('admin.category.all_category_product')->with('all_category_product',$all_category_product)->with('category_product',$category_product);
 
             return view('admin_layout')->with('admin.category.all_category_product', $manager_category_product);
 
-
+            
         }
         public function save_category_product(Request $request){
             $this->AuthLogin();
@@ -58,7 +58,7 @@ class CategoryProduct extends Controller
             Session::put('message','Them danh muc thanh cong');
             return Redirect::to('add-category-product');
         }
-        public function inactive_category_product($category_product_id){
+        public function unactive_category_product($category_product_id){
             $this->AuthLogin();
             DB::table('tbl_category_product')->where('category_id',$category_product_id)->update(['category_status'=>1]);
             Session::put('message','Khong kich hoat danh muc thanh cong');
@@ -176,4 +176,17 @@ class CategoryProduct extends Controller
             Excel::import(new ExcelImports, $path);
             return back();
         }
+        public function arrange_category(Request $request){
+            $this->AuthLogin();
+
+            $data = $request->all();
+            $cate_id = $data["page_id_array"];
+
+            foreach($cate_id as $key => $value){
+                $category = CategoryProductModels::find($value);
+                $category->category_order = $key;
+                $category->save();
+            }
+            echo 'Thay đổi vị trí danh mục thành công ';
+            }
 }

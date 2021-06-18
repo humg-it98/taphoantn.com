@@ -31,16 +31,20 @@ class HomeController extends Controller
         $category_post = CatePost::orderBy('cate_post_id','DESC')->where('cate_post_status','0')->get();
         // $partner = Partner::orderBy('partner_id','DESC')->where('partner_status','0')->take(10)->get();
         // $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->take(3)->get();
-        $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
+        $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->orderBy('category_order','ASC')->limit(15)->get();
         $brand_product = DB::table('tbl_brand_product')->where('brand_status','0')->orderby('brand_id','desc')->get();
         $all_product = DB::table('tbl_product')->where('product_status','0')->orderby('product_id','desc')->limit(10)->get();
         $all_product_laptop = DB::table('tbl_product')->where('category_id','12')->where('product_status','0')->orderby('product_id','desc')->limit(10)->get();
+        $all_product_table = DB::table('tbl_product')->where('category_id','15')->where('product_status','0')->orderby('product_id','desc')->limit(10)->get();
+        $all_product_phone = DB::table('tbl_product')->where('category_id','11')->where('product_status','0')->orderby('product_id','desc')->limit(10)->get();
 
         // $all_post = Post::orderBy('post_id','DESC')->where('post_status','0')->take(10)->get();
 
         return view('pages.home')->with('category',$cate_product)->with('brand',$brand_product)
         ->with('all_product',$all_product)
         ->with('all_product_laptop',$all_product_laptop)
+        ->with('all_product_phone',$all_product_phone)
+        ->with('all_product_table',$all_product_table)
         ->with('category_post',$category_post)
         ->with('meta_desc',$meta_desc)
         ->with('meta_keywords',$meta_keywords)
@@ -55,7 +59,7 @@ class HomeController extends Controller
           $url_canonical = $request->url();
           //--seo
         $keyword = $request->keywords_submit;
-        $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
+        $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->orderBy('category_order','ASC')->get();
         $brand_product = DB::table('tbl_brand_product')->where('brand_status','0')->orderby('brand_id','desc')->get();
         $category_post = CatePost::orderBy('cate_post_id','DESC')->where('cate_post_status','0')->get();
         $search_product = DB::table('tbl_product')->where('product_name','like','%'.$keyword.'%')->get();

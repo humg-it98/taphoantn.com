@@ -6,7 +6,7 @@
         <div class="breadcrumb-content">
             <ul>
                 <li><a href="{{URL::to('/')}}">Home</a></li>
-                <li class="active">Shopping Cart</li>
+                <li class="active">Giỏ hàng</li>
             </ul>
         </div>
         @if(session()->has('message'))
@@ -84,12 +84,13 @@
                             @csrf
                             <div class="col-12">
                                 <div class="coupon-all">
-
+                                    @if(Session::get('cart'))
                                     <div class="coupon2">
-                                        <input class="button" name="update_qty" value="Update cart" type="submit">
+                                        <input class="button" name="update_qty" value="Cập nhật giỏ hàng" type="submit">
                                     </div>
+                                    @endif
                                     @if(Session::get('coupon'))
-                                    <a class="btn btn-default check_out" style="border-radius:20px " href="{{url('/unset-coupon')}}">Xóa mã khuyến mãi</a>
+                                    <a class="btn btn-default check_out" style="border-radius:20px" href="{{url('/unset-coupon')}}">Xóa mã khuyến mãi</a>
                                     @endif
                                 </div>
                             </div>
@@ -148,6 +149,7 @@
                         </div>
                     </div>
                 </form>
+                @if(Session::get('cart'))
                 <form action="{{URL::to('/check-coupon')}}" method="POST">
                     @csrf
                     <div class="coupon">
@@ -155,6 +157,7 @@
                         <input style="border-radius:10px;width=100px" id="button-coupon" class="button" name="apply_coupon" value="Apply coupon" type="submit">
                     </div>
                 </form>
+                @endif
             </div>
         </div>
     </div>

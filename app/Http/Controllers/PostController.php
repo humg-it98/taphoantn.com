@@ -131,7 +131,7 @@ class PostController extends Controller
         //category post
         $category_post = CatePost::orderBy('cate_post_id','DESC')->get();
         //slide
-        $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
+        $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','0')->take(4)->get();
 
 
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
@@ -159,7 +159,7 @@ class PostController extends Controller
         //category post
         $category_post = CatePost::orderBy('cate_post_id','DESC')->get();
         //slide
-        $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
+        $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','0')->take(4)->get();
 
 
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();

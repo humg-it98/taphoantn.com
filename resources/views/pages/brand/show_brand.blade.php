@@ -42,7 +42,15 @@
                     <!-- product-select-box start -->
                     <div class="product-select-box">
                         <form>
-                            @csrf
+                            <p>Lọc giá theo:</p>
+                            <div id="slider-range" class="product-short" style="width:200px;">
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="product-select-box">
+                        <form>
+
                             <div class="product-short">
                                 <p>Sắp xếp theo:</p>
                                 <select class="nice-select" name="sort" id="sort">

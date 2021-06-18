@@ -41,7 +41,7 @@ Route::get('/admin/callback-gg','AdminController@callback_google');
 Route::get('/add-category-product','CategoryProduct@add_category_product');
 Route::get('/all-category-product','CategoryProduct@all_category_product');
 
-Route::get('/inactive-category-product/{category_product_id}','CategoryProduct@inactive_category_product');
+Route::get('/unactive-category-product/{category_product_id}','CategoryProduct@unactive_category_product');
 Route::get('/active-category-product/{category_product_id}','CategoryProduct@active_category_product');
 Route::get('/edit-category-product/{category_product_id}','CategoryProduct@edit_category_product');
 Route::post('/update-category-product/{category_product_id}','CategoryProduct@update_category_product');
@@ -49,6 +49,9 @@ Route::get('/delete-category-product/{category_product_id}','CategoryProduct@del
 Route::post('/save-category-product','CategoryProduct@save_category_product');
 Route::post('/export-csv','CategoryProduct@export_csv');
 Route::post('/import-csv','CategoryProduct@import_csv');
+
+Route::post('/arrange-category','CategoryProduct@arrange_category');
+
 
 //Brand product
 Route::get('/add-brand-product','BrandProduct@add_brand_product');
@@ -85,7 +88,7 @@ Route::get('/edit-category-post/{category_post_id}','CategoryPost@edit_category_
 Route::post('/update-category-post/{category_post_id}','CategoryPost@update_category_post');
 Route::get('/delete-category-post/{category_post_id}','CategoryPost@delete_category_post');
 Route::post('/save-category-post','CategoryPost@save_category_post');
-Route::get('/danh-muc-bai-viet/{cate_post_slug}','CategoryPost@danh_muc_bai_viet');
+// Route::get('/danh-muc-bai-viet/{cate_post_slug}','CategoryPost@danh_muc_bai_viet');
 
 //Bài viết
 Route::get('/add-post','PostController@add_post');
