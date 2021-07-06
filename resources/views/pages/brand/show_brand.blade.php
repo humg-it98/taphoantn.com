@@ -42,23 +42,15 @@
                     <!-- product-select-box start -->
                     <div class="product-select-box">
                         <form>
-                            <p>Lọc giá theo:</p>
-                            <div id="slider-range" class="product-short" style="width:200px;">
-
-                            </div>
-                        </form>
-                    </div>
-                    <div class="product-select-box">
-                        <form>
-
+                            @csrf
                             <div class="product-short">
                                 <p>Sắp xếp theo:</p>
                                 <select class="nice-select" name="sort" id="sort">
                                     <option value="{{Request::url()}}?sort_by=none">Mặc định</option>
                                     <option value="{{Request::url()}}?sort_by=kytu_az">Tên (A - Z)</option>
                                     <option value="{{Request::url()}}?sort_by=kytu_za">Tên (Z - A)</option>
-                                    <option value="{{Request::url()}}?sort_by=tang_dan">Gía tăng dần (Thấp &gt; Cao)</option>
-                                    <option value="{{Request::url()}}?sort_by=giam_dan">Giá giảm dần (Cao &gt; Thấp )</option>
+                                    <option value="{{Request::url()}}?sort_by=tang_dan">Gía tăng dần (Thấp-&gt;Cao)</option>
+                                    <option value="{{Request::url()}}?sort_by=giam_dan">Giá giảm dần (Cao-&gt;Thấp )</option>
                                 </select>
                             </div>
                         </form>
@@ -667,14 +659,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6">
                                     <ul class="pagination-box">
-                                        <li><a href="#" class="Previous"><i class="fa fa-chevron-left"></i> Previous</a>
-                                        </li>
-                                        <li class="active"><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li>
-                                          <a href="#" class="Next"> Next <i class="fa fa-chevron-right"></i></a>
-                                        </li>
+                                        {{$brand_by_id->links('pagination::bootstrap-4') }}
                                     </ul>
                                 </div>
                             </div>

@@ -19,10 +19,10 @@
           <tr>
 
             <th>Duyệt</th>
-            <th>Tên người gửi</th>
-            <th>Bình luận</th>
+            <th>Tên thành viên gửi</th>
+            <th>Nội dung bình luận</th>
             <th>Ngày gửi</th>
-            <th>Sản phẩm</th>
+            <th>Sản phẩm đánh giá</th>
             <th>Quản lý</th>
             <th style="width:30px;"></th>
           </tr>
@@ -70,8 +70,6 @@
             <td>{{ $comm->comment_date }}</td>
             <td><a href="{{url('/chi-tiet-san-pham/'.$comm->product->product_slug)}}" target="_blank">{{ $comm->product->product_name }}</a></td>
             <td>
-              <a href="" class="active styling-edit" ui-toggle-class="">
-                <i class="fa fa-pencil-square-o text-success text-active"></i></a>
               <a onclick="return confirm('Bạn có chắc là muốn xóa bình luận này ko?')" href="" class="active styling-edit" ui-toggle-class="">
                 <i class="fa fa-times text-danger text"></i>
               </a>

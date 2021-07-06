@@ -42,7 +42,8 @@
                 <div class="contact-form-content pt-sm-55 pt-xs-55">
                     <h3 class="contact-page-title">Bạn muốn nhắn nhở điều gì?</h3>
                     <div class="contact-form">
-                        <form id="contact-form" action="" method="post">
+                        <form id="contact-form" action="{{URL::to('/')}}" method="post">
+                            @csrf
                             <div class="form-group">
                                 <label>Your Name <span class="required">*</span></label>
                                 <input type="text" name="customerName" id="customername" required>

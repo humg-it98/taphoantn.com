@@ -5,7 +5,7 @@
     <div class="container">
         <div class="breadcrumb-content">
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="{{URL::to('/')}}">Home</a></li>
                 <li class="active">Đăng kí or Đăng nhập</li>
             </ul>
         </div>
@@ -45,7 +45,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4 mt-10 mb-20 text-left text-md-right">
-                                <a href="#"> Quên mật khẩu?</a>
+                                <a href="{{url('/quen-mat-khau')}}"> Quên mật khẩu?</a>
                             </div>
                             <div class="col-md-12">
                                 <button class="register-button login">Đăng nhập</button>

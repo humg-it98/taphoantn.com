@@ -104,11 +104,6 @@
                         <div class="rating-box pt-20">
                             <ul class="rating rating-with-review-item">
                                 <span style="font-size:25px"> {{$rating}}. </span>
-                                {{-- <li><i class="fa fa-star-o"></i></li>
-                                <li><i class="fa fa-star-o"></i></li>
-                                <li><i class="fa fa-star-o"></i></li>
-                                <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                <li class="no-star"><i class="fa fa-star-o"></i></li> --}}
                                 @for($count=1; $count<=5; $count++)
                                                 		@php
 	                                                		if($count<=$rating){

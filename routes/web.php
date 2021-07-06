@@ -29,6 +29,7 @@ Route::get('/dashboard','AdminController@show_dashboard');
 Route::post('/admin-dashboard','AdminController@dashboard');
 Route::get('/logout','AdminController@logout');
 Route::get('/san-pham-yeu-thich','HomeController@wishlist');
+Route::get('/so-sanh-san-pham','HomeController@compare');
 
 
 //Dang nhap fb-gmail
@@ -215,4 +216,24 @@ Route::post('/send-comment','CommentProduct@send_comment');
 Route::post('/allow-comment','CommentProduct@allow_comment');
 Route::post('/reply-comment','CommentProduct@reply_comment');
 Route::post('/insert-rating','CommentProduct@insert_rating');
+
+
+//Send Mail
+Route::get('/send-coupon-vip/{coupon_time}/{coupon_condition}/{coupon_number}/{coupon_code}','MailController@send_coupon_vip');
+Route::get('/send-coupon/{coupon_time}/{coupon_condition}/{coupon_number}/{coupon_code}','MailController@send_coupon');
+
+Route::get('/mail-example','MailController@mail_example');
+
+
+//quên mật khẩu
+Route::get('/send-mail','MailController@send_mail');
+Route::get('/quen-mat-khau','MailController@quen_mat_khau');
+Route::get('/update-new-pass','MailController@update_new_pass');
+Route::post('/recover-pass','MailController@recover_pass');
+Route::post('/reset-new-pass','MailController@reset_new_pass');
+
+
+//lich sử đơn hàng
+Route::get('/history','OrderController@history');
+Route::get('/view-history-order/{order_code}','OrderController@view_history_order');
 

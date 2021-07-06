@@ -46,10 +46,14 @@ class ProductController extends Controller
             $this->AuthLogin();
             $data = array();
 
+            $product_price = filter_var($request->product_price, FILTER_SANITIZE_NUMBER_INT);
+            $price_cost = filter_var($request->price_cost, FILTER_SANITIZE_NUMBER_INT);
+
             $data['product_name'] = $request->product_name;
             $data['product_tags'] = $request->product_tags;
             $data['product_quantity'] = $request->product_qty;
-            $data['product_price'] = $request->product_price;
+            $data['product_price'] = $product_price;
+            $data['price_cost'] = $price_cost;
             $data['product_desc'] = $request->product_desc;
             $data['product_slug'] = $request->product_slug;
             $data['product_content'] = $request->product_content;
@@ -301,7 +305,7 @@ class ProductController extends Controller
 
 
 
-           $pro_tag = Product::where('product_status',0)->where('product_name','LIKE','%'.$tag.'%')->orWhere('product_tags','LIKE','%'.$tag.'%')->orWhere('product_slug','LIKE','%'.$tag.'%')->get();
+           $pro_tag = Product::where('product_status',0)->where('product_name','LIKE','%'.$tag.'%')->orWhere('product_tags','LIKE','%'.$tag.'%')->orWhere('product_slug','LIKE','%'.$tag.'%')->paginate(6);
 
 
 

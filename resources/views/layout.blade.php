@@ -44,7 +44,7 @@
         <link rel="stylesheet" href="{{asset('public/frontend/css/sweetalert.css')}}">
         <!-- Modernizr js -->
         <script src="{{asset('public/frontend/js/vendor/modernizr-2.8.3.min.js')}}"></script>
-        <link rel="stylesheet" href="/resources/demos/style.css">
+
     </head>
     <body>
  <!--[if lt IE 8]>
@@ -157,20 +157,22 @@
                                 <!-- Begin Header Middle Searchbox Area -->
                                 <form  action="{{URL::to('/tim-kiem')}}" method="POST" class="hm-searchbox">
                                     @csrf
-                                    <select class="nice-select select-search-category">
+                                    {{-- <select class="nice-select select-search-category">
                                         <option value="0">All</option>
-                                    </select>
-                                    <div id="search_ajax"></div>
+                                    </select> --}}
+                                    {{-- <div id="search_ajax"></div> --}}
                                     <input id="keywords" name="keywords_submit" type="text" placeholder="Nhập từ khóa bạn cần tìm kiếm ...">
+                                    {{-- <div id="search_ajax"></div> --}}
                                     <button name="search_items" class="li-btn" type="submit"><i class="fa fa-search"></i></button>
                                 </form>
+                                <div id="search_ajax"></div>
                                 <!-- Header Middle Searchbox Area End Here -->
                                 <!-- Begin Header Middle Right Area -->
                                 <div class="header-middle-right">
                                     <ul class="hm-menu">
                                         <!-- Begin Header Middle Wishlist Area -->
                                         <li class="hm-wishlist">
-                                            <a href="">
+                                            <a href="{{URL::to('/san-pham-yeu-thich')}}">
                                                 <span class="cart-item-count wishlist-item-count">0</span>
                                                 <i class="fa fa-heart-o"></i>
                                             </a>
@@ -205,8 +207,9 @@
                                                             <span>{{number_format($item['product_price']).' đ'}} x {{$item['product_qty']}}</span>
                                                         </div>
                                                         <button class="close" title="Remove">
-                                                            <i class="fa fa-close"></i>
+                                                            <a href="{{url('del-product/'.$item['session_id'])}}"><i class="fa fa-close"></i></a>
                                                         </button>
+
                                                     </li>
                                                     @endforeach
                                                 </ul>
@@ -334,9 +337,9 @@
                                                 </ul>
                                             </li>
 
-                                            <li><a href="{{URL::to('/lien-he')}}">&emsp;&ensp;Contact</a></li>
+                                            <li><a href="{{URL::to('/lien-he')}}">&emsp;&emsp;Contact</a></li>
                                             <li><a href="{{URL::to('/video-shop')}}">&emsp;Video</a></li>
-                                            <li><a href="{{URL::to('/san-pham-yeu-thich')}}">Wishlist Product</a></li>
+                                            <li><a href="{{URL::to('/so-sanh-san-pham')}}">So sanh Product</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -442,13 +445,15 @@
                                     <div class="footer-logo">
                                         <img src="{{asset('public/frontend/images/menu/logo/1.jpg')}}" alt="Footer Logo">
                                         <p class="info">
-                                            We are a team of designers and developers that create high quality HTML Template & Woocommerce, Shopify Theme.
+                                            “Một nhà quản lý luôn căng lên vì công việc là nhà quản lý tốt nhất, bởi họ sẽ không có thời gian để can thiệp, để tham gia những cuộc tầm phào, để làm phiền người khác”
+
+Bill Gates (Chủ tịch của Microsoft)
                                         </p>
                                     </div>
                                     <ul class="des">
                                         <li>
                                             <span>Address: </span>
-                                            6688Princess Road, London, Greater London BAS 23JK, UK
+                                           Số 1, đường Xuân Đỉnh, Quận Bắc Từ Liêm, Thành phố Hà Nội
                                         </li>
                                         <li>
                                             <span>Phone: </span>
@@ -456,7 +461,7 @@
                                         </li>
                                         <li>
                                             <span>Email: </span>
-                                            <a href="mailto://info@yourdomain.com">info@yourdomain.com</a>
+                                            <a href="mailto://thoigian5792@gmail.com">Thoigian5792@gmail.com</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -464,12 +469,13 @@
                                 <!-- Begin Footer Block Area -->
                                 <div class="col-lg-2 col-md-3 col-sm-6">
                                     <div class="footer-block">
-                                        <h3 class="footer-block-title">Product</h3>
+                                        <h3 class="footer-block-title">Sản phẩm</h3>
                                         <ul>
-                                            <li><a href="#">Prices drop</a></li>
-                                            <li><a href="#">New products</a></li>
-                                            <li><a href="#">Best sales</a></li>
-                                            <li><a href="#">Contact us</a></li>
+                                            <li><a href="#">Mua hàng & thanh toán Online</a></li>
+                                            <li><a href="#">Mua hàng trả góp Online</a></li>
+                                            <li><a href="#">Tra cứu hóa đơn điện tử</a></li>
+                                            <li><a href="#">Trung tâm bảo hành chính hãng</a></li>
+                                            <li><a href="#">Dịch vụ bảo hành điện thoại</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -477,12 +483,13 @@
                                 <!-- Begin Footer Block Area -->
                                 <div class="col-lg-2 col-md-3 col-sm-6">
                                     <div class="footer-block">
-                                        <h3 class="footer-block-title">Our company</h3>
+                                        <h3 class="footer-block-title">Về Chúng tôi</h3>
                                         <ul>
-                                            <li><a href="#">Delivery</a></li>
-                                            <li><a href="#">Legal Notice</a></li>
-                                            <li><a href="#">About us</a></li>
-                                            <li><a href="#">Contact us</a></li>
+                                            <li><a href="#">Quy chế hoạt động</a></li>
+                                            <li><a href="#">Cộng tác bán hàng cùng chúng tôi</a></li>
+                                            <li><a href="#">Ưu đãi từ đối tác</a></li>
+                                            <li><a href="#"> Gửi góp ý, khiếu nại</a></li>
+                                            <li><a href="#">Tuyển dụng</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -673,7 +680,6 @@
                                             </div>
                                             <div class="single-add-to-cart">
                                                 <form class="cart-quantity">
-                                                    @csrf
                                                     <div class="quantity">
                                                         <label>Số lượng</label>
                                                         <div class="cart-plus-minus">
@@ -754,10 +760,43 @@
         <script src="{{asset('public/frontend/js/sweetalert.min.js')}}"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 
+        <script type="text/javascript">
+           $("#sort").on('change', 'input', function() {
+
+                    var url = $(this).val();
+                    alert(1);
+                    if (url) {
+                        window.location = url;
+                    }
+                    return false;
+              
+            });
+        </script>
+{{--
+<script>
+    $( ".selected" ).change(function () {
+        var str = "";
+        $( "select option:selected" ).each(function() {
+          str += $( this ).text() + " ";
+        });
+        $( "div" ).text( str );
+      })
+      .change();
+    </script> --}}
 
         <script type="text/javascript">
             $(document).ready(function(){
+
+                if(localStorage.getItem('data')==null){
+                    $('.wishlist-item-count').html(0);
+                    localStorage.setItem('data', '[]');
+                } else {
+                    var old_data = JSON.parse(localStorage.getItem('data'));
+                    $('.wishlist-item-count').html(old_data.length);
+                }
+
                 $('.add-to-cart').click(function(){
                     var id = $(this).data('id_product');
                     var cart_product_id = $('.cart_product_id_' + id).val();
@@ -865,9 +904,9 @@
 
               });
           });
+        </script>
 
 
-      </script>
         <script type="text/javascript">
             $(document).ready(function(){
                     $('.choose').on('change',function(){
@@ -1176,6 +1215,7 @@
             }
 
             if(localStorage.getItem('data')==null){
+                $('.wishlist-item-count').html(0);
                 localStorage.setItem('data', '[]');
             }
 
@@ -1191,6 +1231,7 @@
                 alert('Sản phẩm bạn đã yêu thích,nên không thể thêm');
 
             }else{
+                alert('Sản phẩm bạn đã thêm vào yêu thích.');
 
                 old_data.push(newItem);
 
@@ -1199,55 +1240,146 @@
             }
 
             localStorage.setItem('data', JSON.stringify(old_data));
-
+            $('.wishlist-item-count').html(old_data.length);
 
         }
         </script>
 
-        <script type="text/javascript">
-            $(document).ready(function(){
+        <script>
+            var usd = document.getElementById("vnd_to_usd").value;
+            paypal.Button.render({
+            // Configure environment
+            env: 'sandbox',
+            client: {
+                sandbox: 'AUiE2-dn7Bk84H7mrn7zwaCawMuSZEGtMhhWEnnMS-2Xc5EvlmO7i7jB_PtTz9wIbfGsoBvGXzyxsmmS',
+                production: 'demo_production_client_id'
+            },
+            // Customize button (optional)
+            locale: 'en_US',
+            style: {
+                size: 'small',
+                color: 'gold',
+                shape: 'pill',
+            },
 
-                $('#sort').on('change',function(){
+            // Enable Pay Now checkout flow (optional)
+            commit: true,
 
-                    var url = $(this).val();
-                    // alert(url);
-                    if (url) {
-                        window.location = url;
+            // Set up a payment
+            payment: function(data, actions) {
+                return actions.payment.create({
+                transactions: [{
+                    amount: {
+                    total: `${usd}`,
+                    currency: 'USD'
                     }
-                    return false;
+                }]
                 });
+            },
+            // Execute the payment
+            onAuthorize: function(data, actions) {
+                return actions.payment.execute().then(function() {
+                // Show a confirmation message to the buyer
+                window.alert('Bạn đã thanh toán thành công, chúng tôi sẽ liên hệ với bạn sau.');
+                });
+            }
+            }, '#paypal-button');
 
-            });
         </script>
+
         <script type="text/javascript">
-            $(document).ready(function(){
 
-               $( "#slider-range" ).slider({
-                  orientation: "horizontal",
-                  range: true,
+            function view(){
 
-                  min:{{$min_price_range}},
-                  max:{{$max_price_range}},
+                if(localStorage.getItem('viewed')!=null){
 
-                  steps:10000,
-                  values: [ {{$min_price}}, {{$max_price}} ],
+                    var data = JSON.parse(localStorage.getItem('viewed'));
 
-                  slide: function( event, ui ) {
-                    $( "#amount_start" ).val(ui.values[ 0 ]).simpleMoneyFormat();
-                    $( "#amount_end" ).val(ui.values[ 1 ]).simpleMoneyFormat();
+                    data.reverse();
+
+                    // document.getElementById('row_wishlist').style.overflow = 'scroll';
+                    // document.getElementById('row_wishlist').style.height = '500px';
+
+                    for(i=0;i<data.length;i++){
+
+                    var name = data[i].name;
+                    var price = data[i].price;
+                    var image = data[i].image;
+                    var url = data[i].url;
+
+                    $('#row_compare').append('<div class="row" style="margin:10px 0"><div class="col-md-4"><img width="100%" src="'+image+'"></div><div class="col-md-8 info_wishlist"><p>'+name+'</p><p style="color:#FE980F">'+price+'</p><a href="'+url+'">Đặt hàng</a></div>');
+                }
+
+            }
+
+        }
+
+        view();
 
 
-                    $( "#start_price" ).val(ui.values[ 0 ]);
-                    $( "#end_price" ).val(ui.values[ 1 ]);
+        function add_compare(product_id){
 
-                  }
+            var id = product_id;
+            var name = document.getElementById('wishlist_productname'+id).value;
+            var price = document.getElementById('wishlist_productprice'+id).value;
+            var image = document.getElementById('wishlist_productimage'+id).src;
+            var url = document.getElementById('wishlist_producturl'+id).href;
+            // alert(id);
+            // alert(name);
+            // alert(price);
+            // alert(image);
+            // alert(url);
 
-                });
+            var Sosanh = {
+                'url':url,
+                'id' :id,
+                'name': name,
+                'price': price,
+                'image': image
+            }
+            // alert(JSON.stringify(Sosanh));
+            // 1
+            if(localStorage.getItem('viewed')==null){
+                // console.log(1);
+                localStorage.setItem('viewed', '[]');
+            }
 
-                $( "#amount_start" ).val($( "#slider-range" ).slider("values",0)).simpleMoneyFormat();
-                $( "#amount_end" ).val($( "#slider-range" ).slider("values",1)).simpleMoneyFormat();
+//1
+            var old_data = JSON.parse(localStorage.getItem('viewed'));
+            // var old_data = localStorage.getItem('viewed');
+            // console.log(old_data);
+            var matches = $.grep(old_data, function(obj, i){
+                // console.log(id);
+                return obj.id == id;
+            })
+            console.log(matches);
+            if(matches.length){
+                alert('Sản phẩm bạn đã thêm vào so sánh, nên không thể thêm!');
+            }else{
+                if(old_data.length<2){
+                    alert('Sản phẩm bạn đã thêm vào so sánh!');
+                    old_data.push(Sosanh);
+                    localStorage.setItem('viewed', JSON.stringify(old_data));
 
-            });
+                    $('#row_compare').append(`
+                            <tr>
+                                <th>`+Sosanh.name+`</th>
+                                <td>`+Sosanh.price+`</td>
+                                <td><img width="200px" src="`+Sosanh.image+`"</td>
+                                <td><a href="`+Sosanh.url+`">Xem sản phẩm</a></td>
+                                <td>Xóa sản phẩm so sánh</td>
+                            </tr>
+                            `);
+
+                } else {
+                    alert('Bạn chỉ có thể thêm tối đa được 2 sản phẩm để so sánh!');
+                }
+                // alert('Sản phẩm bạn đã thêm vào so sánh.');
+
+
+            }
+
+        }
         </script>
 
 
