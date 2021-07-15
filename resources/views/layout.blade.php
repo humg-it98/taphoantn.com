@@ -5,8 +5,22 @@
 <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Cửa hàng tạp hóa NTN tùy chỉnh</title>
-        <meta name="description" content="">
+
+        <title>{{$meta_title}}</title>
+        <meta name="description" content="{{$meta_desc}}">
+        <meta name="keywords" content="{{$meta_keywords}}"/>
+        <link  rel="canonical" href="{{$url_canonical}}" />
+
+         <!------------Share fb------------------>
+        <meta property="og:url"                content="{{$url_canonical}}" />
+        <meta property="og:type"               content="articles" />
+        <meta property="og:title"              content="{{$meta_title}}" />
+        <meta property="og:site_name" content="{{$meta_title}}"/>
+        <meta property="og:description"        content="{{$meta_desc}}" />
+        {{-- <meta property="og:image"              content="{{$share_images}}" /> --}}
+        <!--//-------Seo--------->
+
+
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="{{asset('public/frontend/images/favicon.png')}}">
@@ -446,8 +460,7 @@
                                         <img src="{{asset('public/frontend/images/menu/logo/1.jpg')}}" alt="Footer Logo">
                                         <p class="info">
                                             “Một nhà quản lý luôn căng lên vì công việc là nhà quản lý tốt nhất, bởi họ sẽ không có thời gian để can thiệp, để tham gia những cuộc tầm phào, để làm phiền người khác”
-
-Bill Gates (Chủ tịch của Microsoft)
+                                            <br>--Trích lời: Bill Gates (Chủ tịch của Microsoft)
                                         </p>
                                     </div>
                                     <ul class="des">
@@ -515,7 +528,7 @@ Bill Gates (Chủ tịch của Microsoft)
                                                 </a>
                                             </li>
                                             <li class="facebook">
-                                                <a href="https://www.facebook.com/" data-toggle="tooltip" target="_blank" title="Facebook">
+                                                <a href="https://www.facebook.com/ngocnt.5792" data-toggle="tooltip" target="_blank" title="Facebook">
                                                     <i class="fa fa-facebook"></i>
                                                 </a>
                                             </li>
@@ -599,9 +612,23 @@ Bill Gates (Chủ tịch của Microsoft)
                 </div>
                 <!-- Footer Static Bottom Area End Here -->
             </div>
+            <style type="text/css">
+            .zalo-chat-widget{
+                bottom: 20px!important;
+                left: 20px!important;
+            }
+
+            </style>
+                <div class="zalo-chat-widget" data-oaid="248512510121692038" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="0" data-width="350" data-height="420"></div>
+                <!-- Messenger Plugin chat Code -->
+                <div id="fb-root"></div>
+
+                <!-- Your Plugin chat code -->
+                <div id="fb-customer-chat" class="fb-customerchat">
+                </div>
             <!-- Footer Area End Here -->
             <!-- Begin Quick View | Modal Area -->
-            <div class="modal fade modal-wrapper" id="xemnhanh" >
+            {{-- <div class="modal fade modal-wrapper" id="xemnhanh" >
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-body">
@@ -712,7 +739,7 @@ Bill Gates (Chủ tịch của Microsoft)
                 </div>
             </div>
             <!-- Quick View | Modal Area End Here -->
-        </div>
+        </div> --}}
         <!-- Body Wrapper End Here -->
         <!-- jQuery-V1.12.4 -->
         <script src="{{asset('public/frontend/js/vendor/jquery-1.12.4.min.js')}}"></script>
@@ -757,13 +784,38 @@ Bill Gates (Chủ tịch của Microsoft)
         <!-- Main/Activator js -->
         <script src="{{asset('public/frontend/js/main.js')}}"></script>
         {{-- Tự tạo --}}
+        {{-- <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v10.0" nonce="HywljSwE"></script> --}}
+        <script src="https://sp.zalo.me/plugins/sdk.js"></script>
         <script src="{{asset('public/frontend/js/sweetalert.min.js')}}"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v11.0&appId=852484398680038&autoLogAppEvents=1" nonce="N9RehpZN"></script>
 
-        <script type="text/javascript">
-           $("#sort").on('change', 'input', function() {
+        <script>
+            var chatbox = document.getElementById('fb-customer-chat');
+            chatbox.setAttribute("page_id", "110839747904326");
+            chatbox.setAttribute("attribution", "biz_inbox");
+
+            window.fbAsyncInit = function() {
+              FB.init({
+                xfbml            : true,
+                version          : 'v11.0'
+              });
+            };
+
+            (function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+          </script>
+
+        {{-- <script type="text/javascript">
+           $("#sort").on('click', function() {
 
                     var url = $(this).val();
                     alert(1);
@@ -771,20 +823,20 @@ Bill Gates (Chủ tịch của Microsoft)
                         window.location = url;
                     }
                     return false;
-              
+
             });
-        </script>
-{{--
-<script>
-    $( ".selected" ).change(function () {
-        var str = "";
-        $( "select option:selected" ).each(function() {
-          str += $( this ).text() + " ";
-        });
-        $( "div" ).text( str );
-      })
-      .change();
-    </script> --}}
+        </script> --}}
+        <script>
+            $(document).ready(function(){
+              $(".sort").on('change',function(){
+                    var url = $(this).val();
+                    if (url) {
+                        window.location = url;
+                    }
+                // alert("The text has been changed.");
+              });
+            });
+            </script>
 
         <script type="text/javascript">
             $(document).ready(function(){

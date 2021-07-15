@@ -135,7 +135,7 @@ class PostController extends Controller
 
 
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
-        $brand_product = DB::table('tbl_brand_product')->where('brand_status','0')->orderby('brand_id','desc')->get();
+        $brand_products = DB::table('tbl_brand_product')->where('brand_status','0')->orderby('brand_id','desc')->get();
 
         $catepost = CatePost::where('cate_post_slug',$post_slug)->take(1)->get();
 
@@ -149,10 +149,17 @@ class PostController extends Controller
             $share_image = url('public/frontend/images/share_news.png');
             //--seo
         }
-
+        // dd($brand_product);
+        // foreach($brand_product as $item) {
+        //     dd($item->brand_slug);
+        // }
         $post_cate = Post::with('cate_post')->where('post_status',0)->where('cate_post_id',$cate_id)->paginate();
-
-        return view('pages.baiviet.danhmucbaiviet')->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('slider',$slider)->with('post_cate',$post_cate)->with('category_post',$category_post)->with('share_image',$share_image);
+        return view('pages.baiviet.danhmucbaiviet')
+        ->with('category',$cate_product)->with('brand',$brand_products)
+        ->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)
+        ->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)
+        ->with('slider',$slider)->with('post_cate',$post_cate)
+        ->with('category_post',$category_post)->with('share_image',$share_image);
     }
     public function bai_viet(Request $request,$post_slug){
 

@@ -110,7 +110,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li><a href="{{URL::to('/add-slider')}}">Thêm slider</a></li>
                     </ul>
                 </li>
-                <li class="sub-menu">
+                {{-- <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-cube"></i>
                         <span>Đối tác liên kết</span>
@@ -119,7 +119,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li><a href="{{URL::to('/manage-partner')}}">Liệt kê đối tác</a></li>
                         <li><a href="{{URL::to('/add-partner')}}">Thêm đối tác</a></li>
                     </ul>
-                </li>
+                </li> --}}
                 <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-product-hunt"></i>
@@ -218,6 +218,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <li><a href="{{URL::to('/video')}}">Thêm video</a></li>
                 </ul>
             </li>
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-users   "></i>
+                    <span>Quản lý khách hàng</span>
+                </a>
+                <ul class="sub">
+                    <li><a href="{{URL::to('/all-customers')}}">Liệt kê khách hàng</a></li>
+                </ul>
+            </li>
 
                 @impersonate
                 <li class="sub-menu">
@@ -283,7 +292,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src={{asset("public/backend/js/jquery.scrollTo.js")}}></script>
 <script src={{asset("public/backend/js/bootstrap-tagsinput.js")}}></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"   ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <script >
     CKEDITOR.replace('ckeditor');
     CKEDITOR.replace('ckeditor_1');
@@ -694,272 +705,248 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
        });
 
-
-
-   });
-
-</script>
-<script type="text/javascript">
-    $('.comment_duyet_btn').click(function(){
-        var comment_status = $(this).data('comment_status');
-
-        var comment_id = $(this).data('comment_id');
-        var comment_product_id = $(this).attr('id');
-        if(comment_status==0){
-            var alert = 'Thay đổi thành duyệt thành công';
-        }else{
-            var alert = 'Thay đổi thành không duyệt thành công';
-        }
-          $.ajax({
-                url:"{{url('/allow-comment')}}",
-                method:"POST",
-
-                headers:{
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data:{comment_status:comment_status,comment_id:comment_id,comment_product_id:comment_product_id},
-                success:function(data){
-                    location.reload();
-                   $('#notify_comment').html('<span class="text text-alert">'+alert+'</span>');
-
-                }
-            });
-
-
     });
-    $('.btn-reply-comment').click(function(){
-        var comment_id = $(this).data('comment_id');
+    </script>
+    <script type="text/javascript">
+        $('.comment_duyet_btn').click(function(){
+            var comment_status = $(this).data('comment_status');
 
-        var comment = $('.reply_comment_'+comment_id).val();
+            var comment_id = $(this).data('comment_id');
+            var comment_product_id = $(this).attr('id');
+            if(comment_status==0){
+                var alert = 'Thay đổi thành duyệt thành công';
+            }else{
+                var alert = 'Thay đổi thành không duyệt thành công';
+            }
+            $.ajax({
+                    url:"{{url('/allow-comment')}}",
+                    method:"POST",
 
+                    headers:{
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data:{comment_status:comment_status,comment_id:comment_id,comment_product_id:comment_product_id},
+                    success:function(data){
+                        location.reload();
+                    $('#notify_comment').html('<span class="text text-alert">'+alert+'</span>');
 
-
-        var product_id = $(this).data('product_id');
-
-
-        // alert(comment);
-        // alert(comment_id);
-        // alert(comment_product_id);
-
-          $.ajax({
-                url:"{{url('/reply-comment')}}",
-                method:"POST",
-
-                headers:{
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data:{comment:comment,comment_id:comment_id,product_id:product_id},
-                success:function(data){
-                    $('.reply_comment_'+comment_id).val('');
-                   $('#notify_comment').html('<span class="text text-alert">Trả lời bình luận thành công</span>');
-
-                }
-            });
-
-
-    });
-</script>
-<script type="text/javascript">
-    $(document).ready(function(){
-
-        $('#category_order').sortable({
-            placeholder: 'ui-state-highlight',
-             update  : function(event, ui)
-              {
-                var page_id_array = new Array();
-                var _token = $('input[name="_token"]').val();
-
-                $('#category_order tr').each(function(){
-                    page_id_array.push($(this).attr("id"));
+                    }
                 });
 
-                $.ajax({
-                        url:"{{url('/arrange-category')}}",
-                        method:"POST",
-                        data:{page_id_array:page_id_array,_token:_token},
-                        success:function(data)
-                        {
-                            alert(data);
-                        }
-                });
 
-              }
         });
+        $('.btn-reply-comment').click(function(){
+            var comment_id = $(this).data('comment_id');
+
+            var comment = $('.reply_comment_'+comment_id).val();
 
 
-    });
-        </script>
-        <script type="text/javascript">
 
-            $( function() {
-            $( "#start_coupon" ).datepicker({
-                prevText:"Tháng trước",
-                nextText:"Tháng sau",
-                dateFormat:"dd/mm/yy",
-                dayNamesMin: [ "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật" ],
-                duration: "slow"
-            });
-            $( "#end_coupon" ).datepicker({
-                prevText:"Tháng trước",
-                nextText:"Tháng sau",
-                dateFormat:"dd/mm/yy",
-                dayNamesMin: [ "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật" ],
-                duration: "slow"
-            });
-            } );
+            var product_id = $(this).data('product_id');
 
-        </script>
 
-  <script type="text/javascript">
-      $('.btn-delete-document').click(function(){
+            // alert(comment);
+            // alert(comment_id);
+            // alert(comment_product_id);
 
-          var product_id = $(this).data('document_id');
-          var _token = $('input[name="_token"]').val();
-           $.ajax({
-                  url:"{{url('/delete-document')}}",
-                  method:"POST",
+            $.ajax({
+                    url:"{{url('/reply-comment')}}",
+                    method:"POST",
 
-                  data:{_token:_token,product_id:product_id},
+                    headers:{
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data:{comment:comment,comment_id:comment_id,product_id:product_id},
+                    success:function(data){
+                        $('.reply_comment_'+comment_id).val('');
+                    $('#notify_comment').html('<span class="text text-alert">Trả lời bình luận thành công</span>');
 
-                  success:function(data)
-                      {
-                          alert('Xóa file thành công');
-                          location.reload();
-                      }
-              });
-      });
-  </script>
-  <script type="text/javascript">
-      $('.price_format').simpleMoneyFormat();
+                    }
+                });
 
-  </script>
-        <script type="text/javascript">
+
+        });
+    </script>
+    <script type="text/javascript">
         $(document).ready(function(){
 
-                chart60daysorder();
+            $('#category_order').sortable({
+                placeholder: 'ui-state-highlight',
+                update  : function(event, ui)
+                {
+                    var page_id_array = new Array();
+                    var _token = $('input[name="_token"]').val();
 
-                var chart = new Morris.Bar({
-
-                        element: 'chart',
-                        //option chart
-                        lineColors: ['#819C79', '#fc8710','#FF6541', '#A4ADD3', '#766B56'],
-                        parseTime: false,
-                        hideHover: 'auto',
-                        xkey: 'period',
-                        ykeys: ['order','sales','profit','quantity'],
-                        labels: ['đơn hàng','doanh số','lợi nhuận','số lượng']
-
+                    $('#category_order tr').each(function(){
+                        page_id_array.push($(this).attr("id"));
                     });
 
-
-
-                function chart60daysorder(){
-                    var _token = $('input[name="_token"]').val();
                     $.ajax({
-                        url:"{{url('/days-order')}}",
+                            url:"{{url('/arrange-category')}}",
+                            method:"POST",
+                            data:{page_id_array:page_id_array,_token:_token},
+                            success:function(data)
+                            {
+                                alert(data);
+                            }
+                    });
+
+                }
+            });
+
+
+        });
+            </script>
+            <script type="text/javascript">
+
+                $( function() {
+                $( "#start_coupon" ).datepicker({
+                    prevText:"Tháng trước",
+                    nextText:"Tháng sau",
+                    dateFormat:"dd/mm/yy",
+                    dayNamesMin: [ "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật" ],
+                    duration: "slow"
+                });
+                $( "#end_coupon" ).datepicker({
+                    prevText:"Tháng trước",
+                    nextText:"Tháng sau",
+                    dateFormat:"dd/mm/yy",
+                    dayNamesMin: [ "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật" ],
+                    duration: "slow"
+                });
+                } );
+
+            </script>
+
+            <script type="text/javascript">
+                $('.price_format').simpleMoneyFormat();
+
+            </script>
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    var donut = Morris.Donut({
+                    element: 'donut',
+                    resize: true,
+                    colors: [
+                        '#a8328e',
+                        '#61a1ce',
+                        '#ce8f61',
+                        '#f5b942',
+                        '#4842f5'
+
+                    ],
+                    //labelColor:"#cccccc", // text color
+                    //backgroundColor: '#333333', // border color
+                    data: [
+                        {label:"San pham", value:<?php echo $app_product ?>},
+                        {label:"Bai viet", value:<?php echo $app_post ?>},
+                        {label:"Don hang", value:<?php echo $app_order ?>},
+                        {label:"Video", value:<?php echo $app_video ?>},
+                        {label:"Khach mua", value:<?php echo $app_customer ?>}
+                    ]
+                    });
+                });
+            </script>
+            <script type="text/javascript">
+            $(document).ready(function(){
+
+                    chart60daysorder();
+
+                    var chart = new Morris.Bar({
+
+                            element: 'chart',
+                            //option chart
+                            lineColors: ['#819C79', '#fc8710','#FF6541', '#A4ADD3', '#766B56'],
+                            parseTime: false,
+                            hideHover: 'auto',
+                            xkey: 'period',
+                            ykeys: ['order','sales','profit','quantity'],
+                            labels: ['đơn hàng','doanh số','lợi nhuận','số lượng']
+
+                        });
+
+
+
+                    function chart60daysorder(){
+                        var _token = $('input[name="_token"]').val();
+                        $.ajax({
+                            url:"{{url('/days-order')}}",
+                            method:"POST",
+                            dataType:"JSON",
+                            data:{_token:_token},
+
+                            success:function(data)
+                                {
+                                    chart.setData(data);
+                                }
+                        });
+                    }
+
+                $('.dashboard-filter').change(function(){
+                    var dashboard_value = $(this).val();
+                    var _token = $('input[name="_token"]').val();
+                    // alert(dashboard_value);
+                    $.ajax({
+                        url:"{{url('/dashboard-filter')}}",
                         method:"POST",
                         dataType:"JSON",
-                        data:{_token:_token},
+                        data:{dashboard_value:dashboard_value,_token:_token},
+
+                        success:function(data)
+                            {
+                                chart.setData(data);
+                            }
+                        });
+
+                });
+
+                $('#btn-dashboard-filter').click(function(){
+
+                    var _token = $('input[name="_token"]').val();
+
+                    var from_date = $('#datepicker').val();
+                    var to_date = $('#datepicker2').val();
+
+                    $.ajax({
+                        url:"{{url('/filter-by-date')}}",
+                        method:"POST",
+                        dataType:"JSON",
+                        data:{from_date:from_date,to_date:to_date,_token:_token},
 
                         success:function(data)
                             {
                                 chart.setData(data);
                             }
                     });
-                }
 
-            $('.dashboard-filter').change(function(){
-                var dashboard_value = $(this).val();
-                var _token = $('input[name="_token"]').val();
-                // alert(dashboard_value);
-                $.ajax({
-                    url:"{{url('/dashboard-filter')}}",
-                    method:"POST",
-                    dataType:"JSON",
-                    data:{dashboard_value:dashboard_value,_token:_token},
-
-                    success:function(data)
-                        {
-                            chart.setData(data);
-                        }
-                    });
-
-            });
-
-            $('#btn-dashboard-filter').click(function(){
-
-                var _token = $('input[name="_token"]').val();
-
-                var from_date = $('#datepicker').val();
-                var to_date = $('#datepicker2').val();
-
-                $.ajax({
-                    url:"{{url('/filter-by-date')}}",
-                    method:"POST",
-                    dataType:"JSON",
-                    data:{from_date:from_date,to_date:to_date,_token:_token},
-
-                    success:function(data)
-                        {
-                            chart.setData(data);
-                        }
                 });
 
             });
 
+            </script>
+
+
+
+    <script type="text/javascript">
+
+        $( function() {
+        $( "#datepicker" ).datepicker({
+            prevText:"Tháng trước",
+            nextText:"Tháng sau",
+            dateFormat:"yy-mm-dd",
+            dayNamesMin: [ "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật" ],
+            duration: "slow"
         });
-
-        </script>
-
-        {{-- <script type="text/javascript">
-        $(document).ready(function(){
-
-                //     });
-                var donut = Morris.Donut({
-                    element: 'donut',
-                    resize: true,
-                    colors: [
-                    '#a8328e',
-                    '#61a1ce',
-                    '#ce8f61',
-                    '#f5b942',
-                    '#4842f5'
-
-                    ],
-                    //labelColor:"#cccccc", // text color
-                    //backgroundColor: '#333333', // border color
-                    data: [
-                    {label:"San pham", value:<?php echo $app_product ?>},
-                    {label:"Bai viet", value:<?php echo $app_post ?>},
-                    {label:"Don hang", value:<?php echo $app_order ?>},
-                    {label:"Video", value:<?php echo $app_video ?>},
-                    {label:"Khach hang", value:<?php echo $app_customer ?>}
-                    ]
-                });
-
+        $( "#datepicker2" ).datepicker({
+            prevText:"Tháng trước",
+            nextText:"Tháng sau",
+            dateFormat:"yy-mm-dd",
+            dayNamesMin: [ "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật" ],
+            duration: "slow"
         });
-        </script> --}}
+        } );
 
-  <script type="text/javascript">
-
-    $( function() {
-      $( "#datepicker" ).datepicker({
-          prevText:"Tháng trước",
-          nextText:"Tháng sau",
-          dateFormat:"yy-mm-dd",
-          dayNamesMin: [ "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật" ],
-          duration: "slow"
-      });
-      $( "#datepicker2" ).datepicker({
-          prevText:"Tháng trước",
-          nextText:"Tháng sau",
-          dateFormat:"yy-mm-dd",
-          dayNamesMin: [ "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật" ],
-          duration: "slow"
-      });
-    } );
-
-  </script>
+    </script>
 
 
 </body>

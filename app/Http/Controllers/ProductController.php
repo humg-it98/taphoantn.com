@@ -177,7 +177,12 @@ class ProductController extends Controller
             $product_id = $value->product_id;
             $product_cate = $value->category_name;
             $cate_slug = $value->slug_category_product;
+            $share_images = url('public/uploads/product/'.$value->product_image);
             }
+
+            $product = Product::where('product_id',$product_id)->first();
+            $product->product_views = $product->product_views + 1;
+            $product->save();
 
 
             $related_product = DB::table('tbl_product')
@@ -189,6 +194,7 @@ class ProductController extends Controller
             $rating = round($rating);
 
 
+
             return view('pages.sanpham.show_details')->with('category',$cate_product)
             ->with('brand',$brand_product)
             ->with('product_images',$product_images)
@@ -198,6 +204,7 @@ class ProductController extends Controller
             ->with('meta_keywords',$meta_keywords)
             ->with('meta_title',$meta_title)
             ->with('url_canonical',$url_canonical)
+            ->with('share_images',$share_images)
             ->with('category_post',$category_post)
             ->with('partner',$partner)
             ->with('rating',$rating);
@@ -206,7 +213,7 @@ class ProductController extends Controller
         public function add_images_product (){
             $this->AuthLogin();
             $product = DB::table('tbl_product')->orderby('product_id','desc')->get();
-            return view('admin.add_images_product')->with('product', $product);
+            return view('admin.product.add_images_product')->with('product', $product);
         }
 
         public function save_images_product(Request $request){

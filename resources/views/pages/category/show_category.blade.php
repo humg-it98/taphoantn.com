@@ -42,14 +42,15 @@
                     <!-- product-select-box start -->
                     <div class="product-select-box">
                         <form>
+                            @csrf
                             <div class="product-short">
-                                <p>Sắp xếp theo:</p>
-                                <select class="nice-select" name="sort" id="sort">
+                                <p style="width:180px">Sắp xếp theo:</p>
+                                <select class="sort" name="sort" id="sort">
                                     <option value="{{Request::url()}}?sort_by=none">Mặc định</option>
                                     <option value="{{Request::url()}}?sort_by=kytu_az">Tên (A - Z)</option>
                                     <option value="{{Request::url()}}?sort_by=kytu_za">Tên (Z - A)</option>
-                                    <option value="{{Request::url()}}?sort_by=tang_dan">Gía tăng dần (Thấp &gt; Cao)</option>
-                                    <option value="{{Request::url()}}?sort_by=giam_dan">Giá giảm dần (Cao &gt; Thấp )</option>
+                                    <option value="{{Request::url()}}?sort_by=tang_dan">Gía tăng dần (Thấp-&gt;Cao)</option>
+                                    <option value="{{Request::url()}}?sort_by=giam_dan">Giá giảm dần (Cao-&gt;Thấp )</option>
                                 </select>
                             </div>
                         </form>

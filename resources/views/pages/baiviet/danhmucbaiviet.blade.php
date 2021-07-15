@@ -31,15 +31,15 @@
                         <h4 class="li-blog-sidebar-title"><b>Categories</b></h4>
                         <ul class="li-blog-archive">
                             @foreach($category as $key => $cate)
-                            <li><a href="{{URL::to('danh-muc-san-pham/'.$cate->category_id)}}">{{$cate->category_name}}</a></li>
+                            <li><a href="{{URL::to('danh-muc-san-pham/'.$cate->slug_category_product)}}">{{$cate->category_name}}</a></li>
                             @endforeach
                         </ul>
                     </div>
                     <div class="li-blog-sidebar">
                         <h4 class="li-blog-sidebar-title"><b>Brand Product</b></h4>
                         <ul class="li-blog-archive">
-                            @foreach($brand as $key => $brand)
-                            <li><a href="{{URL::to('danh-muc-san-pham/'.$brand->brand_id)}}">{{$brand->brand_name}}</a></li>
+                            @foreach($brand as $key => $bran)
+                            <li><a href="{{URL::to('danh-muc-san-pham/'.$bran->brand_slug)}}">{{$bran->brand_name}}</a></li>
                             @endforeach
                         </ul>
                     </div>

@@ -44,8 +44,8 @@
                         <form>
                             @csrf
                             <div class="product-short">
-                                <p>Sắp xếp theo:</p>
-                                <select class="nice-select" name="sort" id="sort">
+                                <p style="width:180px">Sắp xếp theo:</p>
+                                <select class="sort" name="sort" id="sort">
                                     <option value="{{Request::url()}}?sort_by=none">Mặc định</option>
                                     <option value="{{Request::url()}}?sort_by=kytu_az">Tên (A - Z)</option>
                                     <option value="{{Request::url()}}?sort_by=kytu_za">Tên (Z - A)</option>

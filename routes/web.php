@@ -22,14 +22,21 @@ Route::post('/tim-kiem','HomeController@search');
 Route::get('/404','HomeController@error_page');
 Route::post('/autocomplete-ajax','HomeController@autocomplete_ajax');
 Route::get('/lien-he','HomeController@lienhe');
+Route::get('/san-pham-yeu-thich','HomeController@wishlist');
+Route::get('/so-sanh-san-pham','HomeController@compare');
+
 
 /*Back-end*/
 Route::get('/admin','AdminController@index');
 Route::get('/dashboard','AdminController@show_dashboard');
 Route::post('/admin-dashboard','AdminController@dashboard');
 Route::get('/logout','AdminController@logout');
-Route::get('/san-pham-yeu-thich','HomeController@wishlist');
-Route::get('/so-sanh-san-pham','HomeController@compare');
+
+Route::post('/filter-by-date','AdminController@filter_by_date');
+Route::get('/order-date','AdminController@order_date');
+Route::post('/days-order','AdminController@days_order');
+Route::post('/dashboard-filter','AdminController@dashboard_filter');
+
 
 
 //Dang nhap fb-gmail
@@ -154,13 +161,15 @@ Route::get('/logout-checkout','CheckoutController@logout_checkout');
 Route::post('/add-customer','CheckoutController@add_customer');
 Route::get('/checkout','CheckoutController@checkout');
 Route::post('/save-checkout-customer','CheckoutController@save_checkout_customer');
-Route::get('/payment','CheckoutController@payment');
 Route::post('/login-customer','CheckoutController@login_customer');
 Route::post('/order-place','CheckoutController@order_place');
 Route::post('/select-delivery-home','CheckoutController@select_delivery_home');
 Route::post('/calculate-fee','CheckoutController@calculate_fee');
 Route::get('/del-fee','CheckoutController@del_fee');
 Route::post('/confirm-order','CheckoutController@confirm_order');
+
+Route::post('/thanh-toan-vnpay','CheckoutController@create_vnpay');
+
 
 
 
@@ -236,4 +245,11 @@ Route::post('/reset-new-pass','MailController@reset_new_pass');
 //lich sử đơn hàng
 Route::get('/history','OrderController@history');
 Route::get('/view-history-order/{order_code}','OrderController@view_history_order');
+
+//Customer
+Route::get('/all-customers','CustomersController@all_customers');
+Route::get('/edit-category-post/{category_post_id}','CategoryPost@edit_category_post');
+Route::post('/update-category-post/{category_post_id}','CategoryPost@update_category_post');
+Route::get('/delete-category-post/{category_post_id}','CategoryPost@delete_category_post');
+Route::post('/save-category-post','CategoryPost@save_category_post');
 

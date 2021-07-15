@@ -117,11 +117,7 @@
       <table class="table table-striped b-t b-light">
         <thead>
           <tr>
-            <th style="width:20px;">
-              <label class="i-checks m-b-none">
-                <input type="checkbox"><i></i>
-              </label>
-            </th>
+            <th>STT</th>
             <th>Tên sản phẩm</th>
             <th>Số lượng kho còn</th>
             <th>Mã giảm giá</th>
@@ -226,7 +222,7 @@
 
                 <option disabled id="{{$or->order_id}}" value="1">Chưa xử lý</option>
                 <option id="{{$or->order_id}}" selected value="2">Đã xử lý-Đã giao hàng</option>
-                
+
 
               </select>
             </form>

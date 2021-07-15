@@ -40,18 +40,19 @@
                     </div>
                     <!-- product-select-box start -->
                     <div class="product-select-box">
-                        <div class="product-short">
-                            <p>Sort By:</p>
-                            <select class="nice-select">
-                                <option value="trending">Relevance</option>
-                                <option value="sales">Name (A - Z)</option>
-                                <option value="sales">Name (Z - A)</option>
-                                <option value="rating">Price (Low &gt; High)</option>
-                                <option value="date">Rating (Lowest)</option>
-                                <option value="price-asc">Model (A - Z)</option>
-                                <option value="price-asc">Model (Z - A)</option>
-                            </select>
-                        </div>
+                        <form>
+                            @csrf
+                            <div class="product-short">
+                                <p style="width:180px">Sắp xếp theo:</p>
+                                <select class="sort" name="sort" id="sort">
+                                    <option value="{{Request::url()}}?sort_by=none">Mặc định</option>
+                                    <option value="{{Request::url()}}?sort_by=kytu_az">Tên (A - Z)</option>
+                                    <option value="{{Request::url()}}?sort_by=kytu_za">Tên (Z - A)</option>
+                                    <option value="{{Request::url()}}?sort_by=tang_dan">Gía tăng dần (Thấp-&gt;Cao)</option>
+                                    <option value="{{Request::url()}}?sort_by=giam_dan">Giá giảm dần (Cao-&gt;Thấp )</option>
+                                </select>
+                            </div>
+                        </form>
                     </div>
                     <!-- product-select-box end -->
                 </div>

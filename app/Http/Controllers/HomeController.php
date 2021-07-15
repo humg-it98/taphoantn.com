@@ -29,7 +29,7 @@ class HomeController extends Controller
         //
         $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','0')->take(4)->get();
         $category_post = CatePost::orderBy('cate_post_id','DESC')->where('cate_post_status','0')->get();
-        // $partner = Partner::orderBy('partner_id','DESC')->where('partner_status','0')->take(10)->get();
+        $partner = Partner::orderBy('partner_id','DESC')->where('partner_status','0')->take(10)->get();
         // $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->take(3)->get();
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->orderBy('category_order','ASC')->limit(15)->get();
         $brand_product = DB::table('tbl_brand_product')->where('brand_status','0')->orderby('brand_id','desc')->get();
@@ -38,6 +38,8 @@ class HomeController extends Controller
         $all_product_table = DB::table('tbl_product')->where('category_id','15')->where('product_status','0')->orderby('product_id','desc')->limit(10)->get();
         $all_product_phone = DB::table('tbl_product')->where('category_id','11')->where('product_status','0')->orderby('product_id','desc')->limit(10)->get();
 
+        
+
         // $all_post = Post::orderBy('post_id','DESC')->where('post_status','0')->take(10)->get();
 
         return view('pages.home')->with('category',$cate_product)->with('brand',$brand_product)
@@ -45,6 +47,7 @@ class HomeController extends Controller
         ->with('all_product_laptop',$all_product_laptop)
         ->with('all_product_phone',$all_product_phone)
         ->with('all_product_table',$all_product_table)
+        ->with('partner',$partner)
         ->with('category_post',$category_post)
         ->with('meta_desc',$meta_desc)
         ->with('meta_keywords',$meta_keywords)

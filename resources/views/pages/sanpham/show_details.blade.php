@@ -70,9 +70,9 @@
                 <div class="product-details-view-content pt-60">
                     <div class="product-info">
                         <h2>{{$product->product_name}}</h2>
-                        <span class="product-details-ref">Danh mục sản phẩm: {{$product->category_id}}</span><br>
-                        <span class="product-details-ref">Thương hiệu sản phẩm: {{$product->brand_id}}</span><br>
-                        <span class="product-details-ref">ID sản phẩm: {{$product->product_id}}</span>
+                        <span class="product-details-ref">Danh mục sản phẩm: {{$product->category_name}}</span><br>
+                        <span class="product-details-ref">Thương hiệu sản phẩm: {{$product->brand_name}}</span><br>
+                        {{-- <span class="product-details-ref">ID sản phẩm: {{$product->product_id}}</span> --}}
                         <style type="text/css">
                             a.tags_style {
                                 margin: 3px 2px;
@@ -127,16 +127,6 @@
                                 </span>
                             </p>
                         </div>
-                        <div class="product-variants">
-                            <div class="produt-variants-size">
-                                <label>Dimension</label>
-                                <select class="nice-select">
-                                    <option value="1" title="S" selected="selected">40x60cm</option>
-                                    <option value="2" title="M">60x90cm</option>
-                                    <option value="3" title="L">80x120cm</option>
-                                </select>
-                            </div>
-                        </div>
                         <div class="single-add-to-cart ">
                             <form action="#" class="cart-quantity" method="POST">
                                 @csrf
@@ -157,12 +147,11 @@
                             </form>
                         </div>
                         <div class="product-additional-info pt-25">
-                            <a class="wishlist-btn" href=""><i class="fa fa-heart-o"></i>Add to wishlist</a>
+                            <a class="wishlist-btn"><i class="fa fa-share"></i>Chia sẻ link sản phẩm: </a>
                             <div class="product-social-sharing pt-25">
                                 <ul>
-                                    <li class="facebook"><a href="#"><i class="fa fa-facebook"></i>Facebook</a></li>
-                                    <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i>Google +</a></li>
-                                    <li class="instagram"><a href="#"><i class="fa fa-instagram"></i>Instagram</a></li>
+                                    <div class="fb-share-button" style="height:30px;width:100px" data-href="{{$url_canonical}}" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{$url_canonical}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
+                                    <div &emsp class="zalo-share-button" style="height:30px;width:100px" data-href="{{$url_canonical}}" data-oaid="248512510121692038" data-layout="1" data-color="blue" data-customize=false></div>
                                 </ul>
                             </div>
                         </div>
@@ -267,6 +256,7 @@
                         <div class="review-btn">
                             <a class="review-links" href="#" data-toggle="modal" data-target="#mymodal">Viết đánh giá của bạn</a>
                         </div>
+                        <div class="fb-comments" style="color:#ffebeb" data-href="{{$url_canonical}}" data-width="870" data-numposts="5"></div>
                         <!-- Begin Quick View | Modal Area -->
                         <div class="modal fade modal-wrapper" id="mymodal" >
                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -294,12 +284,12 @@
                                                             <form action="" method="POST">
                                                                 @csrf
                                                                 <input type="hidden" name="comment_product_id" class="comment_product_id" value="{{$product->product_id}}">
-                                                                <p class="your-opinion">
+                                                                {{-- <p class="your-opinion">
                                                                     <label>Đánh giá sao</label>
                                                                     <span>
                                                                         <li title="star_rating" id="{{$product->product_id}}-{{$count}}" data-index="{{$count}}"  data-product_id="{{$product->product_id}}" data-rating="{{$rating}}" class="rating" style="cursor:pointer; {{$color}} font-size:30px;">&#9733;</li>
                                                                     </span>
-                                                                </p>
+                                                                </p> --}}
                                                                 <p class="feedback-form">
                                                                     <label for="feedback">Đánh giá của bạn</label>
                                                                     <textarea id="feedback" class="comment_content" name="comment_content" cols="45" rows="8" aria-required="true"></textarea>

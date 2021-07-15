@@ -16,7 +16,7 @@
 
 			<div class="col-md-2">
 				<p>Từ ngày: <input type="text" id="datepicker" class="form-control"></p>
-
+                <br>
 				<input type="button" id="btn-dashboard-filter" class="btn btn-primary btn-sm" value="Lọc kết quả"></p>
 
 			</div>
@@ -122,7 +122,7 @@
 		<ol class="list_views">
 			@foreach($product_views as $key => $pro)
 			<li>
-				<a target="_blank" href="{{url('/chi-tiet/'.$pro->product_slug)}}">{{$pro->product_name}} | <span style="color:black">{{$pro->product_views}}</span></a>
+				<a target="_blank" href="{{url('/chi-tiet-san-pham/'.$pro->product_slug)}}">{{$pro->product_name}} | <span style="color:black">{{$pro->product_views}}</span></a>
 			</li>
 			@endforeach
 		</ol>

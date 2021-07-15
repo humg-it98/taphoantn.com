@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Auth;
 use App\Models\Video;
 use Session;
 use App\Models\CatePost;
@@ -30,6 +31,7 @@ class VideoController extends Controller
 
     }
     public function video(){
+        $this->AuthLogin();
     	return view('admin.video.list_video');
     }
     public function insert_video(Request $request){
