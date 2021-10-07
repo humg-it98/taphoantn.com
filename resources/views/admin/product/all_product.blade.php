@@ -16,15 +16,12 @@
         <table class="table table-striped b-t b-light" id='myTable'>
           <thead>
             <tr>
-              <th style="width:20px;">
-                <label class="i-checks m-b-none">
-                  <input type="checkbox"><i></i>
-                </label>
-              </th>
               <th>Tên sản phẩm</th>
               <th>Slug sản phẩm</th>
               <th>Số lượng sản phẩm</th>
-              <th>Giá sản phẩm</th>
+              <th>Giá nhập sản phẩm</th>
+              <th>Giá bán sản phẩm</th>
+              <th>Giá sale sản phẩm</th>
               <th>Hình sản phẩm</th>
               <th>Danh mục sản phẩm</th>
               <th>Thương hiệu sản phẩm</th>
@@ -36,11 +33,12 @@
               @foreach($all_product as $key => $pro)
 
             <tr>
-              <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
               <td>{{$pro->product_name}}</td>
               <td>{{$pro->product_slug}}</td>
               <td>{{$pro->product_quantity}}</td>
+              <td>{{number_format($pro->price_cost).' đ'}}</td>
               <td>{{number_format($pro->product_price).' đ'}}</td>
+              <td>{{number_format($pro->product_sale).' đ'}}</td>
               <td><img src ="public/uploads/product/{{ $pro->product_image}}" heght="100" width="100"></td>
               <td>{{$pro->category_name}} </td>
               <td>{{$pro->brand_name}}</td>
@@ -65,6 +63,10 @@
                 <a onclick="return confirm('Bạn có chắc chắn muốn xóa nó?')" href="{{URL::to('/delete-product/'.$pro->product_id)}}" class="active styling-edit" ui-toggle-class="">
                     <i class="fa fa-times text-danger text"></i>
                 </a>
+                <a href="{{URL::to('/them-so-luong/'.$pro->product_id)}}" class="active styling-edit" ui-toggle-class="">
+                    <i class="fa fa-pencil-square-o text-success text-active"></i>
+                </a>
+
               </td>
             </tr>
              @endforeach

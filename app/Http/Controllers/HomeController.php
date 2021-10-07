@@ -10,6 +10,7 @@ use App\Models\Slider;
 use App\Models\Partner;
 use App\Models\CatePost;
 use App\Models\Product;
+use App\Models\Customer;
 use App\Models\Post;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
@@ -17,37 +18,60 @@ session_start();
 
 class HomeController extends Controller
 {
-    public function error_page(){
-        return view('errors.404');
+    public function error_page(Request $request){
+        $meta_desc = "Hệ thống bán lẻ điện thoại, máy tính laptop, tablet, smartwatch, nhà thông minh, thiết bị IT, phụ kiện chính hãng | Giá rẻ, trả góp 0%, giao hàng miễn phí.";
+        $meta_keywords = "NTNShopper - Điện thoại, laptop, tablet, phụ kiện chính hãng";
+        $meta_title = "NTNShopper- Điện thoại, laptop, tablet, phụ kiện chính hãng.";
+        $url_canonical = $request->url();
+        //
+        $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->orderBy('category_order','ASC')->limit(15)->get();
+        $brand_product = DB::table('tbl_brand_product')->where('brand_status','0')->orderby('brand_id','desc')->get();
+        $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','0')->take(4)->get();
+        $category_post = CatePost::orderBy('cate_post_id','DESC')->where('cate_post_status','0')->get();
+        // $partner = Partner::orderBy('partner_id','DESC')->where('partner_status','0')->take(10)->get();
+        // $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->take(3)->get();
+
+        return view('errors.404')
+        ->with('category',$cate_product)->with('brand',$brand_product)
+        ->with('slider',$slider)
+        ->with('category_post',$category_post)
+        ->with('meta_desc',$meta_desc)
+        ->with('meta_keywords',$meta_keywords)
+        ->with('meta_title',$meta_title)
+        ->with('url_canonical',$url_canonical);
     }
     public function index(Request $request){
         //seo
-        $meta_desc = "Shop Đồng Hồ⌚️ Nam Nữ Hơn 15 Cửa Hàng & 15 Năm Bán Đồng Hồ ️ Casio, Orient, Citizen, DW, Tissot Chính Hãng Bảo Hành 5 Năm⚡ Khuyến Mãi 20%-50 ";
-        $meta_keywords = "Đồng Hồ ️ Casio, Orient, Citizen, DW, Tissot Chính Hãng";
-        $meta_title = "Shop Đồng Hồ⌚️ Nam Nữ chính hãng.";
+        $meta_desc = "Hệ thống bán lẻ điện thoại, máy tính laptop, tablet, smartwatch, nhà thông minh, thiết bị IT, phụ kiện chính hãng | Giá rẻ, trả góp 0%, giao hàng miễn phí.";
+        $meta_keywords = "NTNShopper - Điện thoại, laptop, tablet, phụ kiện chính hãng";
+        $meta_title = "NTNShopper- Điện thoại, laptop, tablet, phụ kiện chính hãng.";
         $url_canonical = $request->url();
         //
-        $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','0')->take(4)->get();
+        $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','0')->take(2)->get();
         $category_post = CatePost::orderBy('cate_post_id','DESC')->where('cate_post_status','0')->get();
         $partner = Partner::orderBy('partner_id','DESC')->where('partner_status','0')->take(10)->get();
         // $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->take(3)->get();
-        $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->orderBy('category_order','ASC')->limit(15)->get();
-        $brand_product = DB::table('tbl_brand_product')->where('brand_status','0')->orderby('brand_id','desc')->get();
+        $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->orderBy('category_order','ASC')->limit(4)->get();
+        $brand_product = DB::table('tbl_brand_product')->where('brand_status','0')->orderby('brand_id','desc')->take(5)->get();
         $all_product = DB::table('tbl_product')->where('product_status','0')->orderby('product_id','desc')->limit(10)->get();
+        $all_product_new = DB::table('tbl_product')->where('product_status','0')->orderby('product_sale','desc')->limit(10)->get();
+        $all_product_sale = DB::table('tbl_product')->where('product_status','0')->orderby('product_sold','desc')->limit(10)->get();
         $all_product_laptop = DB::table('tbl_product')->where('category_id','12')->where('product_status','0')->orderby('product_id','desc')->limit(10)->get();
         $all_product_table = DB::table('tbl_product')->where('category_id','15')->where('product_status','0')->orderby('product_id','desc')->limit(10)->get();
         $all_product_phone = DB::table('tbl_product')->where('category_id','11')->where('product_status','0')->orderby('product_id','desc')->limit(10)->get();
 
-        
+
 
         // $all_post = Post::orderBy('post_id','DESC')->where('post_status','0')->take(10)->get();
 
         return view('pages.home')->with('category',$cate_product)->with('brand',$brand_product)
         ->with('all_product',$all_product)
+        ->with('all_product_new',$all_product_new)
+        ->with('all_product_sale',$all_product_sale)
         ->with('all_product_laptop',$all_product_laptop)
         ->with('all_product_phone',$all_product_phone)
         ->with('all_product_table',$all_product_table)
-        ->with('partner',$partner)
+        ->with('slider',$slider)
         ->with('category_post',$category_post)
         ->with('meta_desc',$meta_desc)
         ->with('meta_keywords',$meta_keywords)
@@ -65,7 +89,7 @@ class HomeController extends Controller
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->orderBy('category_order','ASC')->get();
         $brand_product = DB::table('tbl_brand_product')->where('brand_status','0')->orderby('brand_id','desc')->get();
         $category_post = CatePost::orderBy('cate_post_id','DESC')->where('cate_post_status','0')->get();
-        $search_product = DB::table('tbl_product')->where('product_name','like','%'.$keyword.'%')->paginate(6);
+        $search_product = DB::table('tbl_product')->where('product_name','like','%'.$keyword.'%')->orWhere('product_price',$keyword)->paginate(6);
         $partner = Partner::orderBy('partner_id','DESC')->where('partner_status','0')->take(10)->get();
 
 
@@ -113,9 +137,9 @@ class HomeController extends Controller
 
     }
     public function lienhe(Request $request){
-            $meta_desc = "Shop Đồng Hồ⌚️ Nam Nữ Hơn 15 Cửa Hàng & 15 Năm Bán Đồng Hồ ️ Casio, Orient, Citizen, DW, Tissot Chính Hãng Bảo Hành 5 Năm⚡ Khuyến Mãi 20%-50 ";
-            $meta_keywords = "Đồng Hồ ️ Casio, Orient, Citizen, DW, Tissot Chính Hãng";
-            $meta_title = "Shop Đồng Hồ⌚️ Nam Nữ chính hãng.";
+            $meta_desc = "Hệ thống bán lẻ điện thoại, máy tính laptop, tablet, smartwatch, nhà thông minh, thiết bị IT, phụ kiện chính hãng | Giá rẻ, trả góp 0%, giao hàng miễn phí.";
+            $meta_keywords = "NTNShopper - Điện thoại, laptop, tablet, phụ kiện chính hãng";
+            $meta_title = "NTNShopper- Điện thoại, laptop, tablet, phụ kiện chính hãng.";
             $url_canonical = $request->url();
             //
             $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','0')->take(4)->get();
@@ -137,9 +161,9 @@ class HomeController extends Controller
             ->with('url_canonical',$url_canonical);
     }
     public function wishlist(Request $request){
-        $meta_desc = "Shop Đồng Hồ⌚️ Nam Nữ Hơn 15 Cửa Hàng & 15 Năm Bán Đồng Hồ ️ Casio, Orient, Citizen, DW, Tissot Chính Hãng Bảo Hành 5 Năm⚡ Khuyến Mãi 20%-50 ";
-        $meta_keywords = "Đồng Hồ ️ Casio, Orient, Citizen, DW, Tissot Chính Hãng";
-        $meta_title = "Shop Đồng Hồ⌚️ Nam Nữ chính hãng.";
+        $meta_desc = "Hệ thống bán lẻ điện thoại, máy tính laptop, tablet, smartwatch, nhà thông minh, thiết bị IT, phụ kiện chính hãng | Giá rẻ, trả góp 0%, giao hàng miễn phí.";
+        $meta_keywords = "NTNShopper - Điện thoại, laptop, tablet, phụ kiện chính hãng";
+        $meta_title = "NTNShopper- Điện thoại, laptop, tablet, phụ kiện chính hãng.";
         $url_canonical = $request->url();
         //
         $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','0')->take(4)->get();
@@ -161,9 +185,9 @@ class HomeController extends Controller
         ->with('url_canonical',$url_canonical);
     }
     public function compare(Request $request){
-        $meta_desc = "Shop Đồng Hồ⌚️ Nam Nữ Hơn 15 Cửa Hàng & 15 Năm Bán Đồng Hồ ️ Casio, Orient, Citizen, DW, Tissot Chính Hãng Bảo Hành 5 Năm⚡ Khuyến Mãi 20%-50 ";
-        $meta_keywords = "Đồng Hồ ️ Casio, Orient, Citizen, DW, Tissot Chính Hãng";
-        $meta_title = "Shop Đồng Hồ⌚️ Nam Nữ chính hãng.";
+        $meta_desc = "Hệ thống bán lẻ điện thoại, máy tính laptop, tablet, smartwatch, nhà thông minh, thiết bị IT, phụ kiện chính hãng | Giá rẻ, trả góp 0%, giao hàng miễn phí.";
+        $meta_keywords = "NTNShopper - Điện thoại, laptop, tablet, phụ kiện chính hãng";
+        $meta_title = "NTNShopper- Điện thoại, laptop, tablet, phụ kiện chính hãng.";
         $url_canonical = $request->url();
         //
         $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','0')->take(4)->get();
@@ -183,6 +207,88 @@ class HomeController extends Controller
         ->with('meta_keywords',$meta_keywords)
         ->with('meta_title',$meta_title)
         ->with('url_canonical',$url_canonical);
+    }
+    public function gioi_thieu(Request $request){
+        $meta_desc = "Hệ thống bán lẻ điện thoại, máy tính laptop, tablet, smartwatch, nhà thông minh, thiết bị IT, phụ kiện chính hãng | Giá rẻ, trả góp 0%, giao hàng miễn phí.";
+        $meta_keywords = "NTNShopper - Điện thoại, laptop, tablet, phụ kiện chính hãng";
+        $meta_title = "NTNShopper- Điện thoại, laptop, tablet, phụ kiện chính hãng.";
+        $url_canonical = $request->url();
+        //
+        $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->orderBy('category_order','ASC')->limit(15)->get();
+        $brand_product = DB::table('tbl_brand_product')->where('brand_status','0')->orderby('brand_id','desc')->get();
+        $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','0')->take(4)->get();
+        $category_post = CatePost::orderBy('cate_post_id','DESC')->where('cate_post_status','0')->get();
+        $partner = Partner::orderBy('partner_id','DESC')->where('partner_status','0')->take(10)->get();
+        // $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->take(3)->get();
+
+        return view('pages.thongtincuahang.thongtin')
+        ->with('category',$cate_product)->with('brand',$brand_product)
+        ->with('partner',$partner)
+        ->with('category_post',$category_post)
+        ->with('meta_desc',$meta_desc)
+        ->with('meta_keywords',$meta_keywords)
+        ->with('meta_title',$meta_title)
+        ->with('url_canonical',$url_canonical);
+
+    }
+
+    public function details_customer(Request $request){
+        $meta_desc = "Hệ thống bán lẻ điện thoại, máy tính laptop, tablet, smartwatch, nhà thông minh, thiết bị IT, phụ kiện chính hãng | Giá rẻ, trả góp 0%, giao hàng miễn phí.";
+        $meta_keywords = "NTNShopper - Điện thoại, laptop, tablet, phụ kiện chính hãng";
+        $meta_title = "NTNShopper- Điện thoại, laptop, tablet, phụ kiện chính hãng.";
+        $url_canonical = $request->url();
+
+        // $edit_customer = DB::table('tbl_customers')->where('customer_id ',$customer_id )->first()->limit(1);
+        // $edit_customer = DB::table('tbl_customers')->find($id);
+        $id = Session::get('customer_id');
+        $edit_customer = DB::table('tbl_customers')->where('customer_id',$id)->get();
+        // $edit_customer = Customer::find($customer_id);
+        // //
+        $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->orderBy('category_order','ASC')->limit(4)->get();
+        $brand_product = DB::table('tbl_brand_product')->where('brand_status','0')->orderby('brand_id','desc')->limit(4)->get();
+        $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','0')->take(4)->get();
+        $category_post = CatePost::orderBy('cate_post_id','DESC')->where('cate_post_status','0')->get();
+        $partner = Partner::orderBy('partner_id','DESC')->where('partner_status','0')->take(10)->get();
+        // $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->take(3)->get();
+        // dd(Session::get('customer_id'));
+        // dd($edit_customer);
+        // dd($edit_customer);
+        return view('pages.thongtincuahang.khachhang')
+        ->with('category',$cate_product)->with('brand',$brand_product)
+        ->with('partner',$partner)
+        ->with('category_post',$category_post)
+        ->with('meta_desc',$meta_desc)
+        ->with('edit_customer',$edit_customer)
+        ->with('meta_keywords',$meta_keywords)
+        ->with('meta_title',$meta_title)
+        ->with('url_canonical',$url_canonical);
+
+    }
+    // public function change_pass_customer(Request $request){
+    //         $data = array();
+    //         $data['change_password'] = $request->change_password;
+    //         $data['change_password_confirm'] = $request->change_password_confirm;
+    //     dd($data);
+    //         DB::table('tbl_customers')->insert($data);
+    //         return redirect()->back()->with('message','Bạn đã thay đổi mật khẩu thành công');
+    // }
+
+    public function change_pass_customer(Request $request)
+    {
+        $data = array();
+        $data['customer_id'] = $request->customer_id;
+        $data['customer_password'] = md5($request->oldpassword);
+        $data['customer_confirm_password'] = md5($request->newpassword);
+        if($data['customer_password'] ===  $data['customer_confirm_password'])
+        {
+            DB::table('tbl_customers')->where('customer_id',$data['customer_id'])->update($data);
+            Session::put('message','Đổi mật khẩu thanh cong');
+            return Redirect::to('/dang-nhap');
+        }
+        else {
+            Session::put('message','Tai khoan hoac mat khẩu bi sai, vui lòng kiểm tra lai');
+            return redirect()->back();
+        }
     }
 
 

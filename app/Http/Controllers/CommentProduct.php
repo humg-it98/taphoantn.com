@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Models\Comment;
 use App\Models\Product;
+use App\Models\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
 class CommentProduct extends Controller
 {
     public function AuthLogin(){
-        $admin_id = Auth::id();
+        $admin_id = Auth::id(); 
         if($admin_id){
             return Redirect::to('dashboard');
         }else{
@@ -94,5 +95,13 @@ class CommentProduct extends Controller
         }
         echo $output;
 
+    }
+    public function insert_rating(Request $request){
+        $data = $request->all();
+        $rating = new Rating();
+        $rating->product_id = $data['product_id'];
+        $rating->rating = $data['index'];
+        $rating->save();
+        echo 'done';
     }
 }

@@ -111,7 +111,7 @@
         </td>
         <td>
 
-          @if($cou->coupon_date_end>=$today)
+          @if($cou->coupon_date_end<=$today)
           <span style="color:green">Còn hạn</span>
           @else
           <span style="color:red">Đã hết hạn</span>

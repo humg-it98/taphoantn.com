@@ -16,12 +16,12 @@
 <div class="page-section mb-60">
     <div class="container">
         <?php
-    $message = Session::get('message');
-    if($message){
-        echo '<span class="text-alert"><br>'.$message.'</br></span>';
-        Session::put('message',null);
-    }
-    ?>
+        $message = Session::get('message');
+        if($message){
+            echo '<span class="text-alert"><br>'.$message.'</br></span>';
+            Session::put('message',null);
+        }
+        ?>
         <div class="row">
             <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6 mb-30">
                 <!-- Login Form s-->

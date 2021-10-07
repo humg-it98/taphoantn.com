@@ -51,7 +51,7 @@
                                       $total += $subtotal;
                                 @endphp
                                 <tr>
-                                    <td class="li-product-remove"><a href="{{url('del-product/'.$cart['session_id'])}}"><i class="fa fa-times"></i></a></td>
+                                    <td class="li-product-remove">  </td>
                                     <td class="li-product-thumbnail"><a href="#"><img src="{{asset('public/uploads/product/'.$cart['product_image'])}}" height="80px" width="80px" alt="{{$cart['product_name']}}"></a></td>
                                     <td class="li-product-name"><a href="">{{$cart['product_name']}}</a></td>
                                     <td class="li-product-price"><span class="amount">{{number_format($cart['product_price']).'VNĐ'}}</span></td>
@@ -99,7 +99,7 @@
                     <div class="row">
                         <div class="col-md-5 ml-auto">
                             <div class="cart-page-total">
-                                <h2>Cart totals</h2>
+                                <h2>Tổng đơn hàng</h2>
                                 <ul>
                                     @if(Session::get('cart'))
                                         <li>Tạm tính: <span>{{number_format($total).' VNĐ'}}</span></li>

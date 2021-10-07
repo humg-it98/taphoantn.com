@@ -303,6 +303,30 @@ class OrderController extends Controller
 				}
 			}
         }
+        elseif($order->order_status!=2 && $order->order_status!=3 ){
+            foreach($data['order_product_id'] as $key => $product_id){
+
+				$product = Product::find($product_id);
+				$product_quantity = $product->product_quantity;
+				$product_sold = $product->product_sold;
+				//them
+				$product_price = $product->product_price;
+				$product_cost = $product->price_cost;
+				$now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+				foreach($data['quantity'] as $key2 => $qty){
+
+					if($key==$key2){
+						$pro_remain = $product_quantity + $qty;
+						$product->product_quantity = $pro_remain;
+						$product->product_sold = $product_sold - $qty;
+						$product->save();
+						//update doanh thu
+					}
+
+				}
+			}
+        }
 	}
     public function update_qty(Request $request){
 		$data = $request->all();

@@ -128,6 +128,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <ul class="sub">
 						<li><a href="{{URL::to('/add-product')}}">Thêm sản phẩm</a></li>
 						<li><a href="{{URL::to('/all-product')}}">Liệt kê sản phẩm</a></li>
+                        <li><a href="{{URL::to('/add-product-sale')}}">Qly sản phẩm Sale</a></li>
                         <li><a href="{{URL::to('/add-images-product')}}">Thêm hình ảnh sản phẩm</a></li>
                     </ul>
                 </li>
@@ -286,6 +287,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+<script src={{asset("public/backend/js/simple.money.format.js")}}></script>
 
 
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
@@ -514,6 +516,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         }
 
         if(j==0){
+            if(order_status!=3){
                 $.ajax({
                         url : '{{url('/update-order-qty')}}',
                             method: 'POST',
@@ -523,7 +526,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 location.reload();
                             }
                 });
-
+            }
         }
 
     });
@@ -767,7 +770,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
         });
     </script>
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         $(document).ready(function(){
 
             $('#category_order').sortable({
@@ -796,7 +799,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
         });
-            </script>
+            </script> --}}
             <script type="text/javascript">
 
                 $( function() {
@@ -822,7 +825,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 $('.price_format').simpleMoneyFormat();
 
             </script>
-            <script type="text/javascript">
+            {{-- <script type="text/javascript">
                 $(document).ready(function(){
                     var donut = Morris.Donut({
                     element: 'donut',
@@ -846,7 +849,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     ]
                     });
                 });
-            </script>
+            </script> --}}
             <script type="text/javascript">
             $(document).ready(function(){
 
@@ -945,6 +948,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             duration: "slow"
         });
         } );
+
+    </script>
+    <script>
+        $('.money').simpleMoneyFormat();
 
     </script>
 

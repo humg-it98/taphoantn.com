@@ -215,6 +215,11 @@ class ProductController extends Controller
             $product = DB::table('tbl_product')->orderby('product_id','desc')->get();
             return view('admin.product.add_images_product')->with('product', $product);
         }
+        public function add_product_sale(){
+            $this->AuthLogin();
+            $product = DB::table('tbl_product')->orderby('product_id','desc')->get();
+            return view('admin.product.product_sale')->with('product', $product);
+        }
 
         public function save_images_product(Request $request){
             $this->AuthLogin();
@@ -293,7 +298,7 @@ class ProductController extends Controller
             $data['product_image_3'] = '';
             $data['product_image_4'] = '';
             $data['product_image_5'] = '';
-            DB::table('tbl_product')->insert($data);
+            DB::table('tbl_images_product')->insert($data);
             Session::put('message','Thêm hình ảnh sản phẩm thành công');
             return Redirect::to('all-product');
         }
@@ -358,6 +363,25 @@ class ProductController extends Controller
         <input type="hidden" value="1" class="cart_product_qty_'.$product->product_id.'">';
 
         echo json_encode($output);
+
+
+    }
+    public function add_sale(Request $request, $product_id){
+        $cate_product = DB::table('tbl_category_product')->orderby('category_id','desc')->get();
+        $brand_product = DB::table('tbl_brand_product')->orderby('brand_id','desc')->get();
+        $edit_product = DB::table('tbl_product')->where('product_id',$product_id)->get();
+        $manager_product = view('admin.product.add_sale')->with('edit_product',$edit_product)->with('cate_product',$cate_product)->with('brand_product',$brand_product);
+        return view('admin_layout')->with('admin.product.add_sale', $manager_product);
+        }
+    public function update_qty_product (Request $request, $product_id)
+    {
+        $data = array();
+        $qty = $request->product_qty;
+        $ton = $request->product_sale;
+        $data['product_quantity'] = $qty + $ton;
+        DB::table('tbl_product')->where('product_id',$product_id)->update($data);
+        Session::put('message','Cập nhật sản phẩm thành công');
+        return Redirect::to('all-product');
 
 
     }

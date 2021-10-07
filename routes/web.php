@@ -24,6 +24,10 @@ Route::post('/autocomplete-ajax','HomeController@autocomplete_ajax');
 Route::get('/lien-he','HomeController@lienhe');
 Route::get('/san-pham-yeu-thich','HomeController@wishlist');
 Route::get('/so-sanh-san-pham','HomeController@compare');
+Route::get('/gioi-thieu','HomeController@gioi_thieu');
+
+Route::get('/view-customer','HomeController@details_customer');
+Route::post('/change-pass','HomeController@change_pass_customer');
 
 
 /*Back-end*/
@@ -33,7 +37,7 @@ Route::post('/admin-dashboard','AdminController@dashboard');
 Route::get('/logout','AdminController@logout');
 
 Route::post('/filter-by-date','AdminController@filter_by_date');
-Route::get('/order-date','AdminController@order_date');
+// Route::get('/order-date','AdminController@order_date');
 Route::post('/days-order','AdminController@days_order');
 Route::post('/dashboard-filter','AdminController@dashboard_filter');
 
@@ -77,11 +81,16 @@ Route::get('/all-product','ProductController@all_product');
 Route::get('/inactive-product/{product_id}','ProductController@inactive_product');
 Route::get('/active-product/{product_id}','ProductController@active_product');
 Route::get('/edit-product/{product_id}','ProductController@edit_product');
+Route::get('/add-product-sale','ProductController@add_product_sale');
 Route::post('/update-product/{product_id}','ProductController@update_product');
 Route::get('/delete-product/{product_id}','ProductController@delete_product');
 Route::post('/save-product','ProductController@save_product');
 Route::get('/add-images-product','ProductController@add_images_product');
 Route::post('/save-images-product','ProductController@save_images_product');
+
+///
+Route::get('/them-so-luong/{product_id}','ProductController@add_sale');
+Route::post('/update-qty-product/{product_id}','ProductController@update_qty_product');
 
 
 Route::get('/tag/{product_tag}','ProductController@tag');
@@ -169,6 +178,9 @@ Route::get('/del-fee','CheckoutController@del_fee');
 Route::post('/confirm-order','CheckoutController@confirm_order');
 
 Route::post('/thanh-toan-vnpay','CheckoutController@create_vnpay');
+Route::post('/payment-vnpay','CheckoutController@payment_vnpay');
+Route::get('/vnpay/return','CheckoutController@vnpay_return')->name('vnpay.return');
+
 
 
 

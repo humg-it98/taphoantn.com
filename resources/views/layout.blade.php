@@ -131,6 +131,8 @@
                                                 ?>
 
                                                 <li>
+
+                                                    <a href="{{URL::to('/view-customer')}}"><i class="fa fa-user"></i>Đổi mật khẩu</a>&nbsp;
                                                     <a href="{{URL::to('/logout-checkout')}}"><i class="fa fa-lock"></i> Đăng xuất:  {{Session::get('customer_name')}} </a>
 
                                                 </li>
@@ -282,37 +284,9 @@
                                 <div class="hb-menu">
                                     <nav>
                                         <ul>
-                                            <li class="dropdown-holder"><a href="{{URL::to('/')}}">TRANG CHU</a>
+                                            <li><a href="{{URL::to('/')}}">TRANG CHU</a>
                                             </li>
-                                            {{-- <li class="catmenu-dropdown megamenu-holder"><a>Category</a>
-                                                @foreach($category as $key => $danhmuc)
-                                                <ul class="megamenu hb-megamenu">
-                                                    @if($danhmuc->category_parent==0)
-                                                    <li><a href="{{URL::to('/danh-muc-san-pham/'.$danhmuc->slug_category_product)}}">{{$danhmuc->category_name}}</a>
-                                                        @foreach($category as $key => $danhmuc1)
-                                                            @if($danhmuc1->category_parent==$danhmuc->category_id)
-                                                            <ul class="hb-dropdown hb-sub-dropdown">
-                                                                <li><a href="{{URL::to('/danh-muc-san-pham/'.$danhmuc1->slug_category_product)}}">{{$danhmuc1->category_name}}</a></li>
-                                                            </ul>
-                                                            @endif
-                                                        @endforeach
-                                                    </li>
-                                                    @endif
-                                                </ul>
-                                                @endforeach
-                                            </li> --}}
-                                            {{-- <li class="dropdown-holder"><a href="{{URL::to('/')}}">N</a>
-                                                <ul class="hb-dropdown">
-                                                    <li class="sub-dropdown-holder">
-                                                        @foreach($category as $key => $cate)
-                                                        <ul class="nav nav-pills nav-stacked">
-                                                            <li><a href="{{URL::to('/danh-muc-san-pham/'.$cate->slug_category_product)}}">{{$cate->category_name}}</a></li>
-                                                        </ul>
-                                                        @endforeach
-                                                    </li>
-                                                </ul>
-                                            </li> --}}
-                                            <li class="dropdown-holder"><a href="{{URL::to('/')}}">THUONG HIEU SAN PHAM</a>
+                                            <li class="dropdown"><a href="{{URL::to('/')}}">THUONG HIEU SAN PHAM</a>
                                                 <ul class="hb-dropdown">
                                                     <li class="sub-dropdown-holder">
                                                         @foreach($brand as $key => $bran)
@@ -351,9 +325,10 @@
                                                 </ul>
                                             </li>
 
-                                            <li><a href="{{URL::to('/lien-he')}}">&emsp;&emsp;Contact</a></li>
+                                            <li><a href="{{URL::to('/lien-he')}}">&emsp;&emsp;Liên Hê</a></li>
                                             <li><a href="{{URL::to('/video-shop')}}">&emsp;Video</a></li>
-                                            <li><a href="{{URL::to('/so-sanh-san-pham')}}">So sanh Product</a></li>
+                                            <li><a href="{{URL::to('/gioi-thieu')}}">Tuyên Dung</a></li>
+                                            {{-- <li><a href="{{URL::to('/so-sanh-san-pham')}}">So sanh Product</a></li> --}}
                                         </ul>
                                     </nav>
                                 </div>
@@ -398,8 +373,8 @@
                                             <img src="{{asset('public/frontend/images/shipping-icon/1.png')}}" alt="Shipping Icon">
                                         </div>
                                         <div class="shipping-text">
-                                            <h2>Free Delivery</h2>
-                                            <p>And free returns. See checkout for delivery dates.</p>
+                                            <h2>Vận chuyển toàn quốc</h2>
+                                            <p>Giao hàng nhanh chóng và an toàn.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -411,8 +386,8 @@
                                             <img src="{{asset('public/frontend/images/shipping-icon/2.png')}}" alt="Shipping Icon">
                                         </div>
                                         <div class="shipping-text">
-                                            <h2>Safe Payment</h2>
-                                            <p>Pay with the world's most popular and secure payment methods.</p>
+                                            <h2>Thanh toán đa dạng</h2>
+                                            <p>Dễ dàng thanh toán bằng nhiều phương thức.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -424,8 +399,8 @@
                                             <img src="{{asset('public/frontend/images/shipping-icon/3.png')}}" alt="Shipping Icon">
                                         </div>
                                         <div class="shipping-text">
-                                            <h2>Shop with Confidence</h2>
-                                            <p>Our Buyer Protection covers your purchasefrom click to delivery.</p>
+                                            <h2>Hàng chính hãng 100%</h2>
+                                            <p>Phân phối và bán hàng chính hãng từ các nhà cung cấp lớn.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -437,8 +412,8 @@
                                             <img src="{{asset('public/frontend/images/shipping-icon/4.png')}}" alt="Shipping Icon">
                                         </div>
                                         <div class="shipping-text">
-                                            <h2>24/7 Help Center</h2>
-                                            <p>Have a question? Call a Specialist or chat online.</p>
+                                            <h2>Hỗ trợ tư vấn 24/7</h2>
+                                            <p>Hỗ trợ khách hàng tận tình,đổi trả nếu có lỗi từ nhà sản xuất. </p>
                                         </div>
                                     </div>
                                 </div>
@@ -546,12 +521,12 @@
                                     </div>
                                     <!-- Begin Footer Newsletter Area -->
                                     <div class="footer-newsletter">
-                                        <h4>Sign up to newsletter</h4>
+                                        <h4>Đăng ký nhận tin</h4>
                                         <form action="#" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="footer-subscribe-form validate" target="_blank" novalidate>
                                            <div id="mc_embed_signup_scroll">
                                               <div id="mc-form" class="mc-form subscribe-form form-group" >
-                                                <input id="mc-email" type="email" autocomplete="off" placeholder="Enter your email" />
-                                                <button  class="btn" id="mc-submit">Subscribe</button>
+                                                <input id="mc-email" type="email" autocomplete="off" placeholder="Nhập email của bạn" />
+                                                <button  class="btn" id="mc-submit">Đăng ký</button>
                                               </div>
                                            </div>
                                         </form>
@@ -605,6 +580,8 @@
                                 <div class="copyright text-center pt-25">
                                     <span><a target="_blank"> <?php echo date('@'."Y"); ?> Website phát triển 💙 bởi Nguyễn Tuấn Ngọc.</a></span>
                                 </div>
+                                <div class="zalo-chat-widget" data-oaid="248512510121692038" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="1" data-width="310" data-height="320"><div id="overlay" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; display: none;"></div></div>
+                                {{-- <div class="zalo-chat-widget" data-oaid="248512510121692038" data-welcome-message="Ơn giời, Anh Chị đến CellphoneS rồi! Chat ngay với em để được trả lời liền tay về những điều cần giải đáp nhé ạ? " data-autopopup="1" data-width="350" data-height="420" style="z-index: 2147483647; border: none; visibility: visible; bottom: 0px; right: 0px; position: fixed; width: 350px; height: 420px; top: auto;"><iframe frameborder="0" allowfullscreen="" scrolling="no" width="350" height="420" src="https://sp.zalo.me/plugins/chat-widget?position=null&amp;oaid=3894196696036261863&amp;welcomemessage=%C6%A0n%20gi%E1%BB%9Di%2C%20Anh%20Ch%E1%BB%8B%20%C4%91%E1%BA%BFn%20CellphoneS%20r%E1%BB%93i!%20Chat%20ngay%20v%E1%BB%9Bi%20em%20%C4%91%E1%BB%83%20%C4%91%C6%B0%E1%BB%A3c%20tr%E1%BA%A3%20l%E1%BB%9Di%20li%E1%BB%81n%20tay%20v%E1%BB%81%20nh%E1%BB%AFng%20%C4%91i%E1%BB%81u%20c%E1%BA%A7n%20gi%E1%BA%A3i%20%C4%91%C3%A1p%20nh%C3%A9%20%E1%BA%A1%3F%20&amp;autopopup=1&amp;width=350&amp;height=420&amp;style=2&amp;id=80f817c7-eb19-47ed-be51-6bf266ec4899&amp;domain=cellphones.com.vn&amp;android=false&amp;ios=false" style="position: absolute; bottom: 0px; right: 0px;"></iframe><div id="drag-holder" draggable="true" style="position: absolute; top: 0px; width: 80%; height: 70px; cursor: move; left: 0px; display: block;"></div><div id="drag-left" style="position: absolute; top: 0px; left: 0px; width: 10px; height: 100%; cursor: w-resize; display: block;"></div><div id="drag-right" style="position: absolute; top: 0px; right: 0px; width: 10px; height: 100%; cursor: e-resize; display: block;"></div><div id="drag-top" style="position: absolute; top: 0px; width: 100%; height: 10px; cursor: n-resize; display: block;"></div><div id="drag-bottom" style="position: absolute; bottom: 0px; width: 100%; height: 10px; cursor: s-resize; display: block;"></div><div id="drag-top-left" style="position: absolute; top: 0px; left: 0px; width: 15px; height: 15px; cursor: nw-resize; display: block;"></div><div id="drag-top-right" style="position: absolute; top: 0px; right: 0px; width: 15px; height: 15px; cursor: ne-resize; display: block;"></div><div id="drag-bottom-right" style="position: absolute; bottom: 0px; right: 0px; width: 15px; height: 15px; cursor: se-resize; display: block;"></div><div id="drag-bottom-left" style="position: absolute; bottom: 0px; left: 0px; width: 15px; height: 15px; cursor: sw-resize; display: block;"></div><div id="overlay" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; display: none;"></div></div> --}}
                                 <!-- Copyright Area End Here -->
                             </div>
                         </div>
@@ -613,19 +590,16 @@
                 <!-- Footer Static Bottom Area End Here -->
             </div>
             <style type="text/css">
-            .zalo-chat-widget{
-                bottom: 20px!important;
-                left: 20px!important;
+            .zalo-chat-widget {
+                right: 5px !important;
+                left: auto !important;
+                bottom: 1% !important;
+                z-index: 99999999999 !important;
             }
-
             </style>
-                <div class="zalo-chat-widget" data-oaid="248512510121692038" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="0" data-width="350" data-height="420"></div>
-                <!-- Messenger Plugin chat Code -->
-                <div id="fb-root"></div>
+                {{-- <div class="zalo-chat-widget" data-oaid="248512510121692038" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="0" data-width="350" data-height="420"></div> --}}
 
-                <!-- Your Plugin chat code -->
-                <div id="fb-customer-chat" class="fb-customerchat">
-                </div>
+
             <!-- Footer Area End Here -->
             <!-- Begin Quick View | Modal Area -->
             {{-- <div class="modal fade modal-wrapper" id="xemnhanh" >
@@ -793,26 +767,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v11.0&appId=852484398680038&autoLogAppEvents=1" nonce="N9RehpZN"></script>
 
-        <script>
-            var chatbox = document.getElementById('fb-customer-chat');
-            chatbox.setAttribute("page_id", "110839747904326");
-            chatbox.setAttribute("attribution", "biz_inbox");
-
-            window.fbAsyncInit = function() {
-              FB.init({
-                xfbml            : true,
-                version          : 'v11.0'
-              });
-            };
-
-            (function(d, s, id) {
-              var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) return;
-              js = d.createElement(s); js.id = id;
-              js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-              fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-          </script>
 
         {{-- <script type="text/javascript">
            $("#sort").on('click', function() {
@@ -888,23 +842,7 @@
             });
         </script>
 
-        <script>
-        $(function() {
-          $("#slider-range").slider({
-            range: true,
-            min: 0,
-            max: 500,
-            values: [75, 300],
-            slide: function(event, ui) {
-              $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
-            }
-          });
-          $("#amount").val("$" + $("#slider-range").slider("values", 0) +
-            " - $" + $("#slider-range").slider("values", 1));
-        });
-        </script>
-          <script type="text/javascript">
-
+        {{-- <script type="text/javascript">
             $(document).ready(function(){
               $('.send_order').click(function(){
             var total_after = $('.total_after').val();
@@ -933,10 +871,12 @@
                           var order_coupon = $('.order_coupon').val();
                           var _token = $('input[name="_token"]').val();
 
+
                           $.ajax({
                               url: '{{url('/confirm-order')}}',
                               method: 'POST',
-                              data:{shipping_email:shipping_email,shipping_name:shipping_name,shipping_address:shipping_address,shipping_phone:shipping_phone,shipping_notes:shipping_notes,_token:_token,order_fee:order_fee,order_coupon:order_coupon,shipping_method:shipping_method},
+                              data:{shipping_email:shipping_email,shipping_name:shipping_name,shipping_address:shipping_address,shipping_phone:shipping_phone,shipping_notes:shipping_notes,_token:_token,order_fee:order_fee,order_coupon:order_coupon},
+                            //   data:{shipping_email:shipping_email,shipping_name:shipping_name,shipping_address:shipping_address,shipping_phone:shipping_phone,shipping_notes:shipping_notes,_token:_token,order_fee:order_fee,order_coupon:order_coupon,shipping_method:shipping_method},
                               success:function(){
                                  swal("Đơn hàng", "Đơn hàng của bạn đã được gửi thành công", "success");
                               }
@@ -956,7 +896,8 @@
 
               });
           });
-        </script>
+        </script> --}}
+
 
 
         <script type="text/javascript">
@@ -1076,6 +1017,23 @@
             });
         </script>
 
+        <script type="text/javascript">
+            $(function(){
+                let listStart = $(".list_star .fa");
+                $listRatingText = [
+                    1 => 'Không thích',
+                    2 => 'Tạm đuọc',
+                    3 => 'Bình thường',
+                    4 => 'Rất tốt',
+                    5 => 'Tuyệt vời quá',
+                ];
+                listStart.mouseover(function(){
+                    let $this = $(this);
+                    console.log($this.attr('data-key'))
+                });
+            });
+        </script>
+
     <script type="text/javascript">
         function remove_background(product_id)
          {
@@ -1085,7 +1043,7 @@
           }
         }
         //hover chuột đánh giá sao
-       $(document).on('mouseenter', '.rating', function(){
+       $(document).on('mouseenter', '.danhgiasao', function(){
           var index = $(this).data("index");
           var product_id = $(this).data('product_id');
         // alert(index);
@@ -1097,7 +1055,7 @@
           }
         });
        //nhả chuột ko đánh giá
-       $(document).on('mouseleave', '.rating', function(){
+       $(document).on('mouseleave', '.danhgiasao', function(){
           var index = $(this).data("index");
           var product_id = $(this).data('product_id');
           var rating = $(this).data("rating");
@@ -1110,7 +1068,7 @@
          });
 
         //click đánh giá sao
-        $(document).on('click', '.rating', function(){
+        $(document).on('click', '.danhgiasao', function(){
               var index = $(this).data("index");
               var product_id = $(this).data('product_id');
                 var _token = $('input[name="_token"]').val();
@@ -1122,7 +1080,7 @@
                {
                 if(data == 'done')
                 {
-                 alert("Bạn đã đánh giá "+index +" trên 5");
+                 alert("Bạn đã đánh giá "+index +" trên 5 sao");
                 }
                 else
                 {
@@ -1433,6 +1391,25 @@
 
         }
         </script>
+
+        <script>
+        $( function() {
+            $( "#slider-range" ).slider({
+                orientation: "vertical",
+                range: true,
+                values: [ 100, 267 ],
+                step:10;
+                slide: function( event, ui ) {
+                $( "#amount" ).val( "VNĐ" + ui.values[ 0 ] + " - VNĐ" + ui.values[ 1 ] );
+                $( "#start_price" ).val(ui.values[ 0 ]);
+                $( "#end_price" ).val( ui.values[ 1 ] );
+                }
+            });
+            $( "#amount" ).val( "VNĐ" + $( "#slider-range" ).slider( "values", 0 ) +
+                " - VNĐ" + $( "#slider-range" ).slider( "values", 1 ) );
+            } );
+        </script>
+
 
 
 

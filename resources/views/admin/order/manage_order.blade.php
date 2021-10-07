@@ -46,6 +46,8 @@
 
             <td>@if($ord->order_status==1)
                     Đơn hàng mới
+                @elseif($ord->order_status==3)
+                    Đơn hàng bị hủy
                 @else
                     Đã xử lý - Đã giao hàng
                 @endif

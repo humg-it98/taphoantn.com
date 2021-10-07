@@ -17,4 +17,10 @@ class CategoryProductModels extends Model
     public function product(){
         return $this->hasMany('App\Models\Product');
     }
+
+    public function childrenCategories()
+    {
+        return $this->hasMany(CategoryProductModels::class)->with('categories');
+    }
+
 }

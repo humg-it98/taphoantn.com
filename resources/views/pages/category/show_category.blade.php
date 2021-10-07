@@ -39,6 +39,19 @@
                             <span>Tìm thấy {{count($category_by_id)}} sản phẩm.</span>
                         </div>
                     </div>
+                    {{-- <div>
+                        {{-- <label for="amount">Lọc giá theo</label> --}}
+                        {{-- <form>
+                            <p>
+                                <label for="amount">Lọc giá theo</label>
+                                <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold; height:20px">
+                                <input type="hidden" id="start_price">
+                                <input type="hidden" id="end_price">
+                              </p>
+                              <div id="slider-range" style="height:10px;"></div>
+                              <input type="submit" name="filter_price" value="Lọc giá" class="btn btn-sm btn-default" style="height:30px">
+                        </form> --}}
+                    {{-- </div> --}} --}}
                     <!-- product-select-box start -->
                     <div class="product-select-box">
                         <form>

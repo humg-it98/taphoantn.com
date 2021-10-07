@@ -84,7 +84,7 @@
           <td>{{$shipping->shipping_phone}}</td>
           <td>{{$shipping->shipping_email}}</td>
           <td>{{$shipping->shipping_notes}}</td>
-          <td>@if($shipping->shipping_method==0) Chuyển khoản @else Tiền mặt @endif</td>
+          <td>@if($shipping->shipping_method==0) Tiền mặt @else Thanh toan online @endif</td>
 
 
         </tr>
@@ -210,11 +210,13 @@
 
                 <option id="{{$or->order_id}}" selected value="1">Chưa xử lý</option>
                 <option id="{{$or->order_id}}" value="2">Đã xử lý-Đã giao hàng</option>
+                <option id="{{$or->order_id}}" value="3">Hủy đơn hàng</option>
+
 
               </select>
             </form>
 
-            @else
+            @elseif($or->order_status==2)
 
             <form>
               @csrf
@@ -222,6 +224,20 @@
 
                 <option disabled id="{{$or->order_id}}" value="1">Chưa xử lý</option>
                 <option id="{{$or->order_id}}" selected value="2">Đã xử lý-Đã giao hàng</option>
+                <option id="{{$or->order_id}}" value="3">Hủy đơn hàng</option>
+
+
+              </select>
+            </form>
+            @elseif($or->order_status==3)
+
+            <form>
+              @csrf
+              <select class="form-control order_details">
+
+                <option disabled id="{{$or->order_id}}" value="1">Chưa xử lý</option>
+                <option id="{{$or->order_id}}" value="2">Đã xử lý-Đã giao hàng</option>
+                <option id="{{$or->order_id}}" selected value="3">Hủy đơn hàng</option>
 
 
               </select>

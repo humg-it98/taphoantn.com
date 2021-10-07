@@ -54,6 +54,9 @@ class AdminController extends Controller
 
         $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
 
+        //thong ke doanh thu
+        $soluongtheongay = Order::where('order_status',2)->whereMonth('oder_date', date('m'))->select(\DB::raw(''));
+
             //total last month
         $visitor_of_lastmonth = Visitors::whereBetween('date_visitor',[$early_last_month,$end_of_last_month])->get();
         $visitor_last_month_count = $visitor_of_lastmonth->count();
@@ -88,11 +91,12 @@ class AdminController extends Controller
         $app_video = Video::all()->count();
         $app_customer = Customer::all()->count();
 
-        $product_views = Product::orderBy('product_views','DESC')->take(20)->get();
-        $post_views = Post::orderBy('post_views','DESC')->take(20)->get();
+        $product_views = Product::orderBy('product_views','DESC')->take(15)->get();
+        $post_views = Post::orderBy('post_views','DESC')->take(15)->get();
+        $product_sold = Product::orderBy('product_sold','DESC')->take(15)->get();
 
 
-        return view('admin.dashboard')->with(compact('visitors_total','visitor_count','visitor_last_month_count','visitor_this_month_count','visitor_year_count','app_product','app_post','app_order','app_video','app_customer','product_views','post_views'));
+        return view('admin.dashboard')->with(compact('visitors_total','visitor_count','visitor_last_month_count','visitor_this_month_count','visitor_year_count','app_product','app_post','app_order','app_video','app_customer','product_views','post_views','product_sold'));
     }
     public function dashboard(Request $request){
         $admin_email = $request->admin_email;
@@ -291,9 +295,9 @@ class AdminController extends Controller
 
                 $get = Statistic::whereBetween('order_date',[$dauthangnay,$now])->orderBy('order_date','ASC')->get();
 
-            }elseif ($data['dashboard_value']=='thang9') {
+            // }elseif ($data['dashboard_value']=='thang9') {
 
-                $get = Statistic::whereBetween('order_date',[$dauthang9,$cuoithang9])->orderBy('order_date','ASC')->get();
+            //     $get = Statistic::whereBetween('order_date',[$dauthang9,$cuoithang9])->orderBy('order_date','ASC')->get();
 
             }else{
                 $get = Statistic::whereBetween('order_date',[$sub365days,$now])->orderBy('order_date','ASC')->get();
@@ -339,11 +343,5 @@ class AdminController extends Controller
             echo $data = json_encode($chart_data);
 
         }
-        public function order_date(Request $request){
-            $order_date = $_GET['date'];
-            $order = Order::where('order_date',$order_date)->orderby('created_at','DESC')->get();
-            return view('admin.order_date')->with(compact('order'));
-        }
-
 
 }

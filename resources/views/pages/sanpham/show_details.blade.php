@@ -155,7 +155,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="block-reassurance">
+                        {{-- <div class="block-reassurance">
                             <ul>
                                 <li>
                                     <div class="reassurance-item">
@@ -182,7 +182,7 @@
                                     </div>
                                 </li>
                             </ul>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -225,7 +225,7 @@
                 <div class="product-reviews">
                     <div class="product-details-comment-block">
                         <div class="comment-review">
-                            <span>Đánh giá được {{$rating}}/5☆  </span>
+                            <span>Đánh giá được {{$rating}}/5☆ (count($rating))  </span>
                             <ul class="rating">
                                 @for($count=1; $count<=5; $count++)
                                                 		@php
@@ -284,12 +284,27 @@
                                                             <form action="" method="POST">
                                                                 @csrf
                                                                 <input type="hidden" name="comment_product_id" class="comment_product_id" value="{{$product->product_id}}">
-                                                                {{-- <p class="your-opinion">
+                                                                <p class="your-opinion">
                                                                     <label>Đánh giá sao</label>
-                                                                    <span>
-                                                                        <li title="star_rating" id="{{$product->product_id}}-{{$count}}" data-index="{{$count}}"  data-product_id="{{$product->product_id}}" data-rating="{{$rating}}" class="rating" style="cursor:pointer; {{$color}} font-size:30px;">&#9733;</li>
-                                                                    </span>
-                                                                </p> --}}
+
+                                                                    <ul class="list-inline rating"  title="Average Rating">
+                                                                        @for($count=1; $count<=5; $count++)
+                                                                            @php
+                                                                                if($count<=$rating){
+                                                                                    $color = 'color:#ffcc00;';
+                                                                                }
+                                                                                else {
+                                                                                    $color = 'color:#ccc;';
+                                                                                }
+
+                                                                            @endphp
+
+                                                                        <li title="star_rating" id="{{$product->product_id}}-{{$count}}" data-index="{{$count}}"  data-product_id="{{$product->product_id}}" data-rating="{{$rating}}" class="danhgiasao" style="cursor:pointer; {{$color}} font-size:30px;">&#9733;</li>
+                                                                        @endfor
+                                                                                <span class="list_text"></span>
+                                                                    </ul>
+
+
                                                                 <p class="feedback-form">
                                                                     <label for="feedback">Đánh giá của bạn</label>
                                                                     <textarea id="feedback" class="comment_content" name="comment_content" cols="45" rows="8" aria-required="true"></textarea>

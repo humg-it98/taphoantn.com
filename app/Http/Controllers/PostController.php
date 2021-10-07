@@ -153,7 +153,7 @@ class PostController extends Controller
         // foreach($brand_product as $item) {
         //     dd($item->brand_slug);
         // }
-        $post_cate = Post::with('cate_post')->where('post_status',0)->where('cate_post_id',$cate_id)->paginate();
+        $post_cate = Post::with('cate_post')->where('post_status',0)->where('cate_post_id',$cate_id)->paginate(4);
         return view('pages.baiviet.danhmucbaiviet')
         ->with('category',$cate_product)->with('brand',$brand_products)
         ->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)

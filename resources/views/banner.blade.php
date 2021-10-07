@@ -50,16 +50,19 @@
         <!-- Slider Area End Here -->
         <!-- Begin Li Banner Area -->
         <div class="col-lg-4 col-md-4 text-center pt-xs-30">
+            @foreach($slider as $key => $sli)
             <div class="li-banner">
                 <a href="#">
-                    <img src="{{asset('public/frontend/images/banner/1_1.jpg')}}" alt="">
+                    <img src="{{URL::to('public/uploads/slider/'.$sli->slider_image )}}" alt="">
                 </a>
+                <br>
             </div>
-            <div class="li-banner mt-15 mt-sm-30 mt-xs-30">
+            @endforeach
+            {{-- <div class="li-banner mt-15 mt-sm-30 mt-xs-30">
                 <a href="#">
                     <img src="{{asset('public/frontend/images/banner/1_2.jpg')}}" alt="">
                 </a>
-            </div>
+            </div> --}}
         </div>
         <!-- Li Banner Area End Here -->
     </div>

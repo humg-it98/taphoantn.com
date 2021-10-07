@@ -27,14 +27,15 @@
                             </form>
                         </div>
                     </div>
-                    <div class="li-blog-sidebar pt-25">
+                    {{-- <div class="li-blog-sidebar pt-25">
                         <h4 class="li-blog-sidebar-title"><b>Categories</b></h4>
                         <ul class="li-blog-archive">
                             @foreach($category as $key => $cate)
                             <li><a href="{{URL::to('danh-muc-san-pham/'.$cate->slug_category_product)}}">{{$cate->category_name}}</a></li>
                             @endforeach
                         </ul>
-                    </div>
+                    </div> --}}
+                    <br>
                     <div class="li-blog-sidebar">
                         <h4 class="li-blog-sidebar-title"><b>Brand Product</b></h4>
                         <ul class="li-blog-archive">
@@ -43,7 +44,7 @@
                             @endforeach
                         </ul>
                     </div>
-                    <div class="li-blog-sidebar">
+                    {{-- <div class="li-blog-sidebar">
                         <h4 class="li-blog-sidebar-title">Recent Post</h4>
                         <div class="li-recent-post pb-30">
                             <div class="li-recent-post-thumb">
@@ -89,7 +90,7 @@
                             <li><a href="#">Ultrabooks</a></li>
                             <li><a href="#">Sound Cards</a></li>
                         </ul>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <!-- Li's Blog Sidebar Area End Here -->
@@ -105,11 +106,11 @@
                             </div>
                             <div class="li-blog-content">
                                 <div class="li-blog-details">
-                                    <h3 class="li-blog-heading pt-25"><a href="">{{$p->post_title}}</a></h3>
+                                    <h3 class="li-blog-heading pt-25"><a href="{{url('/bai-viet/'.$p->post_slug)}}">{{$p->post_title}}</a></h3>
                                     <div class="li-blog-meta">
-                                        <a class="author" href="#"><i class="fa fa-user"></i>Admin</a>
-                                        <a class="comment" href="#"><i class="fa fa-comment-o"></i> 3 comment</a>
-                                        <a class="post-time" href="#"><i class="fa fa-calendar"></i> 11 Tháng 5 2021</a>
+                                        <a class="author" href="{{url('/bai-viet/'.$p->post_slug)}}"><i class="fa fa-user"></i>Admin</a>
+                                        <a class="comment" href="{{url('/bai-viet/'.$p->post_slug)}}"><i class="fa fa-comment-o"></i>{{$p->post_views}}  Lượt xem</a>
+                                        <a class="post-time" href="{{url('/bai-viet/'.$p->post_slug)}}"><i class="fa fa-calendar"></i>Đăng lúc: {{$p->post_date}} </a>
                                     </div>
                                     <p>{!!$p->post_desc!!}</p>
                                     <a class="read-more" href="{{url('/bai-viet/'.$p->post_slug)}}">Read More...</a>
@@ -125,11 +126,7 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <ul class="li-pagination-box">
-                                        <li><a class="Previous" href="#">Previous</a></li>
-                                        <li class="active"><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a class="Next" href="#">Next</a></li>
+                                        {{$post_cate->links('pagination::bootstrap-4') }}
                                     </ul>
                                 </div>
                             </div>

@@ -27,7 +27,7 @@ class CouponController extends Controller
             if($coupon){
                 return redirect()->back()->with('error','Mã giảm giá đã sử dụng,vui lòng nhập mã khác');
             }else{
-                    $coupon_login = Coupon::where('coupon_code',$data['coupon'])->where('coupon_status',1)->where('coupon_date_end','>=',$today)->first();
+                    $coupon_login = Coupon::where('coupon_code',$data['coupon'])->where('coupon_status',1)->where('coupon_date_end','<=',$today)->first();
                         if($coupon_login){
                             $count_coupon = $coupon_login->count();
                             if($count_coupon>0){

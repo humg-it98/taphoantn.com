@@ -7,7 +7,79 @@
 				    font-size: 20px;
 				    font-weight: bold;
 				}
+                .small-box {
+                    border-radius: .25rem;
+                    box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
+                    display: block;
+                    margin-bottom: 20px;
+                    position: relative;
+                }
+                .small-box>.inner {
+                    padding: 10px;
+                }
+                .small-box .icon>i.ion {
+                    font-size: 70px;
+                    top: 20px;
+                }
 			</style>
+
+<div class="row">
+    <p class="title_thongke">Thống kê tổng sản phẩm bài viết đơn hàng</p>
+
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      <div class="small-box bg-info" >
+        <div class="inner">
+            <h3> &nbsp; {{$app_order}}</h3>
+            <p> Đơn hàng</p>
+        </div>
+        <a href="{{URL::to('/manage-order')}}" class="small-box-footer">Chi tiết <i class="fa fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      <div class="small-box bg-success">
+        <div class="inner">
+          <h3> &nbsp; {{$app_customer}}</h3>
+
+          <p>Khách hàng</p>
+        </div>
+        <a href="{{URL::to('/all-customers')}}" class="small-box-footer">Chi tiết <i class="fa fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      <div class="small-box bg-warning">
+        <div class="inner">
+          <h3> &nbsp; {{$app_product}}</h3>
+
+          <p>Sản phẩm</p>
+        </div>
+        {{-- <div class="icon">
+            <i style="font-size:20px;" class="fa fa-product-hunt"></i>
+        </div> --}}
+        <a href="{{URL::to('/all-product')}}" class="small-box-footer">Chi tiết <i class="fa fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      <div class="small-box bg-danger">
+        <div class="inner">
+            <h3> &nbsp; {{$app_post}}</h3>
+          <p>Bài viết</p>
+        </div>
+        {{-- <div class="icon">
+            <i style="font-size:20px;" class="fa fa-newspaper-o"></i>
+        </div> --}}
+        <a href="{{URL::to('/all-post')}}" class="small-box-footer">Chi tiết <i class="fa fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <!-- ./col -->
+</div>
+<br>
 <div class="row">
 		<p class="title_thongke">Thống kê đơn hàng doanh số</p>
 
@@ -31,7 +103,6 @@
 					Lọc theo:
 					<select class="dashboard-filter form-control" >
 						<option>--Chọn--</option>
-						<option value="thang9">Trong tháng 9</option>
 						<option value="7ngay">7 ngày qua</option>
 						<option value="thangtruoc">tháng trước</option>
 						<option value="thangnay">tháng này</option>
@@ -47,6 +118,70 @@
 		</div>
 
 </div>
+
+{{-- <div class="row">
+    <p class="title_thongke">Thống kê tổng sản phẩm bài viết đơn hàng</p>
+    <div class="col-lg-3 col-4">
+      <!-- small box -->
+      <div class="small-box bg-info">
+        <div class="inner">
+          <h3>150</h3>
+
+          <p>Đơn hàng</p>
+        </div>
+        <div class="icon">
+          <i class="fa fa-shopping-cart"></i>
+        </div>
+        <a href="#" class="small-box-footer">More info <i class="fa fa-shopping-cart"></i></a>
+      </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      <div class="small-box bg-success">
+        <div class="inner">
+          <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+          <p>Khách hàng</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-stats-bars"></i>
+        </div>
+        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      <div class="small-box bg-warning">
+        <div class="inner">
+          <h3>44</h3>
+
+          <p>Sản phẩm</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-person-add"></i>
+        </div>
+        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      <div class="small-box bg-danger">
+        <div class="inner">
+          <h3>65</h3>
+
+          <p>Bài viết</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-pie-graph"></i>
+        </div>
+        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+    <!-- ./col -->
+</div> --}}
 
 <div class="row">
 	<style type="text/css">
@@ -86,14 +221,26 @@
 
 <div class="row">
 
-	<div class="col-md-4 col-xs-12">
+	{{-- <div class="col-md-4 col-xs-12">
 		<p class="title_thongke">Thống kê tổng sản phẩm bài viết đơn hàng</p>
 		<div id="donut"></div>
-	</div>
+	</div> --}}
 
 	<!--------------------------->
+    <div class="col-md-4 col-xs-12">
+		<h3>Sản phẩm bán chạy</h3>
 
-	<div class="col-md-4 col-xs-12">
+		<ol class="list_views">
+			@foreach($product_sold as $key => $top)
+			<li>
+				<a target="_blank" href="{{url('/chi-tiet-san-pham/'.$top->product_slug)}}">{{$top->product_name}} | <span style="color:black">{{$top->product_sold}}</span></a>
+			</li>
+			@endforeach
+		</ol>
+
+	</div>
+
+	<div class="col-md-3 col-xs-12">
 		<h3>Bài viết xem nhiều</h3>
 
 		<ol class="list_views">

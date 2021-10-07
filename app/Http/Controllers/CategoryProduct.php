@@ -43,7 +43,7 @@ class CategoryProduct extends Controller
 
             return view('admin_layout')->with('admin.category.all_category_product', $manager_category_product);
 
-            
+
         }
         public function save_category_product(Request $request){
             $this->AuthLogin();
@@ -169,7 +169,7 @@ class CategoryProduct extends Controller
         return view('pages.category.show_category')->with('category',$cate_product)->with('brand',$brand_product)->with('category_by_id',$category_by_id)->with('category_name',$category_name)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('slider',$slider)->with('category_post',$category_post)->with('min_price',$min_price)->with('max_price',$max_price)->with('max_price_range',$max_price_range)->with('min_price_range',$min_price_range);
         }
         public function export_csv(){
-            return Excel::download(new ExcelExports , 'category_product.xlsx');
+            return Excel::download(new ExcelExports , 'danh_muc_san_pham.xlsx');
         }
         public function import_csv(Request $request){
             $path = $request->file('file')->getRealPath();

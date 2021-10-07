@@ -73,9 +73,9 @@
 					</p>
 					<p>Hình thức thanh toán : <strong style="text-transform: uppercase;color:#fff">
 						@if($shipping_array['shipping_method']==0)
-							Chuyển khoản ATM
-						@else
 							Tiền mặt
+						@else
+							Thanh toán bằng VNPay
 						@endif
 
 					</strong></p>
